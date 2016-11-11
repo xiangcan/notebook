@@ -10,11 +10,11 @@ require.config({
 require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRead) {
 
     // 轮播图
-    new Carouse.Carouse('listBg');
+    $('#listBg').length>0 && new Carouse.Carouse('listBg');
     // code直播图
-    new Autotype('codeBox');
+    $('#codeBox').length>0 && new Autotype('codeBox');
     // 点击阅读图
-    new TabRead('btnRead');
+    $('.btnRead').length>0 && new TabRead('btnRead');
 
     // 搜索框
     var btnInp = $('#btnInput');
@@ -47,8 +47,7 @@ require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRea
 
         iTime = iYear+'年'+iMoth+'月'+iDay+'日 '+week;
         $('#navTime').html(iTime);
-        console.log(1);
-    },1000);
+    },30001000);
 
 
 });

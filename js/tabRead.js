@@ -1,6 +1,6 @@
 
 
-define(['jquery'],function() {
+define(['jquery'],function($) {
 
     function TabRead(id) {
         if($('.'+id)) {
@@ -17,6 +17,7 @@ define(['jquery'],function() {
 
             $btn.on('click',function() {
                 var $contentBox = $(this).siblings('.panel-content').eq(0);
+                var that = $(this);
 
                 if(ikey) {
                     scroll = $(window).scrollTop();
@@ -24,25 +25,24 @@ define(['jquery'],function() {
                     // 加载对应文章
                     $.get('js/'+$contentBox.attr('data-main')+'.txt',function(data) {
                         $contentBox.html(data);
-                        $(this).html('已阅');
+                        // this指向ajax对象
+                        that.html('已阅');
 
                         // 给浮动按钮添加定位
-                        $(this).addClass('back-top');
-                        var left = $contentBox.offset().left + $contentBox.outerWidth()-$(this).outerWidth()-10;
-                        $(this).css({
-                            'left':left,
+                        that.addClass('back-top');
+                        var left = $contentBox.offset().left + $contentBox.outerWidth() - that.outerWidth() -10;
+                        that.css({
+                            'left':left
                          });
                         ikey = false;
                     });
                 }else {
                     $contentBox.html(str);
-                    $(this).html('阅读全文');
+                    that.html('阅读全文');
                     ikey = true;
-                    $(this).removeClass('back-top');
-
+                    that.removeClass('back-top');
                     $(window).scrollTop(scroll);
                 }
-                return false;
             });
         }
     });

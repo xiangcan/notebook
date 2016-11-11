@@ -9,7 +9,7 @@ define(['jquery'],function($) {
 
     function AutoType(id) {
         this.oBox = $('#'+id);
-
+        this.init();
     }
 
     $.extend(AutoType.prototype,{
