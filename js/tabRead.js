@@ -22,7 +22,7 @@ define(['jquery'],function() {
                     scroll = $(window).scrollTop();
                     str = $contentBox.html();
                     // 加载对应文章
-                    $.get('../article/'+$contentBox.attr('data-main')+'.html',function(data) {
+                    $.get('../article/'+$contentBox.attr('data-main')+'.txt',function(data) {
                         $contentBox.html(data);
                         $(this).html('已阅');
 

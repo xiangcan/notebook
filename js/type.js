@@ -18,7 +18,7 @@ define(['jquery'],function($) {
             var oMsk = $('#codeMask');
             var $textParetn = $text.parent();
             // 获取Code内容
-            $.get('../article/code1.html',function(data) {
+            $.get('../article/code1.txt',function(data) {
                 $text.html(data);
                 oMsk.css('display','none');
                 var str = $text.html();//返回被选 元素的内容
