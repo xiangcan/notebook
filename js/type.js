@@ -10,10 +10,6 @@ define(['jquery'],function($) {
     function AutoType(id) {
         this.oBox = $('#'+id);
 
-        if(this.oBox) {
-            console.log(this.oBox);
-            this.init();
-        }
     }
 
     $.extend(AutoType.prototype,{
@@ -32,7 +28,6 @@ define(['jquery'],function($) {
 
                 var timer = setInterval(function(){
                     //substr(index, 1) 方法在字符串中抽取从index下标开始的一个的字符
-                    console.log(str);
                     var current = str.substr(index, 1);
 
                     if(current == '<'){
