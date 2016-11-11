@@ -18,7 +18,8 @@ define(['jquery'],function($) {
             var oMsk = $('#codeMask');
             var $textParetn = $text.parent();
             // 获取Code内容
-            $text.load('https://github.com/xiangcan/notebook/blob/master/article/code1.html',function() {
+            $.get('../article/code1.html',function(data) {
+                $text.html(data);
                 oMsk.css('display','none');
                 var str = $text.html();//返回被选 元素的内容
                 var index = 0;
@@ -49,8 +50,6 @@ define(['jquery'],function($) {
 
                 },50);
             });
-
-
             }
     });
 
