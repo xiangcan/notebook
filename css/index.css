@@ -379,22 +379,23 @@ footer {
       .qianduan-content .top-bg hgroup h3 {
         font-size: 15px;
         line-height: 1.5; }
-  .qianduan-content .qianduan-container {
-    max-width: 1163px;
-    margin: 20px auto; }
   .qianduan-content .nav-tab {
-    height: 30px;
     text-align: center;
-    font-size: 15px;
-    margin-bottom: 15px; }
+    border-bottom: solid 1px #ddd; }
   .qianduan-content .qianduan-list {
-    height: 100%; }
+    max-width: 1163px;
+    margin: 0 auto;
+    padding: 15px 0; }
     .qianduan-content .qianduan-list li {
-      height: 30px;
-      line-height: 30px;
+      height: 15px;
+      line-height: 15px;
       width: 25%;
       float: left;
-      text-align: center; }
+      text-align: center;
+      box-sizing: border-box;
+      border-left: solid 1px #ddd; }
+    .qianduan-content .qianduan-list li:first-child {
+      border-left: none; }
     .qianduan-content .qianduan-list li.active a {
       color: #3498db; }
     .qianduan-content .qianduan-list a {
@@ -408,9 +409,13 @@ footer {
     .qianduan-content .qianduan-list .iconfont {
       font-size: 18px;
       padding-right: 5px; }
+  .qianduan-content .qianduan-container {
+    max-width: 1163px;
+    margin: 20px auto; }
   .qianduan-content .left {
     float: left;
-    width: 75%; }
+    width: 75%;
+    padding-left: 20px; }
     .qianduan-content .left hgroup h3 {
       font-size: 16px;
       margin: 5px 0 10px 0; }
@@ -428,6 +433,7 @@ footer {
       line-height: 30px;
       border-bottom: solid 1px black;
       margin: 10px;
+      margin-bottom: 20px;
       color: #ff0109; }
     .qianduan-content .left .panel {
       width: 95%;
@@ -467,8 +473,9 @@ footer {
         border-radius: 5px;
         padding: 0 10px 0 10px;
         color: #444;
-        margin-left: 15px;
-        cursor: pointer; }
+        cursor: pointer;
+        float: right;
+        margin-right: 10px; }
         .qianduan-content .left .panel .btn-read:hover {
           color: #3498db; }
     .qianduan-content .left .tag-content {
@@ -539,5 +546,55 @@ footer {
         background-color: #eee;
         border: 1px solid #999;
         border-radius: 5px; }
+
+/*
+第三页内容
+=======
+ */
+.js-left figure.panel-content {
+  margin-bottom: 15px; }
+  .js-left figure.panel-content .figImg {
+    float: left;
+    width: 20%;
+    margin: 0 10px 0 10px; }
+  .js-left figure.panel-content h3 {
+    font-size: 15px;
+    font-weight: bold; }
+  .js-left figure.panel-content p {
+    font-size: 14px; }
+
+/*
+第四页内容
+=====
+ */
+.case-container {
+  max-width: 1163px;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 20px;
+  padding: 0 10px;
+  margin-bottom: 15px; }
+  .case-container .case-content {
+    border-radius: 5px;
+    border: 1px solid #666;
+    background-color: #fdfdfd; }
+  .case-container .case-box {
+    width: 25%;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    float: left; }
+    .case-container .case-box a {
+      display: block; }
+    .case-container .case-box .case-img {
+      width: 100%; }
+  .case-container figcaption {
+    line-height: 1.5;
+    padding: 8px;
+    font-size: 14px; }
+    .case-container figcaption a {
+      color: #3568db;
+      margin-bottom: 5px; }
+    .case-container figcaption p {
+      font-size: 13px; }
 
 /*# sourceMappingURL=index.css.map */

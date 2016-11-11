@@ -16,11 +16,11 @@
         <div class="container">
             <h1 class="logo">Notebook</h1>
             <ul class="nav-list">
-                <li class="item"><a href="index.html" class="active">首页</a></li>
+                <li class="item"><a href="index.html">首页</a></li>
                 <li class="item"><a href="qianduan.html">前端笔记</a></li>
-                <li class="item"><a href="jsGo.html" >JS Go</a></li>
-                <li class="item"><a href="#" >技术延伸</a></li>
-                <li class="item"><a href="#" >项目案例</a></li>
+                <li class="item"><a href="jsGo.html" class="active">JS Go</a></li>
+                <li class="item"><a href="extend.html">技术延伸</a></li>
+                <li class="item"><a href="case.html">项目案例</a></li>
             </ul>
             <div class="nav-time" id="navTime">
                 <p>2016年11月8号 星期三</p>
@@ -35,17 +35,17 @@
                 <h3>分享学习经验、最新的开发技术、设计技巧、和项目等。</h3>
             </hgroup>
         </div>
+        <div class="nav-tab" id="navTab">
+            <ul class="qianduan-list clearfix">
+                <li  class="active"><a><i class="iconfont icon-html-copy"></i>Html</a></li>
+                <li><a><i class="iconfont icon-group15copy"></i>Css</a></li>
+            </ul>
+        </div>
         <div class="qianduan-container clearfix" id="qdCont">
-            <div class="nav-tab" id="navTab">
-                <ul class="qianduan-list">
-                    <li  class="active"><a><i class="iconfont icon-html-copy"></i>JS实战总结</a></li>
-                    <li><a><i class="iconfont icon-group15copy"></i>JS库</a></li>
-                </ul>
-            </div>
             <!-- 左侧内容 -->
-            <div class="left">
+            <div class="left js-left">
                 <h2 class="title">今日头条 <i class="iconfont icon-icon69"></i></h2>
-                <div class="left-container active">
+                <div class="left-container">
                     <div class="panel">
                         <hgroup>
                             <h3 class="panel-head">JS和JQ各种宽高理解</h3>
@@ -60,8 +60,7 @@
                             <h3 class="panel-head">JavaScript面向对象总结</h3>
                             <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
                         </hgroup>
-                        <p class="panel-content" data-main="JS-02">Javascript是一种基于对象（object-based）的语言，你遇到的所有东西几乎都是对象。但是，它又不是一种真正的面向对象编程（OOP）语言，因为它的语法中没有class（类）。<br>
-那么，如果我们要把"属性"（property）和"方法"（method），封装成一个对象，甚至要从原型对象生成一个实例对象，我们应该怎么做呢？</p>
+                        <p class="panel-content" data-main="JS-02">avascript是一种基于对象（object-based）的语言，你遇到的所有东西几乎都是对象。但是，它又不是一种真正的面向对象编程（OOP）语言，因为它的语法中没有class（类）。<br>那么，如果我们要把"属性"（property）和"方法"（method），封装成一个对象，甚至要从原型对象生成一个实例对象，我们应该怎么做呢？</p>
                         <button class="btn-read btnRead" >阅读全文</button>
                         <span class="tag-content">jquery</span>
                     </div>
@@ -99,178 +98,16 @@
                         <span class="tag-content">jquery</span>
                     </div>
                 </div>
-                <div class="left-container">
+                <div class="left-container  active">
                     <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-05">
-                        CSS
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-06">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01" id="panelContent">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                </div>
-                <div class="left-container">
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                        JS
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01" id="panelContent">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                </div>
-                <div class="left-container">
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                        JQ
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
-                    </div>
-                    <div class="panel">
-                        <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
-                        </hgroup>
-                        <p class="panel-content" data-main="JS-01" id="panelContent">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
-                        <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
+                        <figure  class="panel-content" data-main="JS-01" id="panelContent">
+                            <img src="images/code-logo.png" class="figImg">
+                            <figcaption>
+                                <h3>JavaScript实现文件上下传</h3>
+                                <p>HTML5中用js、jQuery结合Ajax实现文件上传功能，HTML5中已经可以用Ajax上传文件了，而且代码简单，借助 FormData类即可发送文件数据</p>
+                            </figcaption>
+                        </figure>
+                        <button class="btn-read btnRead" >查看详情</button>
                     </div>
                 </div>
             </div>

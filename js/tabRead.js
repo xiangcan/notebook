@@ -16,7 +16,7 @@ define(['jquery'],function() {
             var str,scroll;
 
             $btn.on('click',function() {
-                var contentBox = $(this).siblings('p').eq(0);
+                var contentBox = $(this).siblings('.panel-content').eq(0);
 
                 if(ikey) {
                     scroll = $(window).scrollTop();

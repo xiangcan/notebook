@@ -433,24 +433,26 @@ footer {
 
         }
     }
-    .qianduan-container {
-        max-width: 1163px;
-        margin: 20px auto;
-    }
 
     .nav-tab {
-        height: 30px;
         text-align: center;
-        font-size: 15px;
-        margin-bottom: 15px;
+        border-bottom: solid 1px #ddd;
 
     }
     .qianduan-list {
-        height: 100%;
+        max-width: 1163px;
+        margin: 0 auto;
+        padding: 15px 0;
+
         li {
-            height: 30px;line-height: 30px;
+            height: 15px;line-height: 15px;
             width: 25%;float: left;
             text-align: center;
+            box-sizing: border-box;
+            border-left: solid 1px #ddd;
+        }
+        li:first-child {
+            border-left: none;
         }
         li.active {
             a {color: #3498db;}
@@ -473,10 +475,16 @@ footer {
 
     }
 
+    .qianduan-container {
+        max-width: 1163px;
+        margin: 20px auto;
+    }
+
     // 左侧
     .left {
         float: left;
         width: 75%;
+        padding-left: 20px;
 
         hgroup {
             h3 {
@@ -501,6 +509,7 @@ footer {
                 line-height: 30px;line-height: 30px;
                 border-bottom: solid 1px black;
                 margin: 10px;
+                margin-bottom: 20px;
                 color: #ff0109;
         }
         .panel {
@@ -552,8 +561,9 @@ footer {
                 border-radius: 5px;
                 padding: 0 10px 0 10px;
                 color: #444;
-                margin-left: 15px;
                 cursor: pointer;
+                float: right;
+                margin-right: 10px;
 
                 &:hover {
                     color: #3498db;
@@ -649,6 +659,76 @@ footer {
                 border: 1px solid #999;
                 border-radius: 5px;
             }
+        }
+    }
+}
+
+
+/*
+第三页内容
+=======
+ */
+.js-left {
+    figure.panel-content {
+        margin-bottom: 15px;
+        .figImg {
+            float: left;
+            width: 20%;
+            margin: 0 10px 0 10px;
+        }
+        h3 {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        p {
+            font-size: 14px;
+        }
+
+    }
+
+}
+
+
+/*
+第四页内容
+=====
+ */
+.case-container {
+    max-width: 1163px;
+    margin: 0 auto;
+    text-align: left;
+    margin-top: 20px;
+    padding: 0 10px;
+    margin-bottom: 15px;
+
+    .case-content {
+        border-radius: 5px;
+        border: 1px solid #666;
+        background-color: #fdfdfd;
+    }
+    .case-box {
+        width: 25%;
+        padding: 10px 5px;
+        box-sizing: border-box;
+        float: left;
+
+        a {
+            display: block;
+        }
+        .case-img {
+            width: 100%;
+        }
+    }
+    figcaption {
+        line-height: 1.5;
+        padding: 8px;
+        font-size: 14px;
+        a {
+            color: #3568db;
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 13px;
         }
     }
 }
