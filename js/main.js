@@ -10,9 +10,7 @@ require.config({
 require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRead) {
 
     // 轮播图
-    if($('#listBg')) {
-        new Carouse.Carouse('listBg');
-    }
+    new Carouse.Carouse('listBg');
     // code直播图
     new Autotype('codeBox');
     // 点击阅读图
