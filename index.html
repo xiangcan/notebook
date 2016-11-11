@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>index</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_xs9o21egoypn9udi.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container">
+            <h1 class="logo">Notebook</h1>
+            <ul class="nav-list">
+                <li class="item"><a href="index.html" class="active">首页</a></li>
+                <li class="item"><a href="qianduan.html">前端笔记</a></li>
+                <li class="item"><a href="jsGo.html" >JS Go</a></li>
+                <li class="item"><a href="#" >技术延伸</a></li>
+                <li class="item"><a href="#" >项目案例</a></li>
+            </ul>
+            <div class="nav-time" id="navTime">
+                <p>2016年11月8号 星期三</p>
+            </div>
+        </div>
+    </header>
+    <!-- 搜索区 -->
+    <div class="search-bg">
+        <ul class="list-bg" id="listBg">
+            <li style="background-color: #0091be;z-index: 30;"><img src="images/html5.jpg" alt=""></li>
+            <li style="background-color: #009cff;z-index: 20;"><img src="images/Css3.jpg" alt=""></li>
+            <li style="background-color: #f2a24d;z-index: 10;"><img src="images/js.jpg" alt=""></li>
+        </ul>
+        <div class="search-box">
+            <input type="text" name="" placeholder="请输入搜索文章..." id="btnInput">
+            <button>搜索</button>
+            <ul class="search-result none" id="btnResult">
+                <li class="item"><a href="#" class="active">第一篇文字</a></li>
+                <li class="item"><a href="#">第一篇文字</a></li>
+                <li class="item"><a href="#">第一篇文字</a></li>
+                <li class="item"><a href="#">第一篇文字</a></li>
+                <li class="item"><a href="#">第一篇文字</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="content clearfix">
+        <div class="content-container">
+            <section class="left">
+                <h2 class="title">Coding.tv <i class="iconfont icon-tv"></i></h2>
+                <div class="code">
+                    <div class="state-bar"><i class="iconfont icon-point"></i><i class="iconfont icon-point"></i><i class="iconfont icon-point"></i></div>
+                    <div class="code-content">
+                        <div class="code-box" id="codeBox"></div>
+                        <div class="code-mask" id="codeMask"></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <aside class="right">
+                <div class="my-profile box">
+                    <h3 class="title">博客介绍</h3>
+                    <p>前端博客，自学编程，关注Web前端开发技术，移动前端开发，前端资讯，新技术发展，同时分享前端资源和工具等.</p>
+                    <p>期待你的参与,一起完善博客!!!</p>
+                    <div class="my-link">
+                        <h3>联系方式</h3>
+                        <a href="#" class="git-link"><i class="iconfont icon-github"></i> @chander</a>
+                        <address class="email"><span>Email：</span>can.heung@gmail.com</address>
+                    </div>
+                </div>
+                <div class="fast-guid box">
+                    <h3 class="title">热门标签</h3>
+                    <ul class="left-list">
+                        <li><a href="#"><i class="iconfont icon-tag"></i>使用Sass编写Css</a></li>
+                        <li><a href="#"><i class="iconfont icon-tag"></i>jquery知识体系</a></li>
+                        <li><a href="#"><i class="iconfont icon-tag"></i>react入门</a></li>
+                        <li><a href="#"><i class="iconfont icon-tag"></i>前端自动化工具gulp</a></li>
+                    </ul>
+                </div>
+                <div class="web-site box">
+                    <h3 class="title">推荐站点</h3>
+                    <ul class="left-list">
+                        <li><a href="#"><i class="iconfont icon-lianjie"></i>慕课网</a></li>
+                        <li><a href="#"><i class="iconfont icon-lianjie"></i>segmentfault</a></li>
+                        <li><a href="#"><i class="iconfont icon-lianjie"></i>github</a></li>
+                        <li><a href="#"><i class="iconfont icon-lianjie"></i>阮一峰博客</a></li>
+                        <li><a href="#"><i class="iconfont icon-lianjie"></i>haorooms博客</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="mask"></div>
+    <div class="search-info"></div>
+    <footer class="footer">
+        <p>Notebook 专注于前端，学习交流，经验分享。</p>
+    </footer>
+    <script src="js/require.js" data-main="js/main.js"></script>
+</body>
+</html>

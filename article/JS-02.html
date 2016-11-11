@@ -1,0 +1,364 @@
+<pre>
+1.JS对象
+    对象是拥有属性和方法的数据
+    1.object-object ，即OO。
+        1.抽象：抓住需要解决的核心问题，把相关类式的属性方法归类。
+        2.封装：只能通过对象继承出新的对象,优化代码
+        3.继承：从已有对象上继承出新的对象
+        4.多态：多对象的不同形态
+
+    2.无序属性的集合
+        1.其属性可以包含基本值、对象或函数。
+          对象是一组没有特定顺序的值，类似数组，但数组是有顺序的。
+        2.对象的每个属性或方法都有一个名字，而每个名字都映射到一个值。即名值对。
+
+    3.对象成员：
+        1.方法：行为、操作，函数-过程的，动态的，即对象下面的函数。
+        2.属性：变量-静态的，即对象下面的变量
+
+
+    4.对象具有封装和继承特性
+      1.封装：constructor
+      2.继承：prototype
+
+    5.对象的属性方法分类
+
+        1.实例方法(私有方法)
+            1.无法继承
+            2.p1.name = 'jack';
+
+        2.对象方法(构造函数)
+            this.name = 'jack';
+        3.原型方法(原型)
+            Person.prototype.name = 'jack';
+
+    6.属性方法获取
+        1.点操作符
+            1.属性名用一个标识符来标识,标识符不是数据类型,可以不用""
+                obj.name
+
+        2.[]操作符
+            1.属性名需要加""
+                obj["name"]
+
+            2.当该属性名是变量,建议用[]来获取
+                for(attr in obj) {
+                    obj[attr] = '';
+                }
+
+2.对象的创建
+    1.new实例化
+        var person = new Object();
+        person.name = 'My Name';
+        person.age = 18;
+        person.getName = function(){
+          return this.name;
+        }
+        eg：new { }，性能更好
+              var obj1 = new Object();
+              var obj2 = new {};
+
+    2.字面量方式
+        var person = {
+          name : 'My name',
+          age : 18,
+          getName : function(){
+              return this.name;
+          }
+        }
+
+    3.工厂方式：构造函数法
+        function CreatePerson(name) { /*构造函数首字母大写*/
+            var obj = {};
+            this.name = name;
+            this.age = 20;
+            this.showName = function() {     /*对象添加元素*/
+                alert(this.name);
+            };
+
+    4.总结
+        1.构造函数应该首字符大写，以便于区分其他非构造函数
+        2.new
+          1.任何函数，使用new操作符来调用，它就可以作为构造函数，this指向实例对象
+          2.任何函数，不通过new操作符来调用，那它就是普通函数，this指向window
+          3.使用new调用，反函数隐式返回this，this指向实例对象
+
+
+3.JS的对象编辑
+    1.使用'.'操作符动态的扩展器属性
+    2.使用'delete'操作符
+    3.将该属性值重设置为’undefined’来删除属性。
+        person.newAtt=’new Attr’;      //添加属性
+        delete person.age;
+        alert(person.age);                  //undefined(删除属性后值为undefined);
+
+
+4.对象的使用
+    var person = new  CreatePerson();
+
+    1.new的实例化新对象
+        1.添加new：使用new调用一个函数，这个时候函数中的this指向新创建出来的实例对象，而且函数的返回值就是就是this(隐式返回)。
+            var p1 = new CreatePerson('jack');                      /*返回值是创建出来的实例对象*/
+        2.不用nwe，this是指createPerson()函数的父级，默认是window
+
+    2.添加原型方法（共有属性方法）
+        CreatePerson.prototype.age = function(){
+            alert(this.age);
+        };
+
+    3.添加私有属性（各自独立）
+
+    4.总结：一些不共用的属性放在普通函数里，一些共用函数放在原型里面。
+        function 构造函数(属性值) {
+            this.属性 = '属性值';             /*一些不共用的属性，通过传参，创建各自对象的私有属性。*/
+        }
+        构造函数.prototype.方法 = function() {
+        };
+
+5.JS对象变量的数据类型
+    1.基本类型
+        1.赋值：实值的传递，变量独立，不相互影响
+        2.比较：值相同即可。
+
+    2.引用类型
+         引用类型，变量仅保存地址，而非值。
+         1.赋值：引用地址传递，变量之间相互影响
+         2.比较：值和引用地址都相同
+               var a = [1,2,3];
+               var b = a;
+               b.push(4);      /*修改数据，a和b的地址共同指向一个数据，相互影响*/
+               b = [1,2];        /*重新赋值，解除关系，重新建立新的关系*/
+
+    3.划分数据类型好处：对象是经常需要使用的，若值相同，又互相独立，很消耗内存
+
+6.JS对象原型与构造函数
+    1.构造函数
+        1.定义
+            1.用来创建对象的初始化
+            2.首字符大写
+            3.充当类的作用,与new一起用来实例化对象
+
+        2.属性
+            1.prototype:指向原型
+
+        3.构造函数实例化
+            1.第一步，创建空对象；
+            2.第二步，A1.__proto__ === A.prototype
+            3.第三步，构造函数传参调用，this指向实例化的对象，初始化属性
+
+    2.原型：prototype，添加公共属性。
+        1.定义
+            1.原型的作用：包含对象共用的方法或属性，让共用的方法或属性在内存中只存在一份，提高系统性能。
+            2.JavaScript没有类，通过原型prototype来实现继承
+
+        2.原型与普通方法
+           1.原型：类型CSS中的class，共有属性和方法
+                /*原型里添加共有方法，可以减少内存，提高性能*/
+               Person.prototype.showName = function () {
+                    alert(this.name);
+               };
+            2.普通方法与属性：类型CSS中style，优先级高，无法复用，属于私有属性
+                arr.sum = function () {  };
+
+        3.属性
+            1.constructor:指向构造函数,实例对象可以通过原型获取这个方法
+
+        4.总结：
+          1.new实例化的对象相对独立，但它们都可以从原型上获取方法
+          2.实例化对象添加的方法属于私有方法
+
+7.原型链
+    1.定义
+        1.JS通过构造器constructor生成一个实例对象。每一个构造器都有一个prototype属性。
+            Person.prototype
+
+        2.每个实例对象，都有一个指向构造器原型的内部私有链接_proto_，即隐式引用。
+            person1_proto_ = Person.prototype = prototype
+
+        3.原型的constructor属性，指向构造函数
+            prototype.constructor = Person.
+
+        4.原型也是对象，它也有自己隐式引用的原型。
+
+        5.总结
+            1.原型才是对象最根本的
+            2.constructor用来作为一个类的。
+            3.new是用来生成实例的
+
+            4.实例化的对象复制了父类的构造函数内的属性与方法，并且将原型__proto__指向了父类的原型对象，这样就拥有了父类原型对象上的属性和方法，
+            并且这个新创建的对象可直接访问到父类原型对象上的属性与方法，同样也可以访问从父类构造函数中复制的属性和方法。
+
+    2.原型的写法
+        1.原型添加模式
+            Fn.prototype.name = 'jack';
+
+        2.字面量写法，相当于重新赋值，会破坏内置属性。
+            Fn.prototype = {
+               constructor:Fn,                  //注意修正，添加constructor
+               name:'jack'
+            };
+
+    3.原型的属性和方法
+        1.原型的内置属性，无法遍历获取，修改了的系统属性也无法获取
+            for(var attr in Fn.prototype) {
+              alert(attr);
+              }
+
+        2.总结：
+            1.构造函数和原型里的都属于共有属性和方法。
+            2.共有属性，可以批量添加，一般写在构造函数里
+                function Person() {
+                   this.name = 'jack';
+                }
+
+            3.共有方法，一般写在prototype原型里
+                    Array.prototype.sum = function() {   };
+            4.由于实例化的对象是相互独立的。普通方法创建的方法属性，属于私有的。且优先级高，
+
+       3.查找机制：先查找实例对象本身，再搜索原型和构造函数的。
+
+    4.原型链：_proto_(隐式链接)
+        1.实例对象与原型之间的链接，即原型链
+        2.Object对象类型是原型链的最外层
+        3.属性方法查找机制：先在实例对象上寻找，如果实例对象没有，就会在原型上寻找。
+        4.原型链的最外层：Object.prototype
+
+8.JS一般函数转面向对象
+    1.普通函数的规范写法
+        1.先写出普通方法，然后改写成面向对象写法
+        2.普通方法修改原则
+            1.尽量不要出现函数嵌套函数                              //onload里面也不要有函数
+            2.可以有全局变量
+            3.把onload中不是赋值的语句放到单独函数中。   //不是赋值的语句单独封装成一个函数
+
+        3.总结：
+            1.onload里提供定义全局变量，和调用函数。
+            2.所有函数写在onload外面，作为函数调用。
+
+    2.转换面向对象写法
+         1.onload中，只需实例化对象或调用方法
+         2.全局作为对象的属性方便方法调用
+         3.函数作为对象的方法，一般在原型中定义
+         4.注意this指向
+
+9.JS包装对象
+    1.包装对象：基本类型都有自己对应的包装对象，String、Number、Boolean
+    2.字符串是对象，它可以调用方法
+        var str1 = 'hello';
+        alert(typeof str1);
+        str1.indexOf('e');       //字符串可以调用函数
+
+    3.基本数据类型调用方法：
+        1.当基本类型获取属性或方法时，基本类型会找到对应的对象类型
+        2.包装对象会把所有的属性和方法给予基本类型,调用结束后，包装对象消失。
+        3.包装类型属于内置对象，可以添加属性和方法
+
+        4.基本类型无法添加和修改包装对象的属性和方法。
+           1.当str1使用了属性概念，对应包装类型出现，执行完后，包装对象清空消失，无法保存。
+               var str2 ='hell0';
+               str.number = 10;
+               alert(str.number);     //重新使用属性功能，str又引用一次包装对象。之前添加的属性是不存在的。
+
+10.JS面向对象的继承与复制
+    1.对象继承
+        1.在原有对象的基础上，略作修改，得到一个新的对象，不影响原有对象的功能
+        2.子类不影响父类，子类可以继承父类的一些功能(代码复用)
+
+        1.拷贝继承
+            function CreatePerson(name) {
+             this.name = name;
+            }
+            CreatePerson.prototype.showName = function() {
+             alert(this.name);
+            };
+            var p1 = new CreatePerson('jack');
+
+           1.属性的继承：调用父级的构造函数，把构造函数绑定到子类中，call解决this问题。
+               function CreateStar(name,job) {
+                CreatePerson.call(this,name);
+               }
+            2.方法的继承：父类的原型赋给子类。
+                1.使用for in 将每个方法复制，避免引用
+                   for(attr in CreatePerson.prototype) {
+                      CreateStar.prototype[attr] = CreatePerson.prototype[attr];
+                  }
+                  var p2 = new CreateStar('jackson','sang');
+
+        2.类式继承
+            JS中没有类的概念，把构造函数看作类。
+              function Lei() {
+               this.name = 'jack';
+               }
+             Lei.prototype.showName = function() {
+               alert(this.name);
+               };
+
+          1.属性的继承：使用call()替代调用对象，获取属性
+               function LeiChild() {
+                   Lei.call(this);
+                }
+            2.方法的继承：将属性与方法继承分开，避免引用的干扰
+               /*类式继承四句话*/
+               var fn = function() {};                                        /*总结：创建一个空的fn构造函数，阻断父类属性的继承，只获取方法即可。*/
+               fn.prototype = Lei.prototype;                            /*分析原型链：LeiChild只是继承了方法，而没有继承属性。完美！*/
+               LeiChild.prototype = new fn();                          /*类式继承，实例化，引用赋值，原型链查找
+               LeiChild.prototype.constructor = LeiChild;        /*修正constructor的指向问题*/
+
+               var a = new LeiChild();
+
+        3.对象复制
+            function extend(obj1,obj2) {
+                for(var attr in obj1) {
+                    obj2[attr] = obj1[attr];
+                }
+            }
+            extend(obj1,obj2);        //把obj1复制给obj2
+
+11.实例对象常用属性和方法
+    1.方法：
+      1.obj.hasOwnProperty(attr)：检查attr是不是该对象的私有属性
+        1.属性名须加引号
+        2.遵循查找机制
+          var a = [];
+          a.num = 10;
+          Array.prototype.num = 20;
+          alert(a.hasOwnProperty('num'));  //属性名加引号
+
+      2.obj.toString():Object上的方法，对象转换为字符串
+        1.返回值：对象的字符串
+        2.将对象转换为字符串
+          var arr = [1,2,3];
+          alert(arr.toString());
+
+      3.对于系统对象，toString是自带的，对于自定义的对象，toString是Object的原型所有的。
+
+      4.做类型的判断的最好方法
+        alert(Object.prototype.toString.call(arr)=='[object Array]');
+
+      3.Object.keys(obj)；接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组。
+        1.返回值:一个数组,包含对象的可枚举属性和方法的名称
+        2.如果传参不是对象,报错
+
+      4.Object.getOwnPropertyNames()：枚举所有属性，包括不可枚举的constructor属性。
+
+
+    2.属性
+        1.constructor:用于获取实例化对象的构造函数
+            function Fn() {
+            Fn.prototype.constructor = Fn;                    /*每个构造函数都会有这个语句，即每个原型都会自动添加constructor属性。*/
+            }
+            var b = new Fn();
+            alert(b.constructor);                             /*constructor是原型的属性，实例化自身没有就回去原型查找。*/
+            alert(b.constructor == Array);  /*true*/
+
+
+    3.操作符
+        1.instanceof：运算符，判断对象与某个构造函数在原型链上是否有关系，是否在同一条原型链上
+            1.alert(b instanceof Fn);                    /*构造函数与实例化都指向同一个原型链*/
+            2.alert(a instanceof Array);                 /*判断一个对象是否属于某种类型的对象*/
+
+        2.delete:删除实例对象的属性
+            delete x.name;
+
+    4.其他
+        1.for in中，系统定义的属性查找不到，修改了系统自带的属性也无法找到</pre>

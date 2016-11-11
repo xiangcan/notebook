@@ -1,0 +1,213 @@
+
+<pre>
+1.window 和 document
+    1.window：浏览器窗口对象
+        1.属性方法是全局的，一般可以省略
+
+    2.document：页面html文档对象
+        1.document是window对象的属性
+            window.document.body：body标签
+            window.document.documentElement：html标签
+
+        2.document.location = window.location
+
+2.window 相关宽高
+    1.浏览器窗口
+        1.高度
+            window.innerHeight：浏览器窗口的内部高度(不包括浏览器的地址栏和菜单栏)
+            window.outerHeight：浏览器窗口的实际高度(包括浏览器的地址栏和菜单栏)
+
+        2.宽度
+            window.innerWidth = window.outerWidth：浏览器窗口的内部宽度(包括滚动条)
+
+        4.浏览器可视区宽高兼容性
+                1.新浏览器(IE9+)
+                    var w = window.innerWidth;
+                    var h = window.innerHeight;
+
+                2.旧浏览器(iE 8不支持innerWidth)
+                    var w = document.documentElement.clientWidth || document.body.clientWdith;
+                    var h = document.documentElement.clientHeight || document.body.clientHeight;
+
+                3.兼容新旧
+                    var w = window.innerWidth?window.innerWidth:document.documentElement.clientWidth || document.body.clientWdith;
+                    var h = window.innerWidth?window.innerHeight:document.documentElement.clientHeight || document.body.clientHeight;
+
+
+    3.浏览器屏幕
+        1.屏幕高度
+            window.screen.height：屏幕整体实际高度
+            window.screen.availHeight：屏幕可用高度(不包括系统的任务栏)
+
+        2.屏幕宽度
+            window.screen.width = window.screen.availHeight：屏幕的宽度 = 屏幕可用宽度
+
+        3.窗口距离
+            window.screenLeft：窗口距离屏幕左边的距离，等价window.screenX
+            window.screenTop：窗口距离屏幕顶部的距离，等价window.screenY
+
+
+3.document 相关宽高
+    1.元素内容宽高(行间样式)
+        ele.style.width:元素的内容区
+        ele.sytle.height:元素的宽度
+
+        1.宽高值
+            1.值为元素设置的行间样式，设置为百分比，则 width 返回此百分比
+            2.offsetWidth则返回对象的具体宽度值而不是百分比值；
+            3.如果没有给元素指定过width样式，则style.width返回的是空字符串；
+
+        2.行间样式与计算样式
+            1.ele.style.width：获取的是设置的行间样式属性，而非样式表样式
+            2.获取元素的最终样式：封装函数 getCurrentStyle()
+
+    2.元素定位距离(仅定位元素可用，行间样式)
+        ele.style.left:定位元素左外边距距离父级左边界(padding)的偏移
+        ele.style.top:定位元素上外边距距离父级上边界(padding)的偏移
+
+        3.具体值
+            1.值为定位元素设置的行间样式 left/top
+            2.返回值:返回值px，可读,可写
+            3.百分数赋值,返回的也是一个百分数
+            4.如果没有指定该样式,返回为空字符串
+
+    3.offset宽高
+        1.元素整体宽高 (包括滚动条)
+            ele.offsetWidth = width + padding + border (包括滚动条)
+            ele.offsetHeight = height + padding  + border (包括滚动条)
+
+        2.元素定位距离
+            ele.offsetLeft：元素边框距离有定位父级边框的距离，相当于left+margin-left
+            ele.offsetTop：元素边框距离有定位父级边框的距离，相当于top+margin-top
+
+            3.总结
+                1.返回值:number,不带px
+                2.只读,不可赋值
+                3.定位父级
+                    1.如果找不到定位父级,相对于body
+                    2.如果有,则相对于定位父级
+                4.IE浏览器有兼容性问题
+
+        3.距离可视区距离
+            ele.getBoundingClientRect().left：元素距离左上角的视口横坐标
+            ele.getBoundingClientRect().top：元素距离左上角的视口纵坐标
+
+    4.client宽高
+        1.元素可视宽高，(不包含滚动条17px)
+            ele.clientWidth = width + padding*2 - 滚动条
+            ele.clientHeight = height + padding*2 - 滚动条
+
+            1.兼容性：mac下默认滚动条不占宽度
+
+        2.元素边框border的厚度，不设边框或不定位，值为0
+            document.body.clientLeft
+            docuemnt.body.clientTop
+
+    5.scroll
+        1.滚动距离(针对滚动容器overflow:scroll)
+            ele.scrollLeft:元素内容超过宽高时，内容左边卷起的距离，和滚动条向右滚动的距离比例值
+            ele.scrollTop:元素内容超过宽高时，内容上面卷起的距离，和滚动条向下滚动的距离比例值
+
+            1.可读可写
+            2.ele：父元素的内容超出，设置overflow:scroll，出现滚动条，计算其内容的滚动距离
+            3.作用对象：有内容超出的滚动容器
+
+        2.滚动尺寸(针对滚动容器overflow:scroll，元素内容总尺寸，包括可滚动部分)
+            ele.scrollWidth：滚动容器实际内容宽度(包括可滚动那部分未显示的)
+            ele.scrollHeight：滚动容器实际内容高度(包括可滚动那部分未显示的)
+
+            1.无滚动轴
+                scrollWidth = clientWidth = width + padding*2
+            2.有滚动轴(不包括滚动轴)
+                scrollWidth = 容器实际内容宽度(包含可滚动部分，容器本身做了宽高限制) + padding*2
+                scrollHeight = 容器实际内容高度(包含可滚动部分，容器本身做了宽高限制) + padding*2
+
+            3.分析：
+                1.scroll就是设置滚动条的，没有滚动条，该属性没意义
+                2.出现滚动条的条件：取决于父级
+                    1.父级设置overflow:scroll-x/scroll-y/scroll
+                    2.此标签的内容宽度超过了标签本身的宽度。
+
+            4.特殊值：body.scrollHeight/Width：
+                1.无滚动轴：
+                    1.宽高小于浏览器窗口：浏览器窗口的宽高
+                    2.宽高大小浏览器窗口：内容的实际高度+padding+margin
+                2.有滚动轴：内容的实际高度+padding+margin
+
+        3.滚动轴宽度
+            ele.outerWidth-ele.clientWidth
+                1.容器只要设置了 overflow:scroll，就会出现滚动条
+
+        3.scroll事件(针对滚动元素overflow:scroll)
+            1.事件绑定给内容的父级，因为滚动条是出现在父级上，即滚动容器上
+            2.滚动条的移动距离与页面的滚动距离是成比例的
+
+        4.window和 html,body
+            1.滚动事件
+                1.绑定给window，$(window).scroll()
+
+            2.滚动高度
+                1.document.body.scrollTop || document.docuemntElement.scrollTop
+                2.document.body.scrollLeft || document.docuemntElement.scrollLeft
+
+
+4.Event坐标
+    1.clientX/Y：相对于浏览器(可视区左上角)的坐标
+        1.移动端浏览器一般不能缩小
+
+    2.screenX/Y：相对于设备屏幕左上角的坐标
+
+    3.pageX/Y：相对于网页页面左上角的坐标(页面会滚动)
+
+    4.offsetX/Y：相对于事件源左上角的坐标
+
+    5.X/Y：相对于Css动态定位的最内层包容元素
+        1.默认等价clientX/Y
+        2.IE中，若设置position，则为offsetX/Y
+
+5.JQ宽高
+    1.内容区宽高：width/height
+        width/height()
+
+        1.window或document：只读
+        2.普通元素：可读可写，值为number
+
+    2.元素内部宽高：padding+width/height (包括滚动条)
+        innerWidth/height()
+
+        1.一般用于普通元素：可读可写，innerWidth(value),innerWidth(function() {})
+
+
+    3.元素整体宽高：
+        1.outerHeight()：height + padding + border
+        2.outerHeight/width(true)：height+padding+border+margin
+
+    4.元素距离
+        offset().top/left：相对于document页面的，和定位无关
+
+    5.元素定位距离
+        position().top/left：元素边框相对于最近一个有定位的父级的距离，不包括margin
+
+        1.把当前元素看作一个定位元素，获取它的边框距离定位父级的left值，margin与left值是不冲突的。
+        2.但是，一般的定位元素的top和left是从margin边界开始计算的。
+
+    6.滚动距离
+        scrollLeft/top()：元素内容的滚动距离
+
+    7.jq没有scrollWidth/height，一般用JS获取
+
+6.使用总结
+    1.针对window和html/body
+        1.浏览器可视区尺寸
+            window.width() = window.innerWidth() = window.outerWidth()
+
+        2.页面宽高
+            document.width() = document.innnerWidth() = document.outerWidth()
+
+        3.滚动
+            1.滚动距离：$(window).scrollTop/left
+            2.滚动尺寸：$('body').scrollWidth/scrollHeight
+
+7.宽高总结
+        $(document).height() = $(window).height() + $(window).scrollTop()
+</pre>
