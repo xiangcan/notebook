@@ -9,7 +9,10 @@ define(['jquery'],function($) {
 
     function AutoType(id) {
         this.oBox = $('#'+id);
-        this.init();
+
+        if(this.oBox) {
+            this.init();
+        }
     }
 
     $.extend(AutoType.prototype,{
@@ -28,7 +31,7 @@ define(['jquery'],function($) {
 
                 var timer = setInterval(function(){
                     //substr(index, 1) 方法在字符串中抽取从index下标开始的一个的字符
-                    var current = str.substr(index, 1);
+                    var current = str.splice(index, 1);
 
                     if(current == '<'){
                     //indexOf() 方法返回">"在字符串中首次出现的位置。
