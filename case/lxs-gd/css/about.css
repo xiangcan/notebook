@@ -1,0 +1,141 @@
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-30 13:58:00
+ * @version $Id$
+ */
+/* line 10, ../sass/about.scss */
+.headline {
+  width: 100%;
+  height: 300px;
+  min-width: 1263px;
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), transparent), url("../images/headline.jpg") no-repeat center; }
+  /* line 17, ../sass/about.scss */
+  .headline .center {
+    width: 1263;
+    height: 300px;
+    margin: 0 auto; }
+  /* line 21, ../sass/about.scss */
+  .headline hgroup {
+    padding: 100px 0 0 550px; }
+    /* line 25, ../sass/about.scss */
+    .headline hgroup h2 {
+      color: #eee;
+      font-size: 20px;
+      letter-spacing: 1px; }
+    /* line 30, ../sass/about.scss */
+    .headline hgroup h3 {
+      color: #eee;
+      font-size: 16px;
+      letter-spacing: 1px; }
+
+/* line 37, ../sass/about.scss */
+.container {
+  width: 1263px;
+  margin: 30px auto; }
+  /* line 41, ../sass/about.scss */
+  .container .sidebar {
+    width: 340px;
+    float: right; }
+  /* line 45, ../sass/about.scss */
+  .container .sidebox {
+    border: 1px solid #eee;
+    margin: 0 0 10px 0; }
+    /* line 49, ../sass/about.scss */
+    .container .sidebox h2 {
+      font-size: 20px;
+      font-weight: normal;
+      text-align: center;
+      letter-spacing: 1px;
+      text-indent: 8px;
+      height: 40px;
+      line-height: 40px;
+      background: #fafafa;
+      color: #666; }
+  /* line 61, ../sass/about.scss */
+  .container .tag {
+    padding: 10px 0; }
+    /* line 63, ../sass/about.scss */
+    .container .tag li {
+      display: inline-block; }
+    /* line 66, ../sass/about.scss */
+    .container .tag a {
+      display: block;
+      width: 100px;
+      height: 35px;
+      line-height: 35px;
+      background: #eee;
+      margin: 2px 0;
+      color: #999;
+      text-align: center; }
+      /* line 75, ../sass/about.scss */
+      .container .tag a:hover, .container .tag a.active {
+        background: #458b00;
+        color: #666; }
+  /* line 82, ../sass/about.scss */
+  .container .img-lsit figure {
+    display: inline-block;
+    padding: 4px;
+    color: #666;
+    text-align: center; }
+  /* line 89, ../sass/about.scss */
+  .container .box {
+    padding: 10px 0;
+    text-align: center; }
+    /* line 93, ../sass/about.scss */
+    .container .box a {
+      display: inline-block;
+      width: 150px;
+      height: 35px;
+      line-height: 35px;
+      background-color: #eee;
+      margin: 2px 0;
+      color: #999;
+      text-align: left;
+      text-indent: 45px;
+      border-radius: 5px; }
+      /* line 105, ../sass/about.scss */
+      .container .box a:hover {
+        background-color: #458b00;
+        color: #666; }
+    /* line 111, ../sass/about.scss */
+    .container .box .weather {
+      background: url("../images/64_weather-35.png") no-repeat 5px center; }
+    /* line 114, ../sass/about.scss */
+    .container .box .train {
+      background: url("../images/Train-35.png") no-repeat 5px center; }
+    /* line 117, ../sass/about.scss */
+    .container .box .plane {
+      background: url("../images/plane-35.png") no-repeat 5px center; }
+    /* line 120, ../sass/about.scss */
+    .container .box .subway {
+      background: url("../images/subway-35.png") no-repeat 5px center; }
+  /* line 127, ../sass/about.scss */
+  .container .main-content {
+    width: 900px;
+    float: left; }
+  /* line 133, ../sass/about.scss */
+  .container .about-list h2 {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px dashed #999;
+    padding-bottom: 10px;
+    font-size: 25px;
+    color: #999;
+    text-align: left;
+    font-weight: normal; }
+  /* line 141, ../sass/about.scss */
+  .container .about-list p {
+    line-height: 1.5;
+    font-size: 20px;
+    text-indent: 2em;
+    margin: 10px 0; }
+  /* line 149, ../sass/about.scss */
+  .container .about-list address {
+    line-height: 1.2;
+    font-size: 16px;
+    padding-top: 10px; }
+    /* line 154, ../sass/about.scss */
+    .container .about-list address li {
+      margin: 5px 0;
+      font-style: normal; }

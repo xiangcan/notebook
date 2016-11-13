@@ -1,0 +1,9 @@
+<MKM version="2.0" imageFileUrl="file:///D:/wamp/www/github/notebook/case/lxs-ydd-01-Mark.png">
+  <Marks>
+    <TextMark defaultDirection="9" direction="5" color="16711680" x="554" y="211" textMaxWidth="100" offsetX="25" offsetY="10" text="移动端去除左侧aside"/>
+    <LengthMark direction="12" color="16711680" length="483" x="47" y="120"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="292" y="105" textMaxWidth="100" offsetX="25" offsetY="10" text="居中显示，兼容移动端"/>
+    <TextMark defaultDirection="10" direction="10" color="16711680" x="243" y="29" textMaxWidth="100" offsetX="36" offsetY="20" text="显示导航，去除多余信息"/>
+    <TextMark defaultDirection="5" direction="5" color="16711680" x="213" y="235" textMaxWidth="144" offsetX="56" offsetY="24" text="依旧inline-block布局"/>
+  </Marks>
+</MKM>

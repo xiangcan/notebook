@@ -1,0 +1,72 @@
+<pre style="text-indent:0;">1.结构标签
+    1.&lt;header>：页眉,页面或板块的头部
+    2.&lt;nav>：导航列表,相对于ul,内嵌的标签规则更加简单,nav默认样式更少。
+    3.&lt;hgroup>：页面上的标题组合
+        1.一个标题和子标题，或标语的组合
+
+    4.&lt;section>：板块，倾向于结构。
+        1.划分页面上的不同区域，或文章里的不同章节
+
+    5.&lt;footer>：页脚，页面的底部
+
+2.内容标签
+    1.&lt;article>：主体，结构完整且独立的内容部分。如博客文章，评论。
+    2.&lt;aside>：和主体相关的附属信息。
+        1.与当前页面或主要内容相关的引用、侧边栏、广告、nav元素组，但有别于主要内容的部分。
+        2.aside内容应该与article内容相关
+        3.在article之外使用，作为页面或站点全局的附属信息，最典型的sidebar，其中的内容可以是链接或导航、广告。
+
+3.独立语义
+    1.&lt;figure>：媒体元素组合，图片、视频
+    2.&lt;figcaption>：figure子元素，用于对figure内容进行说明
+        &lt;figure>
+            &lt;figcaption>
+                this is figure
+            &lt;/figcaption>
+        &lt;/figure>
+
+    3.&lt;time>：语义时间
+        1.属性：datetime='2008-02-14'
+
+    4.&lt;address>：定义文章或页面作者的详细联系信息
+    5.&lt;mark>：标记的语句
+
+4.功能标签
+    1.&lt;datalist>：输入控件的选项列表
+        1.与input元素配合使用,input的list属性与datalist的对应
+        2.输入时有选项栏和提示框合体功能。
+            &lt;input type="text" list="valList"/>
+                &lt;datalist id="valList">
+                    &lt;option value="javascript">javascript&lt;/option>
+                    &lt;option value="html">html&lt;/option>
+                &lt;/datalist>
+
+    2.&lt;details>：用于描述文档或文档某个部分的细节
+        1.该元素用于摘录引用等，应该与页面的主要内容分开。
+        2.Open属性：展开显示内容
+    3.&lt;summary>：details元素的标题
+        &lt;details>
+        &lt;summary>JACK&lt;/summary>
+        &lt;p>JACK IS A MAN&lt;/p>
+        &lt;/details>
+
+    4.&lt;dialog>：对话标签
+        1.&lt;dt>,&lt;dd>：用于区分角色的语句。
+            &lt;dialog open>
+                &lt;dt>JACK IS MAN &lt;/dt>
+                &lt;dd>YES &lt;/dd>
+            &lt;/dialog>
+
+    5.&lt;keygen>：表单控件的数据加密类型设置
+        1.给表单添加一个公钥,设置数据加密类型。
+        2.open属性：展开显示内容
+            &lt;form>
+                &lt;input type="tex" name="user"/>
+                &lt;keygen name="security"/>
+                &lt;input type="submit"/>
+            &lt;/form>
+
+    6.&lt;progress>：定义进度条
+        &lt;progress max="100" value="59">
+            &lt;span>59&lt;/span>%            &lt;!--兼容处理-->
+        &lt;/progress></pre>

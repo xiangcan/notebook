@@ -381,25 +381,6 @@ footer {
     clear: both;
 }
 
-/*
-弹出层
-=========
- */
-.mask {
-    width: 100%;height: 100%;
-    background-color: rgba(#000,0.5);
-    z-index: 600;
-    position: absolute;left: 0;top: 0;
-    display: none;
-}
-.search-info {
-    width: 50%;height: 50%;
-    background-color: #fff;
-    position: fixed;left: 50%;top: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 600;
-    display: none;
-}
 
 
 /*
@@ -461,7 +442,7 @@ footer {
             display: inline-block;
             height: 100%;
             color: #000;
-            font-size: 20px;
+            font-size: 17px;
             cursor: pointer;
 
             &:hover {
@@ -529,6 +510,7 @@ footer {
                 h3 {
                     font-size: 16px;
                     text-align: center;
+                    color: #cf8e35
                 }
                 h4 {
                     font-size: 14px;
@@ -561,9 +543,9 @@ footer {
                 border-radius: 5px;
                 padding: 0 10px 0 10px;
                 color: #444;
-                cursor: pointer;
                 float: right;
-                margin-right: 10px;
+                cursor: pointer;
+                margin-top: -20px;
 
                 &:hover {
                     color: #3498db;
@@ -650,7 +632,7 @@ footer {
             font-size: 14px;
             height: 100%;
             color: #000;
-            padding: 0 10px 0 10px;
+            padding: 0 15px 0 15px;
             margin: 0 10px 0 10px;
             box-sizing: border-box;
             &:hover,&.active {
@@ -674,11 +656,14 @@ footer {
         .figImg {
             float: left;
             width: 20%;
-            margin: 0 10px 0 10px;
+            margin: 0 15px 10px 10px;
+            display: block;
+            vertical-align: middle;
         }
         h3 {
             font-size: 15px;
             font-weight: bold;
+            margin-top: 5px;
         }
         p {
             font-size: 14px;
@@ -705,10 +690,11 @@ footer {
         border-radius: 5px;
         border: 1px solid #666;
         background-color: #fdfdfd;
+        overflow: hidden;
     }
     .case-box {
         width: 25%;
-        padding: 10px 5px;
+        padding: 24px 12px;
         box-sizing: border-box;
         float: left;
 
@@ -716,7 +702,7 @@ footer {
             display: block;
         }
         .case-img {
-            width: 100%;
+            width: 100%;height: 250px;
         }
     }
     figcaption {
@@ -724,11 +710,55 @@ footer {
         padding: 8px;
         font-size: 14px;
         a {
-            color: #3568db;
             margin-bottom: 5px;
+            color: #3298db;
         }
         p {
             font-size: 13px;
         }
     }
+    .fig-bottom {
+        background-color: rgba(#000, .2);
+        a {
+            display: block;float: left;
+            width: 50%;
+            padding: 10px 0;line-height: 13px;
+            font-size: 13px;
+            text-align: center;
+            border-left: 1px solid black;
+            box-sizing: border-box;
+            color: black;
+            &:hover {
+                color: #3298db;
+                text-decoration: underline;
+            }
+        }
+        a:nth-child(1) {
+            border-left: none;
+        }
+        .icon-tips {
+            margin-right: 5px;
+        }
+    }
+}
+/*
+弹出层
+=========
+ */
+.case-mask {
+    width: 100%;height: 100%;
+    background-color: rgba(#000,0.5);
+    position: absolute;left: 0;top: 0;
+    overflow: hidden;
+
+    .maks-info {
+        width: 100%;max-width: 768px;height: 70%;
+        background-color: #fff;
+        position: fixed;left: 50%;top: 50%;
+        transform: translate(-50%,-50%);
+        overflow-y: scroll;
+    }
+}
+.case-img {
+    width:100%;
 }

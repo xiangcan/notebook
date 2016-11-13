@@ -1,0 +1,169 @@
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-11-01 10:36:56
+ * @version $Id$
+ */
+/* line 12, ../sass/ticket.scss */
+.content .headline {
+  height: 1rem;
+  max-width: 6.4rem;
+  margin: 0 auto;
+  position: relative; }
+  /* line 18, ../sass/ticket.scss */
+  .content .headline img {
+    width: 100%;
+    height: 100%; }
+  /* line 23, ../sass/ticket.scss */
+  .content .headline .mask {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), transparent);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000; }
+/* line 32, ../sass/ticket.scss */
+.content .head-title {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff; }
+  /* line 38, ../sass/ticket.scss */
+  .content .head-title h2 {
+    font-size: .22rem; }
+  /* line 41, ../sass/ticket.scss */
+  .content .head-title h3 {
+    font-size: .16rem; }
+/* line 48, ../sass/ticket.scss */
+.content .ticket-list {
+  font-size: .16rem;
+  color: #666;
+  max-width: 6.4rem;
+  margin: .15rem auto;
+  padding: 0 .1rem; }
+  /* line 55, ../sass/ticket.scss */
+  .content .ticket-list h2 {
+    font-size: .2rem;
+    border-bottom: .01rem dashed #999;
+    padding-bottom: .1rem; }
+/* line 62, ../sass/ticket.scss */
+.content form {
+  position: relative; }
+/* line 65, ../sass/ticket.scss */
+.content .type {
+  margin: .2rem 0 .1rem 0; }
+/* line 68, ../sass/ticket.scss */
+.content mark {
+  padding: .05rem .08rem;
+  border-radius: .04rem;
+  margin: 0 .05rem 0 .1rem;
+  background-color: #fff;
+  color: #999; }
+  /* line 76, ../sass/ticket.scss */
+  .content mark.active {
+    background-color: #458b00;
+    color: #fff; }
+/* line 84, ../sass/ticket.scss */
+.content label {
+  display: block; }
+/* line 87, ../sass/ticket.scss */
+.content input {
+  height: .25rem;
+  width: 90%;
+  background-color: #fff;
+  margin: .1rem;
+  border-radius: .04rem;
+  border: 1px solid #ccc;
+  color: #666;
+  padding: .05rem;
+  text-indent: .1rem; }
+/* line 97, ../sass/ticket.scss */
+.content .submit {
+  display: block;
+  width: 30%;
+  padding: .1rem;
+  margin: 0 auto;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #f60;
+  border: none;
+  cursor: pointer; }
+/* line 110, ../sass/ticket.scss */
+.content .new {
+  margin: .1rem 0; }
+/* line 114, ../sass/ticket.scss */
+.content .new-nav {
+  margin-top: .1rem; }
+  /* line 116, ../sass/ticket.scss */
+  .content .new-nav li:first-child {
+    padding-left: 0;
+    padding-right: 0; }
+  /* line 120, ../sass/ticket.scss */
+  .content .new-nav li {
+    display: inline-block;
+    padding: 5px 10px; }
+    /* line 125, ../sass/ticket.scss */
+    .content .new-nav li.active, .content .new-nav li:hover {
+      background-color: #458b00;
+      border-radius: 4px; }
+/* line 132, ../sass/ticket.scss */
+.content table {
+  margin-top: .2rem;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-collapse: collapse; }
+/* line 139, ../sass/ticket.scss */
+.content th {
+  border-bottom: 1px solid #ddd;
+  line-height: .4rem;
+  height: .4rem; }
+/* line 143, ../sass/ticket.scss */
+.content td {
+  line-height: .4rem;
+  height: .4rem;
+  border-bottom: 1px solid #ddd;
+  text-align: center; }
+/* line 148, ../sass/ticket.scss */
+.content tr:nth-child(2n) {
+  background-color: #fafafa; }
+/* line 151, ../sass/ticket.scss */
+.content tr:hover {
+  background-color: #999; }
+/* line 154, ../sass/ticket.scss */
+.content .price {
+  color: #f60; }
+/* line 158, ../sass/ticket.scss */
+.content .reserve {
+  display: inline-block;
+  padding: .04rem;
+  line-height: 1.5;
+  border-radius: .04rem;
+  background-color: #f60;
+  color: #fff;
+  text-align: center; }
+/* line 167, ../sass/ticket.scss */
+.content .table-more {
+  color: #666; }
+
+@media (max-width: 480px) {
+  /* line 173, ../sass/ticket.scss */
+  .content .head-title h2 {
+    font-size: .17rem; }
+
+  /* line 176, ../sass/ticket.scss */
+  .content .head-title h3 {
+    font-size: .1rem; }
+
+  /* line 180, ../sass/ticket.scss */
+  .hide {
+    display: none; } }
+@media (min-width: 480px) and (max-width: 640px) {
+  /* line 190, ../sass/ticket.scss */
+  .content .head-title h2 {
+    font-size: .22rem; }
+
+  /* line 193, ../sass/ticket.scss */
+  .content .head-title h3 {
+    font-size: .14rem; } }

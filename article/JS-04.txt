@@ -1,0 +1,300 @@
+<pre style="text-indent:0;">1.对象转换为字符串
+    1.obj.toString(n):将一个对象转化为字符串，Object方法
+        1.几乎每个值都有toString()方法,可以重写这个方法,除了null和undefined。
+            1.对于null,undefined会报错
+
+        2.Array.toString():将数组转换成一个字符串，并且返回这个字符串。
+            1.首先将每个元素都转换成字符串(通过调用每个元素的toString方法),然后以逗号列表输出
+            2.返回值与没有参数的Array.jion()方法返回的字符串相同。
+
+        3.Boolean.toString():将布尔值转换为字符串
+            1.如果布尔值是true，则返回"true"。否则返回"false"。
+
+        4.Date.toString():将对象转换为一个字符串,采用本地时间
+            1.返回值:返回日期的字符串表示。
+
+        5.Error.toString():将Error对象转换成字符串
+            1.实现预定义包含相关错误信息的字符串。
+
+        6.Function.toString():把函数转换为字符串
+            1.返回值:函数字符串
+              "function fn() { [native code] }"
+
+        7.Number.toString(n):把数字转换为字符串
+            1.传参:n,数值的进制
+                1.只能用于对象number转换进制,默认10,其他无效(boolean,string)
+                    var n = 8;
+                    t.toString(2);      //1000
+
+                    var t = '8';
+                    t.toString(2);      //'8'
+
+        8.String.toString():将字符串作为一个副本输出
+
+    2.String(obj):把对象转换为字符串,强制转化
+        1.直接当做字符串,和toString()相同
+        2.区别：null和undefined也可以使用，结果为'null'/'undefined'
+
+        3.总结：
+            1.对于需要将对象转换为字符串时,内部是先调用对象都有的方法toString()进行转换,如果是null/undefined,则用
+            2.null和undefined可以使用String(),但不能使用toString()
+
+    3.obj.toLocaleString()：将当前对象以字符串值的形式返回，Object方法
+
+    4.Date转换为字符串
+        1.obj.toString()
+            1.返回对象字符串，与Date()一样
+                Thu Sep 29 2016 00:33:25 GMT+0800 (中国标准时间)
+        2.obj.toTimeString()
+            1.返回日期对象时间部分的字符串，返回时分秒
+                00:34:46 GMT+0800 (中国标准时间)
+
+        3.obj.toUTCString()
+            1.把一个日期对象转换为一个以UTC时区计时的字符串。
+                Wed, 28 Sep 2016 16:34:46 GMT
+
+        4.obj.toGMTString()
+            1.根据格林威治时间(GMT)把Date对象转换为字符串
+            2.请使用toUTCString()方法代替
+                Wed, 28 Sep 2016 16:37:58 GMT
+
+        //1970年1月1日0时0分0秒(UTC，即协调世界时)
+
+        5.obj.toLocaleDateString()：根据本地时间，将日期部分转换为字符串
+            1.返回值：以本地时间区表示，并根据本地规则格式化
+                "2016/10/6 下午3:43:44"
+
+    5.数组转化为字符串
+        1.Array.toLocaleString()：转化为字符串
+        2.Array.join()：用分隔符将数组连接为字符串
+
+
+2.对象转换为数值
+    1.Number(value):将元素整体转换为数值
+        1.转换原理：针对整体，字符串整体是数字，可以转换。
+        2.对象可以是任意类型的数据,但不一定可以转换成功
+
+    2.parseInt()/parseFloat():将字符串转换为数字
+        1.传参是string类型
+        2.转换原理:从第一位字符开始搜素数字,第一位是空格或0则忽略,后面遇到非数字则停止
+
+        1.parseInt(val,n):转为整型,可以设置进制
+        2.parseFloat(val):转为浮点数,可以识别第一个小数点,不可以设置进制
+
+3.函数修改this指向，取代上下文环境
+    1.call():替代this调用
+        1.格式：格式：Function.call(thisobj,arg1,arg2)
+        2.参数
+            1.thisobj:这个对象将代替Function里的this指向
+            2.arg：函数的传参列表
+
+        3.定义：调用当前函数,修改this执行
+
+
+    2.apply()
+        1.格式：Function.apply(thisobj,args）
+        2.参数：
+            1.thisobj：这个对象将代替Function的this对象
+            2.args：一个数组，函数的传参4
+
+    3.bind()：函数调用，修改this指向
+        1.语法：Function.bind(thisobj)(arg1,arg2);
+        2.EcmaScript5中扩展了叫bind的方法（IE6,7,8不支持）
+        3.返回值：函数
+            1.修改了this指向，但没有调用，需要手动调用
+            2.fn.bind(obj)()
+
+    4.总结：
+        4.比较：call(obj)与apply(obj)与bind(obj)()
+            1.作用相同，修改this指向，可以获取构造函数里的属性和方法
+            2.不同：
+                1.call(obj,arg1,arg1)：函数的参数一个个分别传入
+                2.apply(obj,[arg1,arg2])：函数的传参是以一个数组或arguments对象的形式整体传入。
+                3.bind(obj)(arg1,arg2)：返回值是函数，需要再次调用
+
+            3.实例
+                var oFn = {
+                    name : "jack",
+                    say : function(school,grade) {alert(this.name+"在"+school + grade);}
+                }
+                var nFn = {
+                    name : "Gordon",
+                    age : 18
+                }
+
+                1.call()：  oFn.say.call(nFn,'shenzen',3);
+                2.apply()： oFn.say.apply(nFn,['shenzen',3]);
+                3.bind()()：oFn.say.bind(nFn)('shen',3);
+
+    5.应用场景
+        1.数组之间追加
+            var array1 = [12, "foo", {name: "Joe"}, -2458];
+            var array2 = ["Doe", 555, 100];
+            Array.prototype.push.apply(array1, array2);         //push的this由原型变更为arr1
+            /* array1 值变为  [12 , "foo" , {name:"Joe"} , -2458 , "Doe" , 555 , 100] */
+
+        2.获取数组中的最大值和最小值
+            var numbers = [5, 458, 120, -215];                 //Math.max(x,y,z..)一样
+            var maxInNumbers = Math.max.apply(Math, numbers);  //458，方便在于参数可以一组传入
+
+        3.验证是否是数组（前提是toString()方法没有被重写过）
+            function isArray(obj){
+                return Object.prototype.toString.call(obj) === '[object Array]';
+            }
+        4.类（伪）数组使用数组方法
+            var domNodes = Array.prototype.slice.call(document.getElementsByTagName("div"));
+
+        5.数字求和
+            function sum() {
+                var numberSum = Array.prototype.reduce.apply(arguments, [function (prev, next) {
+                    return prev + next;
+                }]);
+                console.log(numberSum);
+            }
+            sum(1, 2, 3);
+
+    6.JQ中的修改this
+        1.$.poxy(fn,obj)：改变this指向，属于工具方法
+            function show(n1,n2) {
+                alert(n1);
+                alert(n2);
+                alert(this);
+            }
+            show(1,2);                       //show()调用前是window，结果为window
+            $.proxy(show,document)(1,2);     //修改指向并传参调用。
+            $.proxy(show,document,3,4);      //修改指向并传参，没有调用，在事件函数中很有用。
+            $.proxy(show,document,5)(6);     //也可以混合传参
+
+4.字符串检索
+    1.indexOf('匹配的字符'，'第几位开始')：检索字符串
+        1.查找某个指定的字符串值在字符串中是否出现，返回首次出现的位置，从0开始计算位置，对大小写敏感。
+        2.查找机制：从左开始，默认从0位开始。负数也是从0为开始。也不要超出字符串的长度,找到一个就停止。
+        3.返回值：该字符串在字符串的第几位，即下标。若找不到返回-1。
+        4.如果省略查找起始位置,默认从0开始
+
+    2.lastIndexOf('匹配字符','第几位开始'):
+        1.查找机制：与indexOf()类型,只是从右向左寻找
+
+    3.search():检索字符串
+        1.检索字符串中指定的子字符串
+        2.检索与正则表达式相匹配的子字符串。
+        3.如果没有找到返回-1
+        4.总是从字符串第一位开始检索
+
+    4.总结：
+        1.search()可以传参正则
+        2.indexOf()更底层,效率高,一般推荐
+
+
+5.类型判断
+    1.typeof：判断大体数据类型
+        1.返回值：string/number/boolean/object/function/undefined
+        2.返回值为字符串类型
+           typeof 'jack'
+
+        3.总结：
+            1.一般用于基本数据类型的判断
+            2.不能判断null
+            3.不能判断具体的对象类型,除了funtion
+
+    2.instanceof：原型链查找，判断两个对象的原型链上是否有同一个原型。
+        1.两个值必须都是对象
+            1.左边:对象
+            2.右边:对象类或构造函数
+        2.返回值：true/false
+            1.如果obj是对象类或构造函数的实例:true
+
+        3.查找机制：沿着两个对象的_proto_原型链查找，看看是否有相同引用。
+            var arr = [];
+            arr instanceof Array
+
+        4.总结：
+            1.一般用于对象的具体类型判断
+            2.可以判断具体的对象类型
+            3.不能用于判断基本数据类型
+                'go' instanceof String  //false
+
+            4.主要用于判断数组类型
+                function isArray(arr) {
+                    return arr instanceof Array;
+                }
+
+    3.constructor判断
+        1.支持大部分对象类型的判断,自定义对象也可以
+        2.不支持null和undefined
+        3.constructor包含初始化该实例的构造函数,实例可以在原型上获取这个属性
+            function isArray(arr) {
+                return typeof arr == 'object' && arr.constructor == Array;s
+            }
+
+    4.prototype判断
+        1.Object.prototype.toString.call()
+        2.最好的类型的判断,也可以判断基本数据
+        3.不支持自定义对象的判断
+            1.内置对象类型:Object
+            2.自定义对象:自己创建的
+
+        4.不支持null/undefine,它们不支持toString()
+        5.解决跨框架问题
+            function isArray(arr) {
+                return Object.prototype.toString.call(arr) === "[object Array]";
+            }
+
+    5.总结
+        1.判断各种对象类型的方法
+            1.方法
+            var is ={
+            types:["Array","Boolean","Date","Number","Object","RegExp","String","Window","HTMLDocument"]
+            };
+
+            for(var i = 0,c;c = is.types[i++];){
+                is[c] = (function(type){
+                            return function(obj){
+                                return Object.prototype.toString.call(obj) == "[object " + type + "]";
+                            }
+                          )(c);
+                        }
+            1.使用
+                is.Array([]);       //true
+
+6.代码类型
+    1.全局代码
+        当一段代码被当做程序段运行的时候，它是在全局作用域下执行的，也就是全局代码。在浏览器环境下,通常&lt;SCRIPT>元素就是一段全局代码。
+    2.函数代码
+        所有在function中声明的代码即是函数代码，最常见的是HTML元素的响应事件(&lt;p onclick="...">)。
+    3.eval代码
+        传入内建的eval函数中的代码段称为eval代码
+
+7.Date对象
+    1.Date：构造函数，Date.length = 7，表示该构造函数可接受的参数个数
+    2.Date()：返回值：当前日期，字符串类型，length = 42，代表字符串长度
+    3.new Date()：返回值：当前日期，实例对象类型，没有length属性
+
+8.强制与弱类型转换
+    1.强制类型转换(type casting)
+        1.Boolean(value)：把给定的对象转换成Boolean型；
+            1.true：true,非空字符串(空格也算),非0数字,非空对象(标签元素,数组,object(),json{}),函数
+            2.false：false,空字符串,数字0,NAN,undefined,null
+
+        2.Number(value)：把对象转换成数字（结果可以是整数或浮点数）；
+            1.将字符串作为一个整体进行转换
+            Number(true)                   1
+            Number(undefined)              NaN
+            Number( "5.6.7 ")              NaN
+
+        3.String(value)：把给定的值转换成字符串。
+            1.处理过程：直接加上引号
+
+    2.js变量弱类型(隐式)转换
+            var str = '23ab';
+            var x = str-1;
+        1.原理：JavaScript为弱类型语言
+        2.数字与字符串
+            1.+：数字转换为字符串,+有连接字符串的作用
+            2.-/*%：字符串利用Number转换为数字,否则为NAN
+            3.++--：字符串利用Number转换为数字,否则为NAN
+            4.>：字符串Number转换为数字
+            5.=：根据赋值决定数据的类型
+        3.!：将右边的值转换为布尔值
+        4.空字符转化为数字为0
+            0=='  '             //true</pre>

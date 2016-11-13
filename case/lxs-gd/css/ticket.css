@@ -1,0 +1,298 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-30 13:58:00
+ * @version $Id$
+ */
+/* line 9, ../sass/ticket.scss */
+.headline {
+  width: 100%;
+  height: 300px;
+  min-width: 1263px;
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), transparent), url("../images/headline.jpg") no-repeat center; }
+  /* line 16, ../sass/ticket.scss */
+  .headline .center {
+    width: 1263;
+    height: 300px;
+    margin: 0 auto; }
+  /* line 20, ../sass/ticket.scss */
+  .headline hgroup {
+    padding: 100px 0 0 550px; }
+    /* line 24, ../sass/ticket.scss */
+    .headline hgroup h2 {
+      color: #eee;
+      font-size: 20px;
+      letter-spacing: 1px; }
+    /* line 29, ../sass/ticket.scss */
+    .headline hgroup h3 {
+      color: #eee;
+      font-size: 16px;
+      letter-spacing: 1px; }
+
+/* line 36, ../sass/ticket.scss */
+.container {
+  width: 1263px;
+  margin: 30px auto;
+  /*
+  =======
+  ticket样式
+  =======
+   */ }
+  /* line 40, ../sass/ticket.scss */
+  .container .sidebar {
+    width: 340px;
+    float: right; }
+  /* line 44, ../sass/ticket.scss */
+  .container .sidebox {
+    border: 1px solid #eee;
+    margin: 0 0 10px 0; }
+    /* line 48, ../sass/ticket.scss */
+    .container .sidebox h2 {
+      font-size: 20px;
+      font-weight: normal;
+      text-align: center;
+      letter-spacing: 1px;
+      text-indent: 8px;
+      height: 40px;
+      line-height: 40px;
+      background: #fafafa;
+      color: #666; }
+  /* line 60, ../sass/ticket.scss */
+  .container .tag {
+    padding: 10px 0; }
+    /* line 62, ../sass/ticket.scss */
+    .container .tag li {
+      display: inline-block; }
+    /* line 65, ../sass/ticket.scss */
+    .container .tag a {
+      display: block;
+      width: 100px;
+      height: 35px;
+      line-height: 35px;
+      background: #eee;
+      margin: 2px 0;
+      color: #999;
+      text-align: center; }
+      /* line 74, ../sass/ticket.scss */
+      .container .tag a:hover, .container .tag a.active {
+        background: #458b00;
+        color: #666; }
+  /* line 81, ../sass/ticket.scss */
+  .container .img-lsit figure {
+    display: inline-block;
+    padding: 4px;
+    color: #666;
+    text-align: center; }
+  /* line 88, ../sass/ticket.scss */
+  .container .box {
+    padding: 10px 0;
+    text-align: center; }
+    /* line 92, ../sass/ticket.scss */
+    .container .box a {
+      display: inline-block;
+      width: 150px;
+      height: 35px;
+      line-height: 35px;
+      background-color: #eee;
+      margin: 2px 0;
+      color: #999;
+      text-align: left;
+      text-indent: 45px;
+      border-radius: 5px; }
+      /* line 104, ../sass/ticket.scss */
+      .container .box a:hover {
+        background-color: #458b00;
+        color: #666; }
+    /* line 110, ../sass/ticket.scss */
+    .container .box .weather {
+      background: url("../images/64_weather-35.png") no-repeat 5px center; }
+    /* line 113, ../sass/ticket.scss */
+    .container .box .train {
+      background: url("../images/Train-35.png") no-repeat 5px center; }
+    /* line 116, ../sass/ticket.scss */
+    .container .box .plane {
+      background: url("../images/plane-35.png") no-repeat 5px center; }
+    /* line 119, ../sass/ticket.scss */
+    .container .box .subway {
+      background: url("../images/subway-35.png") no-repeat 5px center; }
+  /* line 126, ../sass/ticket.scss */
+  .container .main-content {
+    width: 900px;
+    float: left; }
+  /* line 130, ../sass/ticket.scss */
+  .container .nav-list {
+    height: 45px; }
+  /* line 134, ../sass/ticket.scss */
+  .container .info {
+    background: #eee;
+    height: 45px;
+    line-height: 45px; }
+  /* line 138, ../sass/ticket.scss */
+  .container .left {
+    float: left; }
+    /* line 141, ../sass/ticket.scss */
+    .container .left li {
+      width: 150px;
+      height: 43px;
+      line-height: 43px; }
+    /* line 145, ../sass/ticket.scss */
+    .container .left li:first-child {
+      position: relative;
+      left: 4px; }
+    /* line 150, ../sass/ticket.scss */
+    .container .left a {
+      display: block;
+      color: #999; }
+      /* line 153, ../sass/ticket.scss */
+      .container .left a:hover, .container .left a.active {
+        border-top: solid 2px #458b00;
+        font-weight: bold; }
+  /* line 159, ../sass/ticket.scss */
+  .container .right {
+    float: right; }
+    /* line 161, ../sass/ticket.scss */
+    .container .right li {
+      padding: 0 20px  0 0;
+      width: 60px;
+      height: 45px; }
+    /* line 165, ../sass/ticket.scss */
+    .container .right a {
+      display: inline;
+      padding: 6px 10px;
+      color: #666; }
+      /* line 170, ../sass/ticket.scss */
+      .container .right a.active, .container .right a:hover {
+        background: #458b00;
+        font-weight: bold; }
+  /* line 176, ../sass/ticket.scss */
+  .container .list li {
+    display: inline-block;
+    text-align: center; }
+  /* line 187, ../sass/ticket.scss */
+  .container .ticket-list {
+    color: #666; }
+    /* line 189, ../sass/ticket.scss */
+    .container .ticket-list form {
+      position: relative; }
+      /* line 191, ../sass/ticket.scss */
+      .container .ticket-list form h2 {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px dashed #999;
+        padding-bottom: 10px;
+        font-size: 25px;
+        color: #999;
+        text-align: left;
+        font-weight: normal; }
+    /* line 200, ../sass/ticket.scss */
+    .container .ticket-list .type {
+      margin: 20px 0 10px 0; }
+    /* line 203, ../sass/ticket.scss */
+    .container .ticket-list mark {
+      padding: 5px 8px;
+      border-radius: 4px;
+      margin: 0 5px 0 10px;
+      background-color: #fff;
+      color: #999; }
+      /* line 211, ../sass/ticket.scss */
+      .container .ticket-list mark.active {
+        background-color: #458b00;
+        color: #fff; }
+    /* line 217, ../sass/ticket.scss */
+    .container .ticket-list .tick-right, .container .ticket-list .tick-left {
+      line-height: 3; }
+    /* line 221, ../sass/ticket.scss */
+    .container .ticket-list label {
+      display: inline-block;
+      width: 43%; }
+    /* line 225, ../sass/ticket.scss */
+    .container .ticket-list input {
+      width: 250px;
+      height: 30px;
+      background-color: #fff;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      color: #666;
+      padding: 5px;
+      font-size: 18px;
+      margin-bottom: 16px;
+      margin-left: 10px;
+      text-indent: 10px; }
+    /* line 237, ../sass/ticket.scss */
+    .container .ticket-list .submit {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      border-radius: 4px;
+      font-size: 20px;
+      color: #fff;
+      background-color: #f60;
+      border: none;
+      position: absolute;
+      right: 60px;
+      top: 120px;
+      cursor: pointer; }
+    /* line 250, ../sass/ticket.scss */
+    .container .ticket-list .new h2 {
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px dashed #999;
+      padding-bottom: 10px;
+      font-size: 25px;
+      color: #999;
+      text-align: left;
+      font-weight: normal;
+      margin-bottom: 10px; }
+    /* line 261, ../sass/ticket.scss */
+    .container .ticket-list .new-nav li:first-child {
+      padding-left: 0;
+      padding-right: 0; }
+    /* line 265, ../sass/ticket.scss */
+    .container .ticket-list .new-nav li {
+      display: inline-block;
+      padding: 5px 10px; }
+      /* line 270, ../sass/ticket.scss */
+      .container .ticket-list .new-nav li.active, .container .ticket-list .new-nav li:hover {
+        background-color: #458b00;
+        border-radius: 4px; }
+    /* line 277, ../sass/ticket.scss */
+    .container .ticket-list table {
+      margin-top: 20px;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-collapse: collapse; }
+    /* line 284, ../sass/ticket.scss */
+    .container .ticket-list th {
+      border-bottom: 1px solid #ddd;
+      line-height: 40px;
+      height: 40px; }
+    /* line 288, ../sass/ticket.scss */
+    .container .ticket-list td {
+      line-height: 40px;
+      height: 40px;
+      border-bottom: 1px solid #ddd;
+      text-align: center; }
+    /* line 293, ../sass/ticket.scss */
+    .container .ticket-list tr:nth-child(2n) {
+      background-color: #fafafa; }
+    /* line 296, ../sass/ticket.scss */
+    .container .ticket-list tr:hover {
+      background-color: #999; }
+    /* line 299, ../sass/ticket.scss */
+    .container .ticket-list .price {
+      color: #f60; }
+    /* line 303, ../sass/ticket.scss */
+    .container .ticket-list .reserve {
+      display: inline-block;
+      width: 60px;
+      height: 25px;
+      border-radius: 4px;
+      line-height: 25px;
+      background-color: #f60;
+      color: #fff;
+      font-size: 18px;
+      text-align: center; }
+    /* line 313, ../sass/ticket.scss */
+    .container .ticket-list .table-more {
+      color: #666; }

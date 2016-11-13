@@ -1,0 +1,477 @@
+<pre style="text-indent:0;">1.定义
+    1.Bootstrap的所有JavaScript插件都依赖jQuery
+    2.文件引入
+        &lt;!-- Bootstrap 核心 CSS 文件 -->
+        &lt;link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        &lt;!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        &lt;link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+        &lt;!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        &lt;script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js">&lt;/script>
+        &lt;!-- Bootstrap 核心 JavaScript 文件 -->
+        &lt;script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js">&lt;/script>
+
+2.boostrap.css
+    1.全局样式reset.css：
+        1.重置可能产生问题的样式（如，body,form的margin等），保留和坚持部分浏览器的基础样式，解决部分潜在的问题，提升一些细节的体验
+        2.实现
+            1.移除body的margin声明
+            2.设置body的背景色为白色
+            3.为排版设置了基本的字体.字号和行高
+            4.设置全局链接颜色，且当链接处于悬浮":hover"状态时才会显示下划线样式
+
+        3.通过"normalize.less"（LESS版本）或"_normalize.scss"（Sass版本）也可以实现
+
+3.使用
+    1.标题：
+        1.样式重置
+            1.margin-top/bottom
+                h1~h3：20px      h4~h6：10px
+            2.高都是1.1（也就是font-size的1.1倍）,而且文本颜色和字体都继承父元素的颜色和字体。
+            3.标题字体大小
+                h1=36px，h2=30px，h3=24px，h4=18px，h5=14px和h6=12px。
+
+        2.使用
+            1.正常使用
+                &lt;h1>Bootstrap标题一&lt;/h1>
+                &lt;h2>Bootstrap标题二&lt;/h2>
+                &lt;h3>Bootstrap标题三&lt;/h3>
+
+            2.通过class，非标题元素获取样式
+                &lt;div class="h1">Bootstrap标题一&lt;/div>
+                &lt;div class="h2">Bootstrap标题二&lt;/div>
+                &lt;div class="h3">Bootstrap标题三&lt;/div>
+
+        3.副标题&lt;small>
+            1.样式：
+                1.行高都是1，font-weight设置了normal(不加粗)，颜色被设置为灰色（#999）。
+                2.字体大小为当前字号的65%；而在h4~h6内的字号都设置为当前字号的75%；
+
+            2.使用(嵌套标题)：也支持class方法使用
+                &lt;h1>Bootstrap标题一&lt;small>我是副标题&lt;/small>&lt;/h1>
+                &lt;h2>Bootstrap标题二&lt;small>我是副标题&lt;/small>&lt;/h2>
+                &lt;h3>Bootstrap标题三&lt;small>我是副标题&lt;/small>&lt;/h3>
+    2.段落
+        1.样式
+            body {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 14px;line-height: 1.42857143;color: #333;background-color: #fff;}
+
+            p {margin: 0 0 10px;}
+
+        2.排版设置的默认值都存在variables.less文件中(Sass版本存在_variables.scss中)的两个变量
+            Sass版本：
+                $font-size-base: 14px !default; $line-height-base: 1.428571429 !default; // 20/14
+
+    3.内容强调
+        1.添加类名".lead"
+            1.增大文本字号，加粗文本，而且对行高和margin也做相应的处理
+                &lt;p class="lead">我是特意要突出的文本，我的样子成这样。我是特意要突出的文本，我的样子长成这样。&lt;/p>
+
+                .lead {margin-bottom: 20px;font-size: 16px;
+                    font-weight: 200;line-height: 1.4;}
+                @media (min-width: 768px) {/
+                *大中型浏览器字体稍大*/
+                    .lead {font-size: 21px;}}
+        2.标签
+            1.&lt;small>、&lt;strong>、&lt;cite>
+
+                b,strong {font-weight: bold;}
+                small,.small {font-size: 85%; /*标准字体的85%,也就是14px * 0.85px，差不多12px*/}
+                cite {font-style: normal;}
+
+            2.&lt;em>和&lt;i>：斜体
+
+        3.颜色强调class
+            .text-muted：提示，使用浅灰色（#999）
+            .text-primary：主要，使用蓝色（#428bca）
+            .text-success：成功，使用浅绿色(#3c763d)
+            .text-info：通知信息，使用浅蓝色（#31708f）
+            .text-warning：警告，使用黄色（#8a6d3b）
+            .text-danger：危险，使用褐色（#a94442）
+
+    4.文本对齐
+        1.class
+            .ext-left：左对齐
+            .text-center：居中对齐
+            .text-right：右对齐
+            .text-justify：两端对齐
+
+            &lt;p class="text-left">我居左&lt;/p>
+
+    5.列表
+        1.无点列表：class="list-unstyled:
+            .list-unstyled {padding-left: 0;list-style: none;}
+        2.内联列表：class="list-inline"，即水平列表
+            .list-inline {
+                padding-left: 0;
+                margin-left: -5px;
+                list-style: none;
+            }
+            .list-inline > li {
+                display: inline-block;
+                padding-right: 5px;
+                padding-left: 5px;
+            }
+
+            &lt;ul class="list-inline">
+                &lt;li>Blog&lt;/li>
+                &lt;li>CSS3&lt;/li>
+                &lt;li>jQuery&lt;/li>
+            &lt;/ul>
+
+        3.水平自定义列表：class="dl-horizontal"，dt浮动，dd块级
+            @media (min-width: 768px) {
+                .dl-horizontal dt {
+                    float: left;width: 160px;overflow: hidden;
+                    clear: left;text-align: right;
+                    text-overflow: ellipsis;white-space: nowrap;
+                }
+
+                .dl-horizontal dd {margin-left: 180px;}
+            }
+
+            &lt;dl class="dl-horizontal">
+                &lt;dt>W3cplus&lt;/dt>
+                &lt;dd>一个致力于推广国内前端行业的技术博客。&lt;/dd>
+                &lt;dt>慕课网&lt;/dt>
+                &lt;dd>一个专业的，真心实意在做培训的网站&lt;/dd>
+                &lt;dt>我来测试一个标题，我来测试一个标题&lt;/dt>
+                &lt;dd>我在写一个水平定义列表的效果&lt;/dd>
+            &lt;/dl>
+
+            1.只有屏幕大于768px的时候，添加类名".dl-horizontal"才具有水平定义列表效果。其实现主要方式：
+                1.将dt设置了一个左浮动，并且设置了一个宽度为160px
+                2.将dd设置一个margin-left的值为180px，达到水平的效果
+                3.当标题宽度超过160px时，将会显示三个省略号
+
+    6.代码
+        1.代码风格
+            1.&lt;code>&lt;/code>：显示单行内联代码，一般是针对于单个单词或单个句子的代码
+                &lt;div>Bootstrap的代码风格有三种：
+                  &lt;code>&lt;code&gt;&lt;/code>
+                  &lt;code>&lt;pre&gt;&lt;/code>
+                  &lt;code>&lt;kbd&gt;&lt;/code>
+                &lt;/div>
+
+            2.&lt;pre>&lt;/pre>：显示多行块代码，原有格式输出，一般是针对于多行代码（也就是成块的代码）
+                1.calss="pre-scrollable"：控制代码块的宽高
+
+                .pre-scrollable {max-height: 340px;overflow-y: scroll;}
+
+                &lt;div>
+                    &lt;pre>
+                        &lt;ul&gt;
+                        &lt;li&gt;...&lt;/li&gt;
+                        &lt;li&gt;...&lt;/li&gt;
+                        &lt;li&gt;...&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/pre>
+                &lt;/div>
+
+            3.&lt;kbd>&lt;/kbd>：显示用户输入代码，一般是表示用户要通过键盘输入的内容
+                &lt;div>请输入&lt;kbd>ctrl+c&lt;/kbd>来复制代码，然后使用&lt;kbd>ctrl+v&lt;/kbd>来粘贴代码&lt;/div>
+
+            4.总结：
+                1.不管使用哪种代码风格，在代码中碰到小于号（&lt;）要使用硬编码“&lt;”来替代，大于号(>)使用“&gt;”来替代
+                2.对于&lt;pre>代码块风格，标签前面留多少个空格，在显示效果中就会留多少个空格。建议在编写HTML标签时，就控制好
+
+    7.表格
+        1.表格类型类
+            1..table：基础表格，必须要
+                1.class="table"，使用bootstrap定义的样式
+                2..table作用：
+                    1.给表格设置了margin-bottom:20px以及设置单元内距
+                    2.在thead底部设置了一个2px的浅灰实线
+                    3.每个单元格顶部设置了一个1px的浅灰实线
+
+            2..table-striped：斑马线表格
+                &lt;table class="table table-striped">
+                …
+                &lt;/table>
+            3..table-bordered：带边框的表格
+                &lt;table  class="table table-bordered">
+                  …
+                &lt;/table>
+            4..table-hover：鼠标悬停高亮的表格，背景变为浅灰色
+                &lt;table class="table table-hover">
+                …
+                &lt;/table>
+            5..table-condensed：紧凑型表格，单元格没有边距或内边距较小
+                &lt;table class="table table-condensed">
+                …
+                &lt;/table>
+            6..table-responsive：响应式表格，容器具备响应式
+                1.具体效果：可视区域小于768px时，表格底部会出现水平滚动条
+
+            &lt;div class="table-responsive">
+                &lt;table class="table table-bordered">
+                   …
+                &lt;/table>
+            &lt;/div>
+        2.表格行背景色类&lt;tr>
+            1..active：示当前活动的信息，#f5f5f5
+            2..success：表示成功或者正确的行为，#dff0d8
+            3..info：表示中立的信息或行为，#d9edf7
+            4..warning：表示警告，#fcf8e3
+            5..danger：表示危险，#f2dede
+
+            &lt;tr class="active">
+                &lt;td>…&lt;/td>
+            &lt;/tr>
+
+    8.表单
+        1.对表单内的fieldset、legend、label标签进行了定制
+            fieldset {
+                min-width: 0;padding: 0;
+                margin: 0;border: 0;
+            }
+
+            legend {
+                display: block;width: 100%;padding: 0;margin-bottom: 20px;
+                font-size: 21px;line-height: inherit;color: #333;border: 0;
+                border-bottom: 1px solid #e5e5e5;
+            }
+
+            label {
+                display: inline-block;margin-bottom: 5px;font-weight: bold;
+            }
+
+        2.控件类：form-control
+            1.控件元素(input、select、textarea等)使用类"form-control"，将会实现一些设计上的定制效果。
+            2.实现
+                1.宽度变成了100%
+                2.设置了一个浅灰色（#ccc）的边框
+                3.具有4px的圆角
+                4.设置阴影效果，并且元素得到焦点之时，阴影和边框效果会有所变化
+                5.设置了placeholder的颜色为#999
+
+        3.水平表单(form-horizontal)
+            1.水平表单风格：标签居中，表单控件局右
+            2.实现水平表单效果，满足以下两个条件：
+                1.在&lt;form>元素是使用类名“form-horizontal”。
+                2.配合Bootstrap框架的网格系统
+            3.&lt;form>元素上使用"form-horizontal"作用：
+                1.设置表单控件padding和margin值。
+                2.改变"form-group"的表现形式，类似于网格系统的"row"
+        4.内联表单
+            1.表单元素全部一行显示
+            2.&lt;form>标签添加"form-inline"，给空间元素设置display：inline-block
+
+        5.表单控件
+            1.select：多行选择设置multiple属性的值为multiple
+                &lt;form role="form">
+                    &lt;div class="form-group">
+                        &lt;select multiple class="form-control">
+                            &lt;option>1&lt;/option>
+                            &lt;option>2&lt;/option>
+                            &lt;option>3&lt;/option>
+                            &lt;option>4&lt;/option>
+                            &lt;option>5&lt;/option>
+                        &lt;/select>
+                    &lt;/div>
+                &lt;/form>
+            2.textarea：文本域
+                1.设置cols可以设置其宽度
+                2.如果textarea元素中添加了类名"form-control"类名，则无需设置cols属性。框架中的"form-control"样式的表单控件宽度为100%或auto。
+
+                &lt;form role="form">
+                  &lt;div class="form-group">
+                    &lt;textarea class="form-control" rows="3">&lt;/textarea>
+                  &lt;/div>
+                &lt;/form>
+
+            3.checkbox和radio
+                1.label的对齐处理：将labe和控件元素放入一个div中，处理对齐方式
+
+                &lt;form role="form">
+                    &lt;div class="checkbox">
+                        &lt;label>
+                            记住密码：&lt;input type="checkbox" value="">
+                        &lt;/label>
+                    &lt;/div>
+                    &lt;div class="radio">
+                        &lt;label>
+                            喜欢：&lt;input type="radio" name="optionsRadios" id="optionsRadios1" value="love" checked>
+                        &lt;/label>
+                    &lt;/div>
+                &lt;/form>
+
+                2.水平排列
+                    1.如果checkbox需要水平排列，只需要在label标签上添加类名"checkbox-inline"
+                    2.如果radio需要水平排列，只需要在label标签上添加类名"radio-inline"
+
+                &lt;div class="form-group">
+                    &lt;label class="checkbox-inline">
+                        &lt;input type="checkbox"  value="option1">游戏
+                    &lt;/label>
+                    &lt;label class="checkbox-inline">
+                        &lt;input type="checkbox"  value="option2">摄影
+                    &lt;/label>
+                    &lt;label class="checkbox-inline">
+                        &lt;input type="checkbox"  value="option3">旅游
+                    &lt;/label>
+                &lt;/div>
+
+            4.按钮&lt;button>
+                1.按钮实现方式
+                    1.input[type=“submit”]
+                    2.input[type=“button”]
+                    3.input[type=“reset”]
+                    4.&lt;button>
+
+                2.bootstrap使用&lt;button>实现按钮
+
+            5.表单控件大小
+                1.样式类，适用于&lt;input>/&lt;textarea>/&lt;section>
+                    1.input-sm：较小
+                    2.input-lg：较大
+
+                    &lt;input class="form-control input-lg" type="text" placeholder="添加.input-lg，控件变大">
+                    &lt;input class="form-control" type="text" placeholder="正常大小">
+                    &lt;input class="form-control input-sm" type="text" placeholder="添加.input-sm，控件变小">
+
+        6.表单控件状态
+            1.焦点状态：伪类:focus，添加form-control类
+                &lt;input class="form-control input-lg" type="text" placeholder="焦点点状态下效果">
+                .form-control:focus {
+                    border-color: #66afe9;outline: 0;
+                    -webkit-box-shadow: inset 0 1px 1pxrgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+                    box-shadow: inset 0 1px 1pxrgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+                }
+
+            2.禁用状态：属性disabled
+                &lt;input class="form-control" type="text" placeholder="表单已禁用，不能输入" disabled>
+
+            3.验证状态
+                1.在form-group容器上对应添加状态类名，border颜色不一样
+                    1.has-warning:警告状态（黄色）
+                    2.has-error：错误状态（红色）
+                    3.has-success：成功状态（绿色）
+
+                    &lt;form role="form">
+                        &lt;div class="form-group has-success">
+                            &lt;label class="control-label" for="inputSuccess1">成功状态&lt;/label>
+                            &lt;input type="text" class="form-control" id="inputSuccess1" placeholder="成功状态" >
+                        &lt;/div>
+                        &lt;div class="form-group has-warning">
+                            &lt;label class="control-label" for="inputWarning1">警告状态&lt;/label>
+                            &lt;input type="text" class="form-control" id="inputWarning1" placeholder="警告状态">
+                        &lt;/div>
+                        &lt;div class="form-group has-error">
+                            &lt;label class="control-label" for="inputError1">错误状态&lt;/label>
+                            &lt;input type="text" class="form-control" id="inputError1" placeholder="错误状态">
+                        &lt;/div>
+                    &lt;/form>
+
+                2.添加icon：在form-group容器上添加has-feedback
+                    &lt;form role="form">
+                        &lt;div class="form-group has-success has-feedback">
+                            &lt;label class="control-label" for="inputSuccess1">成功状态&lt;/label>
+                            &lt;input type="text" class="form-control" id="inputSuccess1" placeholder="成功状态" >
+                            &lt;!-- 字体图标 -->
+                            &lt;span class="glyphiconglyphicon-ok form-control-feedback">&lt;/span>
+                        &lt;/div>
+
+                        &lt;div class="form-group has-warning has-feedback">
+                            ......
+                        &lt;/div>
+
+                        &lt;div class="form-group has-error has-feedback">
+                            ......
+                        &lt;/div>
+                    &lt;/form>
+
+        7.表单提示信息
+            1.help-block，将提示信息在底部以块级显示，并显示在控件底部
+
+            &lt;form role="form">
+                &lt;div class="form-group has-success has-feedback">
+                    &lt;label class="control-label" for="inputSuccess1">成功状态&lt;/label>
+                    &lt;input type="text" class="form-control" id="inputSuccess1" placeholder="成功状态" >
+                    &lt;span class="help-block">你输入的信息是正确的&lt;/span>
+                    &lt;span class="glyphiconglyphicon-ok form-control-feedback">&lt;/span>
+                &lt;/div>
+            &lt;/form>
+
+            2.help-inline，行内提示信息
+
+            &lt;form role="form">
+                &lt;div class="form-group">
+                    &lt;label class="control-label" for="inputSuccess1">成功状态&lt;/label>
+                &lt;div class="row">
+                    &lt;div class="col-xs-6">
+                        &lt;input type="text" class="form-control" id="inputSuccess1" placeholder="成功状态" >
+                    &lt;/div>
+                    &lt;span class="col-xs-6 help-block">你输入的信息是正确的&lt;/span>
+                &lt;/div>
+                &lt;/div>
+            &lt;/form>
+
+    9.按钮
+        1.基本按钮：class="btn"
+            &lt;button class="btn" type="button">我是一个基本按钮&lt;/button>
+        2.按钮风格
+            1.默认按钮：btn-default
+                &lt;button class="btn btn-default" type="button">默认按钮&lt;/button>
+                .btn-default {
+                    color: #333;background-color: #fff;border-color: #ccc;
+                }
+
+            2.主要按钮：btn-primary
+            3.成功按钮：btn-success
+            4.信息按钮：btn-info
+            5.警告按钮：btn-warning
+            6.危险按钮：btn-danger
+            7.链接按钮：btn-link
+
+        3.其他按钮标签：&lt;input>/&lt;a>，添加class="btn"获取样式，bootstrap建议用&lt;button>或&lt;a>来制作按钮
+            &lt;button class="btn btn-default" type="button">button标签按钮&lt;/button>
+            &lt;input type="submit" class="btn btn-default" value="input标签按钮"/>
+            &lt;a href="##" class="btn btn-default">a标签按钮&lt;/a>
+            &lt;span class="btn btn-default">span标签按钮&lt;/span>
+            &lt;div class="btn btn-default">div标签按钮&lt;/div>
+
+        4.按钮大小
+            1.整体样式
+                1.btn-lg
+                2.btn-sm
+                3.btn-xs
+                &lt;button class="btn btn-primary btn-xs" type="button">超小型按钮.btn-xs&lt;/button>
+
+            2.块状按钮：充满整个容器，没有padding和margin
+                &lt;button class="btnbtn-primary btn-lg btn-block" type="button">大型按钮.btn-lg&lt;/button>
+
+        5.按钮状态
+            1.活动状态：伪类
+                1.:hover    2.:active   3.:focus
+                   &lt;button class="btn" type="button">基础按钮.btn&lt;/button>
+
+            2.禁用状态：
+                1.disabled属性：可以禁止按钮的默认行为
+                2.disabled类：不会禁止按钮的默认行为(提交/重置)
+
+    10.图片
+        1.图片风格
+            1.img-responsive：响应式图片，主要针对于响应式设计
+            2.img-rounded：圆角图片
+            3.img-circle：圆形图片
+            4.img-thumbnail：缩略图片
+
+        2.图片大小(max-width:100%)
+            1.通过控制容器的大小
+            2.不可以通过css样式直接修改img图片的大小，这样操作就不响应了，通过父级的响应来改变
+
+            &lt;div class="col-sm-6">
+              &lt;img  class="img-responsive" alt="140x140" src="http://placehold.it/140x140" />
+            &lt;/div>
+
+    11.icon
+        1.原理分析：字体图标
+            1.通过自定义字体@font-face加载字体
+            2.伪类中文本使用该字体
+
+            &lt;span class="glyphicon glyphicon-cloud">&lt;/span>
+
+        2.一般用于内联元素上
+            1.类：glyphicon
+            &lt;span class="glyphicon glyphicon-search">&lt;/span></pre>

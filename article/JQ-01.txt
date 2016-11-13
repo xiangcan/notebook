@@ -1,0 +1,135 @@
+<pre style="text-indent:0;">JS与JQ
+    1.JQ核心$()函数(jQuery())，
+    2.向该函数传递DOM对象，返回jquery对象，对象将具有jquery的属性和方法
+    3.jquery通过CSS风格的选择器来获取元素
+
+JQ对象：
+    1.通过JQuery包装DOM对象后产生的对象，可以使用JQuery的方法。
+    2.JQ方法和JS方法不能混用。
+    3.$()函数是创建jQuery对象的制造工厂
+
+JQ特性
+    1.HTML元素获取
+    2.HTML元素操作
+    3.Css操作
+    4.HTML事件函数
+    5.JavaScript特效和动画
+    6.HTML DOM遍历和修改
+    7.Ajax
+    8.Utilities(工具)
+
+CDN：
+    1.Google：http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js
+    2.Microsoft：http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js
+    3.优点：用户之前访问其他网站时可能已有缓存，CDN默认从用户最近的服务器上加载
+    4.获取最新版本，1.8.0不写全
+        1.1.8：获取1.8的最新版
+        2.1：获取1.0开始的最新版
+
+1.概念
+   1.定义
+        1.一个优秀的JS库，大型开发必备
+        2.JQ好处：
+            1.简化JS的复杂操作
+                1.简化了标签选择,$(tag)
+                2.获取的元素可以批量添加操作,避免了for循环的滥用
+            2.不再需要关心兼容性
+            3.提供大量实用方法
+
+2.写法
+    1.JQ写法思想
+        1.语法：$(selector).fn();
+
+        2.方法函数化:函数作为参数,减少等号赋值
+            1.把赋值写成一个函数,参数放进函数里面
+            2.减少赋值,转换为传参
+            eg：
+            window.onload=fn            $(fn);
+            ele.innerHtml='hello'       ele.html('hello')
+            ele.onclick=fn              ele.click(fn)
+
+        2.链式操作
+            $('li:last').html('hello').css('border','red').click(fn);
+
+        3.赋值与取值合体
+            1.两个或一个参数为赋值
+                1.当获取的元素为一组时,赋值是给所有的元素
+                    $('li').html('hi');
+            2.一个或空参数为取值
+                1.当获取的参数为一组时,取值是针对列表的第一个元素
+                    str = $('li').html();
+            eg:
+                ele.innerHtml='hi'       ele.html('hi')
+                ele.innerHtml            ele.html()
+
+                ele.style.width='1px'    ele.css('width','1px')
+                ele.style.width          ele.css('width')
+
+2.JQ与JS
+    1.JQ方法和JS方法不能混用
+        $('ul').children().css('bottom-right','solid 2px green');
+
+    2.JQ与JS转换
+        1.JS转JS：$()
+
+        2.JQ转JS
+            1.get():获取指定的DOM元素
+                1.可以将JQ元素转换为JS元素
+                    $('div').get(0)
+
+            2.集合下标,也可以转成JS
+                $('li')[1].style
+                //JQ没有定义,但是源码符合
+
+    3.定义变量风格
+        var ojs = a;
+        var $jq = b;        //JQ前面加$
+
+3.$标识符
+    1.$在jQuery里是一个内置函数
+            function $() {}
+
+    2.作用
+        1.$('li'):标签选择器
+        2.$(fn):模拟window.onload,类式JS中的DOMContentLoaded事件
+            1.简写:$(fn);
+            2.全写:$(window).ready(fn);
+        3.$('&lt;div>'):创建DOM元素
+        4.$(this):转化为JQ对象
+        5.$div,可以作为前缀,表示是一个JQ对象
+
+    3.容错处理：$()获取不到,也不会报错
+
+    4.$防冲突(JS库最好最先导入)
+        1.JQ中，$ = jQuery，如果其他库或者变量使用了$符或jQuery会造成冲突
+        2.解决方法
+            2.noConflict()：防止冲突
+                1.代替名
+                    var M = $.noConflict();
+                    var $=10;
+                    M(function() {}); //用mi来代替$
+
+                2.内部函数传参
+                    jQuery.noConfict();
+                    jQuery(function($) {
+                       $('p').html();
+                    });
+
+            3.函数传参
+                (function($) {          //形参：$
+                    $(fn);
+                })(jQuery);             //实参：jQuery
+
+4.JQ中this
+    1.JQ中this是JS的DOM元素
+    2.$(this):将JS转换为JQ对象,获取使用JQ的方法属性
+            $('#div1').find('input').click(function() {
+            //获取的一组元素，赋值是所有的，减少没必要的循环
+                $('#div1').find('div').eq($(this).index()).css('display','block');
+                //this:上下文所处的对象
+            });
+        });
+
+5.属性
+    1.length:集合长度
+        1.与size()方法效果一样</pre>

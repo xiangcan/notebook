@@ -1,0 +1,400 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-11-03 15:17:40
+ * @version $Id$
+ */
+/*
+默认样式
+=======
+ */
+/* line 13, ../sass/index.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 17, ../sass/index.scss */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+  color: #666;
+}
+
+/* line 23, ../sass/index.scss */
+a:focus {
+  outline: none;
+}
+
+/*
+导航条
+=======
+ */
+/* line 33, ../sass/index.scss */
+.navbar-header .logo-text {
+  padding-left: 60px !important;
+  color: #000;
+  background: url("../images/logo.png") no-repeat;
+  line-height: 50px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/*
+轮播图
+=======
+ */
+/* line 46, ../sass/index.scss */
+#myCarousel {
+  margin-top: 50px;
+}
+
+/* line 49, ../sass/index.scss */
+.carousel-inner .item img {
+  margin: 0 auto;
+  min-height: 150px;
+}
+
+/*
+index.html
+=======
+ */
+/* line 58, ../sass/index.scss */
+.tab1 {
+  color: #666;
+  margin: 30px auto;
+}
+/* line 61, ../sass/index.scss */
+.tab1 .tab-h2 {
+  color: #0059b2;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 20px 0 40px auto;
+}
+/* line 68, ../sass/index.scss */
+.tab1 .media-heading {
+  margin: 5px 0 20px 0;
+}
+/* line 71, ../sass/index.scss */
+.tab1 .col {
+  padding: 20px;
+}
+/* line 74, ../sass/index.scss */
+.tab1 .media {
+  margin-bottom: 15px;
+}
+/* line 77, ../sass/index.scss */
+.tab1 .media-body {
+  padding-left: 10px;
+}
+
+/* 文本图片区 */
+/* line 83, ../sass/index.scss */
+.tab2 {
+  padding: 40px 20px;
+  background-color: #eee;
+  text-align: center;
+}
+/* line 90, ../sass/index.scss */
+.tab2 img {
+  width: 40%;
+}
+
+/* line 94, ../sass/index.scss */
+.tab3 {
+  padding: 40px 20px;
+  text-align: center;
+}
+/* line 97, ../sass/index.scss */
+.tab3 img {
+  width: 45%;
+}
+
+/* line 103, ../sass/index.scss */
+.tab2 h3, .tab3 h3 {
+  font-size: 18px;
+}
+/* line 106, ../sass/index.scss */
+.tab2 p, .tab3 p {
+  font-size: 14px;
+}
+
+/*
+info.html
+======
+ */
+/* line 118, ../sass/index.scss */
+.jumbotron {
+  background-image: url("../images/bg.jpg");
+  margin: 50px 0 0 0;
+}
+/* line 122, ../sass/index.scss */
+.jumbotron h1 {
+  font-size: 26px;
+}
+/* line 125, ../sass/index.scss */
+.jumbotron h4 {
+  font-size: 16px;
+}
+
+/* line 133, ../sass/index.scss */
+.info {
+  background-color: #eee;
+  padding: 40px;
+}
+
+/* line 138, ../sass/index.scss */
+.info-content {
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 2px #ccc;
+}
+/* line 144, ../sass/index.scss */
+.info-content img {
+  margin: 15px 0;
+}
+/* line 148, ../sass/index.scss */
+.info-content h4 {
+  color: #333;
+  padding-top: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+/* line 154, ../sass/index.scss */
+.info-content p {
+  line-height: 1.6;
+}
+
+/* line 158, ../sass/index.scss */
+.info-right {
+  background-color: #fff;
+  border-shadow: 2px 2px 2px #ccc;
+}
+/* line 162, ../sass/index.scss */
+.info-right blockquote {
+  margin: 0;
+  padding: 0;
+}
+/* line 166, ../sass/index.scss */
+.info-right blockquote h2 {
+  font-size: 20px;
+  padding: 5px;
+  color: #333;
+}
+/* line 171, ../sass/index.scss */
+.info-right blockquote h4 {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/*
+case.html
+======
+ */
+/* line 185, ../sass/index.scss */
+.case {
+  padding: 40px 0;
+  background-color: #eee;
+  text-align: center;
+}
+/* line 190, ../sass/index.scss */
+.case h4 {
+  color: #666;
+}
+/* line 193, ../sass/index.scss */
+.case p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/*
+about.html
+======
+ */
+/* line 205, ../sass/index.scss */
+.about {
+  padding: 40px 15px;
+  background-color: #eee;
+  text-align: left;
+}
+/* line 210, ../sass/index.scss */
+.about a {
+  color: #0059b2;
+}
+/* line 214, ../sass/index.scss */
+.about .content h3 {
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+/* line 221, ../sass/index.scss */
+.about .content p {
+  line-height: 2;
+  font-size: 13px;
+}
+
+/*
+尾部内容
+=======
+ */
+/* line 233, ../sass/index.scss */
+#footer {
+  background-color: #666;
+  text-align: center;
+  color: #eee;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+/* 媒体查询 */
+/* bootstrap没有小于768px，以移动端为优先，布局用移动端的显示效果计算，然后媒体查询是调整大屏幕上的显示 */
+@media (min-width: 768px) {
+  /* line 247, ../sass/index.scss */
+  .tab-h2 {
+    font-size: 26px;
+  }
+
+  /* line 250, ../sass/index.scss */
+  .tab-p {
+    font-size: 16px;
+  }
+
+  /* line 255, ../sass/index.scss */
+  .tab2 h3, .tab3 h3 {
+    font-size: 20px;
+  }
+  /* line 258, ../sass/index.scss */
+  .tab2 p, .tab3 p {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  /* 调整大屏幕时的图面浮动方向 */
+  /* line 265, ../sass/index.scss */
+  .tab2-text {
+    float: left;
+  }
+
+  /* line 268, ../sass/index.scss */
+  .tab2-img {
+    float: right;
+  }
+
+  /* line 274, ../sass/index.scss */
+  .jumbotron h1 {
+    font-size: 30px;
+  }
+  /* line 277, ../sass/index.scss */
+  .jumbotron h4 {
+    font-size: 16px;
+  }
+
+  /* line 282, ../sass/index.scss */
+  .info-content {
+    margin-bottom: 20px;
+  }
+  /* line 285, ../sass/index.scss */
+  .info-content h4 {
+    font-size: 16px;
+    overflow: hidden;
+    white-space: normal;
+    text-decoration: ellipsis;
+  }
+
+  /* line 296, ../sass/index.scss */
+  .about .content h3 {
+    font-size: 20px;
+  }
+  /* line 299, ../sass/index.scss */
+  .about .content p {
+    font-size: 14px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 306, ../sass/index.scss */
+  .tab-h2 {
+    font-size: 28px;
+  }
+
+  /* line 309, ../sass/index.scss */
+  .tab-p {
+    font-size: 17px;
+  }
+
+  /* line 314, ../sass/index.scss */
+  .tab2 h3, .tab3 h3 {
+    font-size: 22px;
+  }
+  /* line 317, ../sass/index.scss */
+  .tab2 p, .tab3 p {
+    font-size: 15px;
+  }
+
+  /* line 324, ../sass/index.scss */
+  .jumbotron h1 {
+    font-size: 33px;
+  }
+  /* line 327, ../sass/index.scss */
+  .jumbotron h4 {
+    font-size: 17px;
+  }
+
+  /* line 333, ../sass/index.scss */
+  .info-content h4 {
+    font-size: 18px;
+  }
+
+  /* line 339, ../sass/index.scss */
+  .about .content h3 {
+    font-size: 20px;
+  }
+  /* line 342, ../sass/index.scss */
+  .about .content p {
+    font-size: 15px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 350, ../sass/index.scss */
+  .tab-h2 {
+    font-size: 30px;
+  }
+
+  /* line 353, ../sass/index.scss */
+  .tab-p {
+    font-size: 18px;
+  }
+
+  /* line 358, ../sass/index.scss */
+  .tab2 h3, .tab3 h3 {
+    font-size: 22px;
+  }
+  /* line 361, ../sass/index.scss */
+  .tab2 p, .tab3 p {
+    font-size: 15px;
+  }
+
+  /* line 367, ../sass/index.scss */
+  .jumbotron h1 {
+    font-size: 36px;
+  }
+  /* line 370, ../sass/index.scss */
+  .jumbotron h4 {
+    font-size: 18px;
+  }
+
+  /* line 376, ../sass/index.scss */
+  .info-content h4 {
+    font-size: 20px;
+  }
+
+  /* line 382, ../sass/index.scss */
+  .about .content h3 {
+    font-size: 22px;
+  }
+  /* line 385, ../sass/index.scss */
+  .about .content p {
+    font-size: 16px;
+  }
+}

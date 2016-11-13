@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        /*
+        原理：
+        1.给canvas添加一个属性data-process，控制进度环
+        2.三层图
+            1.底层：gray，圆
+            2.中间层：green，扇形，起始点2.5π，终点，属性设置完成度
+            3.外层：white，小一点的圆覆盖中心
+
+        js：可以通过data-process完成动画
+         */
+    </script>
+</head>
+<body>
+<canvas id="pczren" data-process="0" width="250" height="250"></canvas>
+<script type="text/javascript">
+    var pczren = document.getElementById('pczren');
+    var mprocess = pczren.getAttribute('data-process');
+    var mctx = pczren.getContext('2d');
+    var Wc = pczren.width;
+    var Hc = pczren.height;
+
+    function draw(ctx, process, colors, fco) {
+        // 画灰色的圆
+        ctx.beginPath();
+        ctx.arc(Wc/2, Hc/2,100, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fillStyle = fco;
+        ctx.fill();
+        // 画进度环
+        ctx.beginPath();
+        ctx.moveTo(Wc/2, Hc/2);
+        ctx.arc(Wc/2, Hc/2, 100, -0.5*Math.PI, (process/100)*Math.PI*2-0.5*Math.PI);
+        ctx.closePath();
+        ctx.fillStyle = colors;
+        ctx.fill();
+        // 画内填充圆
+        ctx.beginPath();
+        ctx.arc(Wc/2, Hc/2, 80, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+
+        //设置文字
+        ctx.beginPath();
+        ctx.font='50px Arial bold';
+        ctx.textAlign = 'center';
+        ctx.textBaseline="middle";
+        ctx.fillStyle = 'red';
+        ctx.fillText(process+'%',Wc/2, Hc/2);
+        console.log(1);
+
+    }
+
+    draw(mctx, mprocess, '#53b48d', '#edecec');
+    setInterval(function() {
+        mprocess++;
+        draw(mctx, mprocess, '#53b48d', '#edecec');
+    },1000);
+</script>
+</body>
+</html>

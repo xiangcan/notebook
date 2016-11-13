@@ -1,0 +1,150 @@
+<pre style="text-indent:0;">1.文本水平居中
+  1.行内元素水平居中
+      1. 给单独的行内元素设置居中是没有意义的 ， 行内元素无法设置宽度，宽度是撑开的
+       2 .父级设置 ：text-algin:center，行内元素就可以在块级元素内水平居中
+  2.块级元素的文本
+     1.设置text-align：center即可
+
+2.块级元素水平居中
+   1.确定宽度居中
+        1.margin值
+            1.margin：0 auto；上下水平都会居中
+            2.margin-left:auto;margin-right；只有水平居中
+
+        3.负外边距法+绝对定位
+            //margin和left值为百分数是相对父元素的
+            1.left：50%，元素inner左边处于outer层的中线处
+            2.margin-left：负自身的宽度的一半；inner内容再偏移过去
+
+            3.或使用三层嵌套，即left：50%，left：-50%
+
+         2.不确定宽度
+            1.{ display:table; margin:auto;}
+                    1.table不是块级元素，宽度由内容撑开，是inline-block类型。
+            2.{ display:inline}，父级添加text-align：center
+                    1.将块级元素转换为内联元素，利用父级的text-align
+
+            3.CSS3法：使用transform代替margin，transform中translate偏移的百分比值是相对于自身大小的
+                .element {
+                    width: 600px; height: 400px;
+                    position: absolute; left: 50%; top: 50%;
+                    transform: translate(-50%, -50%);    /* 50%为自身尺寸的一半 */
+                }
+
+3.垂直文本居中
+   1.单行文字
+        1.line-height=width
+        2.表格单元格的垂直居中：vertical-align
+            1. 与图片有所不同，文字在表格单元格中默认就是垂直居中的：
+            2.如果想要改变这种默认样式，可以通过设置  top  和  bottom  来实现顶部和底部对齐
+            3. 当你在表格单元格中使用  vertical-align 属性时，top、bottom 和 middle 是你的最佳选择，使用其他的属性则会产生一些兼容性问题。
+            1. text-bottom 对齐方式在 IE 6 中会表现为 bottom，在 Safari 4 中会表现为 top；sub 对齐方式在 IE 6 中表现为 middle，在 Safari 4 中会表 现为 top 。
+
+    3.多行文本的居中
+        1.文本高度未知的居中
+            1.padding值填充
+                1.：父级高度随着文本高度自适应
+                    div{  padding:25px; width:760px;  }
+
+                2.缺点：
+                    1.父级高度无法固定，只能随着内容增加
+                    2.padding值固定了居中的间隙
+
+            2.display：table
+                1.让div模拟&lt;table>去使用vertical-align，文本内容需要用div包围
+                2.父级：display：table
+                3.文本：display：table-cell，vertical-align：middle
+                    div#wrap{  height:400px; display:table;  }
+                    div#content{  vertical-align:middle;  display:table-cell;  width:760px; }
+                4.优点：content 可以动态改变高度(不需在 CSS 中定义)。当 wrapper 里没有足够空间时， content 不会被截断
+                    缺点： IE6以下，不能正确地理解display:table和display:table-cell
+                6.table的Hack写法
+                    .box {display: table-cell; vertical-align:middle; width:200px; height:200px; text-align:center;/* hack for ie */ *display: block; *font-size: 175px;/* end */border: 5px solid red;}
+                    .box img {vertical-align:middle;}
+
+            3.inline-block法
+                1.创建一个空的内容，作为vertic-align的参照
+                2.文本元素设置为inline-block，当做图片居中的方式处理
+                3.问题：元素必须是inline-block，确实块级元素的一些方法
+                    .block:before { content: '';
+                        display: inline-block;
+                        height: 100%;
+                        vertical-align: middle;
+                        font-size：0；                //字体设为0}
+                        .centered { display: inline-block;
+                        vertical-align: middle;font-size：px；    //字体一定要用px
+                    }
+
+            4.Css3变形(Transforms)方法
+                1.transform代替margin. transform中translate偏移的百分比值是相对于自身大小的
+                    position: fixed;top: 50%;
+                    left: 50%;
+                    width: 50%;
+                    visibility: hidden;-webkit-backface-visibility: hidden;-moz-backface-visibility: hidden;
+                    backface-visibility: hidden;
+
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                -moz-transform: translateX(-50%) translateY(-50%);
+                -ms-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+
+        2.文本高度固定的居中
+            1.负margin法
+                1.利用绝对定位，元素的顶部与居中线对齐
+                2.需要知道文本元素的高度
+                3.margin-top：元素高度的一半，即将元素内容向上移动自身高度的一般。
+                  #wrap { position：relative； }
+                  #content { position:absolute;top:50%; margin-top:-元素自身高度的一半;}
+
+        2.绝对定位法
+           width: 600px; height: 400px;
+           position: absolute; left: 0; top: 0; right: 0; bottom: 0;    //可以不绝对定位
+           margin: auto;    /* 有了这个就自动居中了 */
+
+4.实现水平垂直都居中的方法
+    1.负margin值法
+        1.确定了内容宽高
+            .element {
+                width: 600px; height: 400px;
+                position: absolute; left: 50%; top: 50%;
+                margin-top: -200px;    /* 高度的一半 */
+                margin-left: -300px;    /* 宽度的一半 */
+            }
+
+        2.不确定内容宽高
+            1.Css3：使用transform代替margin，transform中translate偏移的百分比值是相对于自身大小的
+                .element {
+                    width: 600px; height: 400px;
+                    position: absolute; left: 50%; top: 50%;
+                    transform: translate(-50%, -50%);    /* 50%为自身尺寸的一半 */
+                }
+
+    2.绝对定位法：
+        1.还是需要设置宽高
+        2.适合绝对定位的元素
+            非绝对定位情况下，一般使用margin:0 auto的方法来进行居中，但在绝对定位情况下，margin:0 auto会失效。
+            .element {
+                width: 600px; height: 400px;
+                position: absolute; left: 0; top: 0; right: 0; bottom: 0;    //可以不绝对定位
+                margin: auto;    /* 有了这个就自动居中了 */
+            }
+
+            分析：绝对定位的元素也可以使用margin：auto居中，因为left与margin不冲突，left定义就是从外边距开始计算的。
+
+
+text-align：只能用于块级元素或块级元素内控制的内联元素，该属性可以继承
+        作用：文字在当前盒子内显示居中
+居中也是针对块级元素内的文本而言，内联元素只有一行，而且宽度由内容撑开，何谈居中
+    可以这么理解，内联元素只是作为块级元素内部文本的一种修饰，主要控制还是块级元素
+
+块中的内容进行居中的：
+    1.如果块元素的子元素也为块元素，就对子元素使用margin auto
+    2.如果块级元素的子元素为行内元素，text-align:center
+    3.对于子元素为块元素的，也可以用display设置为inline然后再用text-align
+    4.内容为纯文本，直接居中就好
+
+vertical-align：元素在该行内居中，适用于
+   1.内联元素(以及被转化为内联元素的块元素)
+    2.display设置为table-cell的元素
+        1.在 firefox 和 ie8 下，可以设置块级元素的 display 值为 table-cell，来激活 vertical-align 属性，显示效果和就和表格中的 valign="center" 一样了。但 ie6,7 并不支持。
+    3.&lt;td>&lt;tr></pre>

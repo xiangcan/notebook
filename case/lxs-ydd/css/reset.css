@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-30 13:44:46
+ * @version $Id$
+ */
+/*
+=======
+默认样式
+=======
+ */
+/* line 18, ../sass/reset.scss */
+html {
+  font-size: 625%; }
+
+/* line 23, ../sass/reset.scss */
+body, div, ul, li, h1, h2, h3, h4, p, figure {
+  padding: 0;
+  margin: 0; }
+
+/* line 27, ../sass/reset.scss */
+body {
+  background: #fff;
+  font-size: .16rem;
+  padding-top: .45rem; }
+
+/* line 35, ../sass/reset.scss */
+li {
+  list-style: none; }
+
+/* line 39, ../sass/reset.scss */
+a {
+  text-decoration: none; }
+
+/* line 43, ../sass/reset.scss */
+input, button {
+  outline: none; }
+
+/*
+=======
+工具样式
+======
+ */
+/* line 52, ../sass/reset.scss */
+.none {
+  display: none; }
+
+/* line 56, ../sass/reset.scss */
+.clear-float:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0; }
+
+/* line 65, ../sass/reset.scss */
+img {
+  display: block;
+  max-width: 100%; }
+
+/*
+头部样式
+=======
+ */

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>index</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_xs9o21egoypn9udi.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_phsurxe8m5ay8pvi.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
             <ul class="nav-list">
                <li class="item"><a href="index.html" class="active">首页</a></li>
                 <li class="item"><a href="qianduan.html">前端笔记</a></li>
-                <li class="item"><a href="jsGo.html">JS Go</a></li>
+                <li class="item"><a href="jsGo.html">资料库</a></li>
                 <li class="item"><a href="extend.html">技术延伸</a></li>
                 <li class="item"><a href="case.html">项目案例</a></li>
             </ul>
@@ -37,13 +37,7 @@
         <div class="search-box">
             <input type="text" name="" placeholder="请输入搜索文章..." id="btnInput">
             <button>搜索</button>
-            <ul class="search-result none" id="btnResult">
-                <li class="item"><a href="#" class="active">第一篇文字</a></li>
-                <li class="item"><a href="#">第一篇文字</a></li>
-                <li class="item"><a href="#">第一篇文字</a></li>
-                <li class="item"><a href="#">第一篇文字</a></li>
-                <li class="item"><a href="#">第一篇文字</a></li>
-            </ul>
+            <ul class="search-result none" id="btnResult"></ul>
         </div>
     </div>
 
@@ -95,13 +89,59 @@
             </aside>
         </div>
     </div>
-    <div class="mask"></div>
-    <div class="search-info"></div>
+
     <footer class="footer">
         <p>Notebook 专注于前端，学习交流，经验分享。</p>
     </footer>
     <script src="js/require.js" data-main="js/main.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
+
+            var oSearchText = $('#btnInput');
+            var oSearchUl = $('#btnResult');
+
+            oSearchText.on('keyup',function() {
+                var searchText = oSearchText.val();
+                var timer = null;
+                timer = setTimeout(function() {
+                    clearTimeout(timer);
+                    var params = {'q':searchText};
+                    $.ajax({
+                        url: "https://api.cognitive.microsoft.com/bing/v5.0/search?" + $.param(params),
+                        beforeSend: function(xhrObj){
+                            // Request headers
+                            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","545bda338e494e85aa6f2da8e85582af");
+                    },
+                        type: "GET",
+                        dataType:'json',
+                        success: function(data) {
+                            data = data.relatedSearches.value;
+                            var iHtml = '';
+                            for(var i=0;i<data.length;i++) {
+                                iHtml+= '<li class="item"><a href="#">'+data[i].text+'</a></li>';
+                            }
+                            oSearchUl.html(iHtml);
+                            oSearchUl.css('display','block');
+                        }
+                    });
+                    },300);
+            });
+
+            $(document).on('click',function() {
+                oSearchUl.hide();
+            });
+            oSearchText.on('click',function() {
+                oSearchUl.toggle();
+                return false;
+            });
+
+            oSearchUl.delegate('li', 'click', function(ev) {
+                var keyWord = $(this).find('a').html();
+                //直接改变页面地址即可
+                location.href = 'http://cn.bing.com/search?q='+keyWord;
+                //在新窗口打开
+                //window.open('http://cn.bing.com/search?q='+keyWord,'_blank',"height=500,width=500,top=0,left=200");
+            });
     </script>
 </body>
 </html>

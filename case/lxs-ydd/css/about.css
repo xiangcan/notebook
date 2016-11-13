@@ -1,0 +1,84 @@
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-11-01 10:36:56
+ * @version $Id$
+ */
+/* line 12, ../sass/about.scss */
+.content .headline {
+  height: 1rem;
+  max-width: 6.4rem;
+  margin: 0 auto;
+  position: relative; }
+  /* line 18, ../sass/about.scss */
+  .content .headline img {
+    width: 100%;
+    height: 100%; }
+  /* line 23, ../sass/about.scss */
+  .content .headline .mask {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), transparent);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000; }
+/* line 32, ../sass/about.scss */
+.content .head-title {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff; }
+  /* line 38, ../sass/about.scss */
+  .content .head-title h2 {
+    font-size: .22rem; }
+  /* line 41, ../sass/about.scss */
+  .content .head-title h3 {
+    font-size: .16rem; }
+/* line 48, ../sass/about.scss */
+.content .about-list {
+  font-size: .16rem;
+  color: #666;
+  max-width: 6.4rem;
+  margin: .15rem auto;
+  padding: 0 .1rem; }
+  /* line 55, ../sass/about.scss */
+  .content .about-list h2 {
+    font-size: .2rem;
+    border-bottom: .01rem dashed #999;
+    padding-bottom: .1rem; }
+  /* line 61, ../sass/about.scss */
+  .content .about-list p {
+    line-height: 2;
+    margin: .2rem 0; }
+  /* line 66, ../sass/about.scss */
+  .content .about-list address {
+    font-style: normal;
+    line-height: 1.6;
+    margin: .2rem 0; }
+
+@media (max-width: 480px) {
+  /* line 77, ../sass/about.scss */
+  .content .head-title h2 {
+    font-size: .17rem; }
+
+  /* line 80, ../sass/about.scss */
+  .content .head-title h3 {
+    font-size: .1rem; }
+
+  /* line 83, ../sass/about.scss */
+  .content .about-list {
+    font-size: .14rem; } }
+@media (min-width: 480px) and (max-width: 640px) {
+  /* line 93, ../sass/about.scss */
+  .content .head-title h2 {
+    font-size: .22rem; }
+
+  /* line 96, ../sass/about.scss */
+  .content .head-title h3 {
+    font-size: .14rem; }
+
+  /* line 101, ../sass/about.scss */
+  .content .about-list {
+    font-size: .16rem; } }

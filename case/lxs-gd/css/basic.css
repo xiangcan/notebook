@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-30 13:41:19
+ * @version $Id$
+ */
+/*
+1.顶部导航
+=======
+ */
+/*
+总结：
+    1.导航内的元素：float并排显示
+    2.a链接可能继承不了父级的字体，尽量重新设置
+ */
+/* line 22, ../sass/basic.scss */
+.header {
+  width: 100%;
+  height: 70px;
+  min-width: 1263px;
+  background: #333;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  position: relative; }
+  /* line 32, ../sass/basic.scss */
+  .header .center {
+    width: 1263px;
+    height: 70px;
+    margin: 0 auto; }
+  /* line 37, ../sass/basic.scss */
+  .header .logo {
+    width: 240px;line-height: 70px;color: #fff;font-size: 20px;
+    padding-left: 55px;
+    font-weight: normal;
+    background: url('../images/logo.png') no-repeat 0 center;
+    height: 70px;
+    float: left; }
+  /* line 46, ../sass/basic.scss */
+  .header .link {
+    width: 650px;
+    height: 70px;
+    line-height: 70px;
+    color: #eee;
+    float: right;
+    text-align: center; }
+    /* line 54, ../sass/basic.scss */
+    .header .link li {
+      width: 120px;
+      float: left; }
+    /* line 59, ../sass/basic.scss */
+    .header .link a {
+      display: block;
+      color: #eee; }
+      /* line 64, ../sass/basic.scss */
+      .header .link a:hover, .header .link a.active {
+        background: #000; }
+
+/*
+2.底部内容
+=======
+ */
+/* line 76, ../sass/basic.scss */
+.footer {
+  height: 250px;
+  min-width: 1263px;
+  background: #222;
+  clear: both;
+  position: relative;
+  top: 10px; }
+  /* line 86, ../sass/basic.scss */
+  .footer .top {
+    width: 1263px;
+    height: 200px;
+    margin: 0 auto;
+    text-align: center; }
+    /* line 93, ../sass/basic.scss */
+    .footer .top .item {
+      display: inline-block;
+      width: 410px;
+      height: 200px;
+      color: #ccc;
+      text-align: left; }
+    /* line 99, ../sass/basic.scss */
+    .footer .top h2 {
+      font-size: 20px;
+      font-weight: normal;
+      padding: 20px 20px 0 20px; }
+    /* line 105, ../sass/basic.scss */
+    .footer .top hr {
+      width: 90%;
+      border-bottom: 1px dashed #333; }
+    /* line 110, ../sass/basic.scss */
+    .footer .top a {
+      display: inline-block;
+      font-size: 16px;
+      color: #777;
+      text-indent: 20px;
+      line-height: 2; }
+  /* line 119, ../sass/basic.scss */
+  .footer .bottom p {
+    min-width: 1263px;
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    background: #000;
+    line-height: 50px;
+    color: #777;
+    text-align: center; }

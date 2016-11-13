@@ -1,0 +1,43 @@
+<pre style="text-indent:0;">1.JS静态效果
+    1.topbar是用css3写
+    2.原理：div内嵌span，span用Css运动作为火箭头，关键在于div的长度发生变化
+
+        body{margin:0;}
+        #progress {position:fixed;height: 2px;background:#2085c5;
+            transition:opacity 500ms linear}
+        #progress.done {opacity:0}
+
+        #progress span {                                //滑动光标
+            -webkit-border-radius:100%;opacity:1;width:150px;right:-10px;
+            position:absolute;height:2px;
+            -webkit-box-shadow:#2085c5 1px 0 6px 1px;
+            -webkit-animation:pulse 2s ease-out 0s infinite;        //透明度动画
+        }
+
+        @-webkit-keyframes pulse {
+            30% {opacity:.6}
+            60% {opacity:0;}
+            1001% {opacity:.6}}
+
+        &lt;div id="progress">
+            &lt;span>&lt;/span>
+        &lt;/div>
+
+        $({property: 0}).animate({property: 100}, {
+            duration: 3000,
+            step: function() {
+                var percentage = Math.round(this.property);
+                $('#progress').css('width',  percentage+"%");               //div长度发生变化
+                if(percentage == 100) {
+                    $("#progress").addClass("done");                        //完成，隐藏进度条
+                }
+            }
+        });
+
+3.插件：
+    1.LoadingBar
+        1.LoadingBar.js的地址是：http://www.onextrapixel.com/2013/09/02/loadingbar-js-adding-a-youtube-like-loading-bar-to-your-website/
+        2.用ajax方式读取页面内容，然后加载。
+
+    2.NProgress.js
+        1.NProgress.js的地址是：http://ricostacruz.com/nprogress/</pre>

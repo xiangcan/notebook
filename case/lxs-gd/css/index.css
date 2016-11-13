@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-30 00:54:11
+ * @version $Id$
+ */
+/*
+=======
+页面样式
+=======
+ */
+/*
+2.搜索区
+=======
+ */
+/* line 22, ../sass/index.scss */
+.search {
+  width: 100%;
+  height: 600px;
+  min-width: 1263px;
+  background: url("../images/search.jpg") no-repeat center;
+  position: relative; }
+  /* line 30, ../sass/index.scss */
+  .search .center {
+    width: 600px;
+    height: 55px;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    padding: 5px; }
+    /* line 38, ../sass/index.scss */
+    .search .center input, .search .center button {
+      height: 53px;
+      border-radius: 5px;
+      color: #666;
+      border: 1px solid #666;
+      vertical-align: middle; }
+    /* line 46, ../sass/index.scss */
+    .search .center input {
+      background: #fff;
+      width: 446px;
+      padding: 0 10px;
+      font-size: 24px;
+      line-height: 50px; }
+    /* line 54, ../sass/index.scss */
+    .search .center button {
+      width: 120px;
+      font-size: 22px;
+      color: #666;
+      font-weight: bold;
+      background: #eee;
+      float: right;
+      margin-top: 1px;
+      cursor: pointer; }
+
+/*
+3.旅游介绍区
+======
+ */
+/* line 69, ../sass/index.scss */
+.tour {
+  width: 1263px;
+  height: 1300px;
+  margin: 30px auto;
+  text-align: center;
+  color: #666; }
+  /* line 77, ../sass/index.scss */
+  .tour .message h2 {
+    font-size: 45px;
+    letter-spacing: 2px;
+    margin: 10px 0; }
+  /* line 83, ../sass/index.scss */
+  .tour .message p {
+    margin: 10px 0; }
+  /* line 88, ../sass/index.scss */
+  .tour figure {
+    display: inline-block;
+    padding: 4px;
+    border-radius: 4px;
+    margin: 15px 12px;
+    width: 380px;
+    position: relative; }
+    /* line 97, ../sass/index.scss */
+    .tour figure img {
+      vertical-align: middle;
+      width: 100%; }
+    /* line 103, ../sass/index.scss */
+    .tour figure figcaption {
+      color: #777;
+      font-size: 14px;
+      padding: 7px 0 5px 0;
+      letter-spacing: 1px;
+      line-height: 1.5; }
+    /* line 110, ../sass/index.scss */
+    .tour figure .title {
+      color: #333;
+      font-weight: normal; }
+    /* line 116, ../sass/index.scss */
+    .tour figure .content {
+      text-align: left;
+      letter-spacing: 2px; }
+    /* line 121, ../sass/index.scss */
+    .tour figure .sat {
+      float: right;
+      color: #999;
+      font-style: normal;
+      font-size: 14px;
+      margin-top: 5px; }
+    /* line 126, ../sass/index.scss */
+    .tour figure .price {
+      color: #f60;
+      font-size: 14px; }
+      /* line 129, ../sass/index.scss */
+      .tour figure .price strong {
+        font-size: 20px; }
+    /* line 134, ../sass/index.scss */
+    .tour figure .type {
+      width: 90px;
+      height: 25px;
+      line-height: 25px;
+      color: #fff;
+      font-size: 14px;
+      background: #59b200;
+      position: absolute;
+      left: 4px;
+      top: 4px; }

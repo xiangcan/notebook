@@ -18,7 +18,7 @@
             <ul class="nav-list">
                 <li class="item"><a href="index.html">首页</a></li>
                 <li class="item"><a href="qianduan.html">前端笔记</a></li>
-                <li class="item"><a href="jsGo.html" class="active">JS Go</a></li>
+                <li class="item"><a href="jsGo.html" class="active">资料库</a></li>
                 <li class="item"><a href="extend.html">技术延伸</a></li>
                 <li class="item"><a href="case.html">项目案例</a></li>
             </ul>
@@ -37,8 +37,8 @@
         </div>
         <div class="nav-tab" id="navTab">
             <ul class="qianduan-list clearfix">
-                <li  class="active"><a><i class="iconfont icon-html-copy"></i>Html</a></li>
-                <li><a><i class="iconfont icon-group15copy"></i>Css</a></li>
+                <li ><a><i class="iconfont icon-html-copy"></i>Blog</a></li>
+                <li  class="active"><a><i class="iconfont icon-group15copy"></i>Case</a></li>
             </ul>
         </div>
         <div class="qianduan-container clearfix" id="qdCont">
@@ -48,91 +48,122 @@
                 <div class="left-container">
                     <div class="panel">
                         <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
+                            <h3 class="panel-head" style="text-align: left;">实现头部加载动态条</h3>
+                            <h4><i class="iconfont icon-tag"></i>小博文</h4>
                         </hgroup>
-                        <p class="panel-content" data-main="JS-01">在网页实际开发中，我们经常需要通过JS和JQ来动态的定义某些元素的高度和宽度。不同的高度在不同的浏览器下的又存在兼容性问题，下面我们一起总结下JQ和JS中关于window和document以及相关盒模型的宽高计算。</p>
+                        <p class="panel-content" data-main="zlk-01">网页顶部加载进度条，近年来很流行，很多网站都采用了这种加载方式。网上也有这样类似的插件，我们总结一下网页顶部线性页面加载进度条</p>
                         <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
+                        <span class="tag-content">Key</span>
                     </div>
                     <div class="panel">
                         <hgroup>
-                            <h3 class="panel-head">JavaScript面向对象总结</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
+                            <h3 class="panel-head" style="text-align: left;">Canvas动态加载图片</h3>
+                            <h4><i class="iconfont icon-tag"></i>小博文</h4>
                         </hgroup>
-                        <p class="panel-content" data-main="JS-02">avascript是一种基于对象（object-based）的语言，你遇到的所有东西几乎都是对象。但是，它又不是一种真正的面向对象编程（OOP）语言，因为它的语法中没有class（类）。<br>那么，如果我们要把"属性"（property）和"方法"（method），封装成一个对象，甚至要从原型对象生成一个实例对象，我们应该怎么做呢？</p>
+                        <p class="panel-content" data-main="zlk-02">canvas加载图片：占用内存小<br>    1.将文章用需要用到的图片，都用canvas加载<br>2.data-src，里面存放img的路径<br>    3.通过canvas方法渲染图片需要时间，一般会给canvas一个背景，背景可以用gif图片。图片渲染好了之后把背景去掉。</p>
                         <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
                     </div>
                     <div class="panel">
                         <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
+                            <h3 class="panel-head" style="text-align: left;">Ajax跨域</h3>
+                            <h4><i class="iconfont icon-tag"></i>小博文</h4>
                         </hgroup>
-                        <p class="panel-content" data-main="JS-03">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
+                        <p class="panel-content" data-main="zlk-03">Ajax请求一个目标地址为非本域（协议、域名、端口任意一个不同）的web资源，并根据响应获得外部应用数据。比如我们用Ajax访问城市天气预报、IP地址等公共服务接口时，就涉及跨域了。我们请求一个外部服务时，浏览器会基于安全问题拒绝授权访问。而script、script、iframe标签的src属性就不存在跨域的问题，所以Ajax跨域就是利用这一点以及js对JSON的支持，外部服务只要给Ajax的请求响应一段JS代码或JSON数据，就能被Ajax获取到。</p>
                         <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
+                        <span class="tag-content">Key</span>
                     </div>
                     <div class="panel">
                         <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
+                            <h3 class="panel-head" style="text-align: left;">JS上传与下载</h3>
+                            <h4><i class="iconfont icon-tag"></i>小博文</h4>
                         </hgroup>
-                        <p class="panel-content" data-main="JS-01">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
+                        <p class="panel-content" data-main="zlk-04">HTML5定义了FileReader作为文件API的重要成员用于读取文件，根据W3C的定义，FileReader接口提供了读取文件的方法和包含读取结果的事件模型。</p>
                         <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
+                        <span class="tag-content">Key</span>
                     </div>
                     <div class="panel">
                         <hgroup>
-                            <h3 class="panel-head">JS和JQ各种宽高理解</h3>
-                            <h4><i class="iconfont icon-tag"></i><em>前端笔记</em><i class="space">•</i> JS基础知识体系</h4>
+                            <h3 class="panel-head" style="text-align: left;">弹出层和底层一起滑动问题</h3>
+                            <h4><i class="iconfont icon-tag"></i>小博文</h4>
                         </hgroup>
-                        <p class="panel-content" data-main="JS-04" id="panelContent">
-                            在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。                        在网页实际开发中，我们经常需要通过JS/JQ来动态的定义某些元素的高度和宽度，下面我们可以使用一下代码获取浏览器的宽或高。
-                        </p>
+                        <p class="panel-content" data-main="zlk-05" id="panelContent">弹出层的滚动轴滚到底部的时候，会触发body的滑动，如果给弹出层滚到底部一个touchmove的阻止事件，可以解决该问题<br>1.到达滚动轴底部，向下滑动，阻止事件<br>2.向上滑动，开启事件<br>3.需要判断touchmove的方向</p>
                         <button class="btn-read btnRead" >阅读全文</button>
-                        <span class="tag-content">jquery</span>
+                        <span class="tag-content">Key</span>
                     </div>
                 </div>
                 <div class="left-container  active">
                     <div class="panel">
-                        <figure  class="panel-content" data-main="JS-01" id="panelContent">
-                            <img src="images/code-logo.png" class="figImg">
+                        <figure  class="panel-content">
+                            <img src="zlk/放大镜原理.png" class="figImg">
                             <figcaption>
-                                <h3>JavaScript实现文件上下传</h3>
-                                <p>HTML5中用js、jQuery结合Ajax实现文件上传功能，HTML5中已经可以用Ajax上传文件了，而且代码简单，借助 FormData类即可发送文件数据</p>
+                                <h3>JS实现放大镜效果</h3>
+                                <p>在淘宝上购物时，总会看到类似放大镜的效果。<br>我的大体思路是：时时监听鼠标的坐标，当鼠标移动时，透明层随着鼠标移动，大图片相对透明层的移动而移动。</p>
                             </figcaption>
                         </figure>
-                        <button class="btn-read btnRead" >查看详情</button>
+                        <a href="zlk/fdj.html" class="btn-read">查看效果</a>
+                    </div>
+                    <div class="panel">
+                        <figure  class="panel-content">
+                            <img src="zlk/图片扫光.png" class="figImg">
+                            <figcaption>
+                                <h3>图片扫光</h3>
+                                <p>图片扫光思路:其实扫光的思路都是一样的，不外乎是表层一个动态的光，从左往右进行一个动画运动！但是这个运动的光，一般是用过伪元素来::after或者::before来实现的。然后我们对这个伪元素用css的渐变gradient进行处理。</p>
+                            </figcaption>
+                        </figure>
+                        <a href="zlk/图片扫光.html" class="btn-read">查看效果</a>
+                    </div>
+                    <div class="panel">
+                        <figure  class="panel-content">
+                            <img src="zlk/进度条.png" class="figImg">
+                            <figcaption>
+                                <h3>Canvas实时进度条</h3>
+                                <p>HTML5可以使用Cansvas绘制图像，我们可以使用canvas模拟绘制一个进度环，然后通过JS改变进度条状态原理<br>三层图：1.底层圆作为背景 2.中间层扇形作为进度条 3.外层显示环形中心</p>
+                            </figcaption>
+                        </figure>
+                        <a href="zlk/canvas进度条.html" class="btn-read">查看效果</a>
+                    </div>
+                    <div class="panel">
+                        <figure  class="panel-content">
+                            <img src="zlk/轮播图.png" class="figImg">
+                            <figcaption>
+                                <h3>轮播图</h3>
+                                <p>基于jquery和Html的一个简单的轮播图自动播放幻灯片<br>
+                                实现原理：单张图片容器float水平排列，轮播图容器采用绝对定位的方式。设置一个定时器，改变轮播图容器的偏移距离，同时与控制小圆点建立关系</p>
+                            </figcaption>
+                        </figure>
+                        <a href="zlk/轮播图.html" class="btn-read">查看效果</a>
+                    </div>
+                    <div class="panel">
+                        <figure  class="panel-content">
+                            <img src="zlk/diao-border.png" class="figImg">
+                            <figcaption>
+                                <h3>绘制dialog对话框</h3>
+                                <p>头部三角形思路：伪类正方形旋转<br>1.用before创建一个伪类，即小三角<br>1.提示框的小三角，先写一个正方形，然后旋转45度变为三角形<br>        3.用before创建一个伪类，即小三角inherit继承属性，达到覆盖的效果</p>
+                            </figcaption>
+                        </figure>
+                        <a href="zlk/左侧三角对话框.html" class="btn-read">查看效果</a>
                     </div>
                 </div>
+
             </div>
             <!-- 右侧内容 -->
             <div class="right" id="right">
                 <h3>热门文章</h3>
                 <button type="button" class="btn-list" data-list="0">基础篇<i class="iconfont icon-triangledown-copy"></i></button>
                 <ol class="actile-list">
-                    <li><a href="#" class="active">JavaScript基础知识整理</a></li>
-                    <li><a href="#">JavaScript面向对象总结</a></li>
-                    <li><a href="#">Js易混淆方法</a></li>
-                    <li><a href="#">Js继承总结</a></li>
-                    <li><a href="#">Js处理方法总结</a></li>
-                    <li><a href="#">Js组件式开发</a></li>
-
+                    <li><a href="#">Canvas动态加载图片</a></li>
+                    <li><a href="#">Ajax跨域</a></li>
+                    <li><a href="#">JS上传与下载</a></li>
+                    <li><a href="#">轮播图</a></li>
+                    <li><a href="#">图片扫光</a></li>
                 </ol>
                 <button type="button" class="btn-list" data-list="1">高级篇<i class="iconfont icon-triangledown-copy"></i></button>
                 <ol class="actile-list">
-                    <li><a href="#">JavaScript基础知识整理</a></li>
-                    <li><a href="#">第一篇文章</a></li>
-                    <li><a href="#">第一篇文章</a></li>
-                    <li><a href="#">第一篇文章</a></li>
-                    <li><a href="#">第一篇文章</a></li>
-                    <li><a href="#">第一篇文章</a></li>
-
+                    <li><a href="#">Canvas实时进度条</a></li>
+                    <li><a href="#">绘制dialog对话框</a></li>
+                    <li><a href="#">弹出层和底层一起滑动问题</a></li>
+                    <li><a href="#">实现头部加载动态条</a></li>
+                    <li><a href="#">JS实现放大镜效果</a></li>
                 </ol>
             </div>
         </div>

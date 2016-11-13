@@ -1,0 +1,174 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-31 20:28:08
+ * @version $Id$
+ */
+/*
+广告轮播
+======
+ */
+/* line 18, ../sass/index.scss */
+.content .ad {
+  max-width: 6.4rem;
+  height: 1.5rem;
+  margin: 0 auto; }
+  /* line 24, ../sass/index.scss */
+  .content .ad ul {
+    overflow: hidden;
+    height: 100%;
+    position: relative; }
+    /* line 30, ../sass/index.scss */
+    .content .ad ul li {
+      float: left;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0; }
+  /* line 37, ../sass/index.scss */
+  .content .ad a {
+    display: block;
+    height: 100%; }
+  /* line 41, ../sass/index.scss */
+  .content .ad img {
+    display: block;
+    width: 100%;
+    height: 100%; }
+/* line 50, ../sass/index.scss */
+.content .search {
+  max-width: 6.4rem;
+  margin: .1rem auto;
+  height: .29rem;
+  box-sizing: border-box;
+  padding-top: 0.02rem;
+  font-size: .14rem;
+  position: relative; }
+  /* line 62, ../sass/index.scss */
+  .content .search input {
+    width: 90%;
+    height: .23rem;
+    border-radius: .04rem;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    text-indent: 0.1rem; }
+  /* line 71, ../sass/index.scss */
+  .content .search button {
+    display: block;
+    position: absolute;
+    top: 0.02rem;
+    right: 1%;
+    z-index: 100;
+    cursor: pointer;
+    border: none;
+    border-radius: 0 0.04rem 0.04rem 0;
+    width: .6rem;
+    height: .27rem;
+    border: 1px solid #ddd;
+    border-left: none;
+    background-color: #eee;
+    color: #666;
+    font-weight: bold; }
+/* line 89, ../sass/index.scss */
+.content .tour {
+  max-width: 6.4rem;
+  margin: .1rem auto 0 auto;
+  text-align: center; }
+  /* line 95, ../sass/index.scss */
+  .content .tour .message h2 {
+    font-size: .22rem;
+    font-size: 22px;
+    line-height: 1.5; }
+  /* line 100, ../sass/index.scss */
+  .content .tour .message h3 {
+    font-size: .16rem;
+    font-size: 16px;
+    padding-bottom: .1rem; }
+  /* line 107, ../sass/index.scss */
+  .content .tour .pic-list {
+    max-width: 6.4rem;
+    margin: 0 auto;
+    overflow: hidden;
+    /*需要根据媒体查询修改字体大小，否则内容放不下*/ }
+    /* line 113, ../sass/index.scss */
+    .content .tour .pic-list figure {
+      width: 50%;
+      float: left;
+      background-color: #eee;
+      font-size: .14rem;
+      padding: 0 0 .05rem 0;
+      position: relative;
+      box-sizing: border-box; }
+    /* line 123, ../sass/index.scss */
+    .content .tour .pic-list figure:nth-child(2n+1) {
+      padding-right: .05rem; }
+    /* line 126, ../sass/index.scss */
+    .content .tour .pic-list figure:nth-child(2n) {
+      padding-left: .05rem; }
+    /* line 129, ../sass/index.scss */
+    .content .tour .pic-list img {
+      padding: .02rem;
+      /*宽度等于父级*/
+      width: 100%;
+      border-radius: .04rem;
+      vertical-align: middle; }
+    /* line 138, ../sass/index.scss */
+    .content .tour .pic-list figcaption {
+      color: #666;
+      padding: .02rem .05rem;
+      text-align: left; }
+      /* line 143, ../sass/index.scss */
+      .content .tour .pic-list figcaption h4 {
+        font-weight: normal;
+        padding: 0 0 .05rem 0; }
+      /* line 149, ../sass/index.scss */
+      .content .tour .pic-list figcaption p, .content .tour .pic-list figcaption h4 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+    /* line 160, ../sass/index.scss */
+    .content .tour .pic-list .info {
+      padding: .1rem 0 0 0;
+      position: relative; }
+    /* line 164, ../sass/index.scss */
+    .content .tour .pic-list .sat {
+      float: right;
+      position: absolute;
+      right: .05rem;
+      font-style: normal; }
+    /* line 169, ../sass/index.scss */
+    .content .tour .pic-list .price {
+      color: #f60;
+      font-size: .16rem; }
+      /* line 172, ../sass/index.scss */
+      .content .tour .pic-list .price strong {
+        letter-spacing: .01rem; }
+    /* line 177, ../sass/index.scss */
+    .content .tour .pic-list .type {
+      display: block;
+      line-height: 1.5;
+      color: #fff;
+      padding: .05rem;
+      background: #59b200;
+      position: absolute;
+      left: .02rem;
+      top: .02rem; }
+
+@media (max-width: 480px) {
+  /* line 191, ../sass/index.scss */
+  .content .tour h2 {
+    font-size: .18rem; }
+
+  /* line 194, ../sass/index.scss */
+  .content .tour h3, footer, figure, .pic-list .type {
+    font-size: .14rem; } }
+@media (min-width: 480px) and (max-width: 640px) {
+  /* line 204, ../sass/index.scss */
+  .content .tour h2 {
+    font-size: .22rem; }
+
+  /* line 207, ../sass/index.scss */
+  .content .tour h3, footer, figure, .pic-list .type {
+    font-size: .16rem; } }

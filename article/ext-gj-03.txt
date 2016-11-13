@@ -1,0 +1,332 @@
+<pre style="text-indent:0;">1.ReactDOM.render()：将模板转化为HTML语言，并插入指定的DOM节点
+    ReactDOM.render(
+        &lt;h1>Hello, world!&lt;h1>,
+        document.getElementById('container');
+    );
+
+2.JSX语法
+    1.JSX：HTML语言直接写入JS语言中，不加任何引号
+    2.标签解析：
+        1.html标签：&lt;>标记，用HTML规则解析
+        2.代码块：{}标记，用JavaScript规则解析
+
+        var names = ['alice','emily','kate'];
+        ReactDOM.render(
+            &lt;div>                                               //&lt;>：html解析标签
+                {                                               //{}：JS解析标签
+                    names.map(function(name) {
+                        return &lt;div>hello,{name}!&lt;/div>         //&lt;>：混合html,js解析
+                    })
+                }
+            &lt;/div>,
+            document.getElementById('container');
+        );
+
+    3.JSX允许直接在模板中插入JS变量
+        1.如果变量是数组，会自动展开数组，分别添加到模板中，形成多个标签
+
+        var arr = [&lt;h1>hello world!&lt;/h1>,&lt;h2>React is awesome!&lt;/h2>];
+        ReactDOM.render(
+            &lt;div>{arr}&lt;/div>,document.getElementById('container')           //arr会自动展开，然后复制生成标签集合
+        );
+
+3.组件
+    1.React.createClass()：创建组件类
+        1.React允许将代码封装为组件(component)，虚拟DOM标签，然后插入网页中
+        2.规则：
+            1.组件首字符大写
+            2.组件里只能包含一个顶层标签
+
+        3.组件标签属性
+            1.插入时，可以同HTML一样添加属性
+            2.属性可以在组件类的this.props对象上获取
+            3.class属性写成className
+            4.for属性写成htmlFor
+
+        var HelloMessage = React.createClass({              //组件类，虚拟标签，可以当做标签使用
+            render: function() {
+                return &lt;h2>hello {this.props.name}&lt;/h2>
+            }
+        });
+
+        ReactDOM.render(
+            &lt;HelloMessage name="john"/>,                    //插入组件，必须有/
+            document.getElementById('container')
+
+        );
+
+    2.this.props.children
+        1.this.props：对象的属性与组件类的属性一一对应
+        2.this.props.children：表示组件标签的所有子节点
+            1.React.children.map()：遍历子节点
+            2.this.props.children取值：
+                1.undefine：没有子节点
+                2.object：一个子节点
+                3.arr：多个子节点
+
+        var NoteList = React.createClass({
+            render: function() {
+                return (
+                    &lt;ol>{React.children.map(this.props.children,function(child) {
+                        return &lt;li>{child}&lt;/li>
+                    })}&lt;/ol>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            &lt;NoteList>
+                &lt;span>hello&lt;/span>                  //组件标签的子节点
+                &lt;span>world&lt;/span>
+            &lt;/NoteList>,
+            document.getElementById('container')
+        );
+
+    3.PropTypes
+        1.用来验证组件实例的属性是否符合要求
+
+        var MyTitle = React.createClass({
+            propTypes: {
+                title: React.PropTypes.string.isRequired        //组件拥有一属性，且为string
+            },
+            render: function() {
+                return &lt;h1>{this.props.title}&lt;/h2>
+            }
+        });
+
+        var data = 123;
+        ReactDOM.render(
+            &lt;MyTitle title={data} />,
+            document.getElementById('container')
+        );
+
+        2.getDefaultProps：设置组件属性的默认值
+
+        var MyTitle = React.createClass(
+            getDefaultProps: function() {
+                return {
+                    title: 'hello world'                        //组件属性默认值
+                };
+            },
+            render: function() {
+                &lt;h1>{this.props.title}&lt;/h1>
+            },
+        );
+        ReactDOM.render(
+            &lt;MyTitle/>,
+            document.getElementById('#container')
+        );
+
+4.获取真实的DOM节点
+    1.虚拟DOM：组件并非真实的DOM节点，而是存在于内存中的一种数据结构，插入文档后才会生成真实的DOM
+        1.所有的DOM变动，都先在虚拟DOM上发生，然后再将实际发生变动的部分，反应在真实DOM上
+    2.DOM diff：虚拟DOM的变动方式，可以提高网页的性能表现
+
+    3.获取真实DOM：ref属性
+        1.this.refs.[refName]：获取真实的DOM节点
+        2.ref属性，需要等到虚拟DOM插入文档后才可以使用
+
+    var MyComponent = React.createClass({
+        handleClick: function() {
+            this.refs.myTextInput.focus();
+        },
+
+        render: function() {
+            return (
+                &lt;div>
+                    &lt;input type="text" ref="myTextInput"/>                   //获取用户的数据，必须操作真实的DOM节点，使用ref属性
+                    &lt;input type="text" onclick = {this.handleClick}/>        //绑定一个事件函数
+                &lt;/div>
+            );
+        },
+    });
+
+    ReactDOM.render(
+        &lt;MyComponent />,
+        document.getElementById('container')
+    );
+
+5.this.state
+    1.组件作为一个状态机，开始的初始状态，与用户交互后，状态变化，触发重新渲染
+    2.相关方法：
+        1.getInitialState：定义组件初始状态，可以通过this.state获取
+            1.当产生交互时，状态变化，this.state修改状态值
+            2.修改状态值后，自动调用this.render()渲染组件
+        2.this.setState({})：修改状态
+
+    3.this.props和this.state
+        1.this.props：表示组件一旦定义，就不再更改的特性
+        2.this.state：表示组件会随着用户交互而产生变化的特性
+
+    var LikeButton = React.createClass(
+        getInitialState: function() {                                   //定义组件初始状态，返回对象
+            return {liked: false};
+        },
+        handleClick: function(event) {
+            this.setState({liked: !this.state.liked});
+        },
+        render: function() {
+            var text = this.state.liked ? 'like' : 'haven\'t liked';
+            return (
+                &lt;p onclick={this.handleClick}>
+                    you {text} this.
+                &lt;/p>
+            );
+        },
+    );
+    ReactDOM.render(
+        &lt;LikeButton />,
+        document.getElementById('container')
+    );
+
+6.表单
+    1.表单需要和用户互动，使用this.state
+
+    var Input = React.createClass({
+        getInitialState: function() {
+            return {value: 'hello'};
+        },
+        handleChange: function(event) {
+            this.setState({value: event.target.value});             //读取新值，event.target.value
+        },
+        render: function() {
+            return (&lt;div>
+                &lt;input type="text" value={value} onChange={this.handleChange}/>
+                &lt;p>{value}&lt;/p>
+            &lt;/div>);
+        },
+    });
+    ReactDOM.render(
+        &lt;Input/>,
+        document.getElementById('container')
+    );
+
+7.组件的生命周期
+    1.生命周期状态
+        1.Mounting：已插入真实DOM
+        2.Updating：正在被重新渲染
+        3.Unmounting：已移除真实DOM
+
+    2.状态处理函数
+        1.React为每个状态都提供了两种处理函数
+        2.API
+            1.will：进入状态之前
+            2.did：进入状态之后
+        3.函数
+            1.componentWillMount()
+            2.componentDidMount()
+            3.componentWillUpdate(object nextProps, object nextState)
+            4.componentDidUpdate(object prevProps, object prevState)
+            5.componentWillUnmount()
+
+        4.特殊处理函数
+            1.componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+            2.shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+
+        var Hello = React.createClass({
+            getInitialState: function() {
+                return {
+                    opacity: 1.0
+                };
+            },
+            componentDidMount: function() {                     //组件加载后，通过定时器重新设置组件的属性，引发新的渲染
+                this.timer = setInterval(function() {
+                    var opacity = this.state.opacity;
+                    opacity -= 0.5;
+                    if(opacity&lt;0.1) {opacity=1.0;}
+                    this.setState({
+                        opacity: opacity
+                    });
+                }.bind(this),100);
+            },
+
+            render: function() {
+                return (
+                    &lt;div style={{opacity: this.state.opacity}}>     //组件样式是一个对象，第一个{}代表为JS标签
+                        Hello {this.props.name}
+                    }
+                    &lt;/div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            &lt;Hello name="world" />,
+            document.getElementById('container')
+        );
+
+8.Ajax
+    1.组件的数据来源，通常是通过Ajax请求从服务器获取
+    2.实现
+        1.componentDidMount：可以用来设置Ajax请求
+        2.this.setState重新渲染UI
+
+    var UserGist = React.createClass({
+        getInitialState: function() {
+            return {
+                username: '',
+                lastGistUrl: ''
+            };
+        },
+
+        componentDidMount: function() {
+            $.get(this.props.source,function(result) {
+                var lastGist = result[0];
+                if(this.isMounted) {
+                    this.setState({
+                        username: lastGist.owner.login,
+                        lastGisUrl: lastGist.html_url
+                    });
+                }
+            }.bind(this));
+        },
+        render: function() {
+            return (
+                &lt;div>
+                    {this.state.username}'s last gist is
+                    &lt;a href="this.state.lastGisturl">&lt;/a>
+                &lt;/div>
+            );
+        }
+    });
+    ReactDOM.render(
+        &lt;UserGist source="http://github.com />",
+        document.getElementById('container')
+    );
+
+    var RepoList = React.createClass({
+      getInitialState: function() {
+        return { loading: true, error: null, data: null};
+      },
+
+      componentDidMount() {
+        this.props.promise.then(
+          value => this.setState({loading: false, data: value}),
+          error => this.setState({loading: false, error: error}));
+      },
+
+      render: function() {
+        if (this.state.loading) {
+          return &lt;span>Loading...&lt;/span>;
+        }
+        else if (this.state.error !== null) {
+          return &lt;span>Error: {this.state.error.message}&lt;/span>;
+        }
+        else {
+          var repos = this.state.data.items;
+          var repoList = repos.map(function (repo) {
+            return (
+              &lt;li>
+                &lt;a href={repo.html_url}>{repo.name}&lt;/a> ({repo.stargazers_count} stars) &lt;br/> {repo.description}
+              &lt;/li>
+            );
+          });
+          return (
+            &lt;main>
+              &lt;h1>Most Popular JavaScript Projects in Github&lt;/h1>
+              &lt;ol>{repoList}&lt;/ol>
+            &lt;/main>
+          );
+        }
+      }
+    });</pre>

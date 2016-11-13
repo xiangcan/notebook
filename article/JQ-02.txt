@@ -1,0 +1,152 @@
+<pre style="text-indent:0;">JQ方法
+    1.对象方法：只能JQ对象使用，JS对象需要转化为JQ对象
+    2.工具方法：JS对象也可以使用
+
+1.对象方法
+    1.HTML
+        1.html():innerHtml
+            1.没有参数:获取ele的标签内容
+                1.当获取的参数为一组时,取值是针对列表的第一个元素
+                        str = $('li').html();
+            2.有参数:设置ele的标签内容
+                1.当获取的元素为一组时,赋值是给所有的元素
+                        $('li').html('hi');
+
+        2.text():获取对象的文本
+            1.无参数,获取对象的文本，纯文本内容,无法获取标签，区别innerHTML
+            2.有参数,则为修改
+
+        3.attr():属性，一个参数就是获取，两个是修改
+            str = $('div').attr('title');
+            $('div').attr('title','123');
+        4.removeAttr(str)：移除属性
+
+        4.addClass()：添加属性class
+            1.添加多个用空格隔开
+            2.重复添加会自动覆盖
+            $('.box1').addClass('box2 active');
+        5.removeClass()：删除一个或多个Class
+            1.若没有参数,则移除所有class
+            $('.box1').removeClass('box1');
+        6.toggleClass()：切换class
+
+        6.width()：获取元素的宽,不带单位px
+            1.无参数:获取值
+                $('.div1').width()
+            2.有参数:修改值
+                $('.div1').width(200)
+        7.innerWidth()：width+padding
+            1.无参数:获取
+                $('.div1').innerWidth()
+            2.有参数:修改width
+                $('.div1').innerWidth(200)
+        8.outerWidth()：width+padding+border
+            1.无参数:获取
+                $('.div1').outerWidth()
+            1.有参数:
+                1.第一个：可选,修改width
+                2.第二个：可选,true,算上margin值。
+                $('.div1').outerWidth(200,true);
+
+        9.height()
+          innerHeight()
+          outerHeight()
+
+        10.css():css设置
+            1.一个参数为获取
+            2.两个参数为设置
+
+
+    2.常用方法
+        1.val():获取或修改value值
+            1.属性值是vlue设置的
+            2.大多用于input元素
+
+            3.如果元素为多选值(checkbox)，则返回一个包含所有选择值的数组
+            4.val()还可以使select,checkbox,radio相应的选项被选中。
+                    $('#select').val(['china','gm']);    //达到勾选，checked的效果,多个用数组
+
+        2.hasClass(class)：检查元素class
+            1.返回值：布尔
+        2.index(n):搜索匹配的元素，返回索引值。
+            1.空参数:该元素或该集合第一个元素在所有兄弟节点中的排行
+                $('li').index()           //第一个li在所有兄弟中的排行
+            2.有参数:
+                &lt;ul>
+                    &lt;li id="foo">foo&lt;/li>
+                    &lt;li id="bar">bar&lt;/li>
+                    &lt;li id="baz">baz&lt;/li>
+                &lt;/ul>
+                1.传递一个DOM或JQ对象，返回这个对象在原先集合中的索引位置
+                    $('li').index(document.getElementById('bar'))
+                    $('li').index($('#bar'));
+                2.传递一组jQuery对象，返回这个对象中第一个元素在原先集合中的索引位置
+                    $('li').index($('li:gt(0)'));
+                3.传递一个选择器，返回#bar在所有li中的做引位置
+                    $('#bar').index('li');
+
+        3.size():获取集合长度,即length
+
+        4.each():遍历，一般用来处理DOM
+            $(selector).each(function(index,element))
+                1.传参：i为元素下标，ele代表对应下标的元素
+                2.功能类型for或for in循环
+                3.this指向对应下标的元素
+
+                $('li').each(function(i,ele) {
+                    $(ele).html(i);
+                });
+
+2.工具方法(可以给JS使用)
+
+    1.$.each(obj,fn)：遍历，一般用来处理数组和对象
+        $.each(Object, function(name, value) {
+            this;      //this指向当前属性的值
+            name;      //name表示Object当前属性的名称
+            value;     //value表示Object当前属性的值
+        });
+
+    1.$.type(obj):判断类型
+        alert(typeof a);        //原生JS方法
+        alert($.type(a));       //JQ方法，功能更强大，判断更仔细，更多类型
+
+    2.$.trim():去掉字符串前后空格
+        alert($.trim(str));
+
+    3.$inArray(str,arr)：匹配字符查找,类式原生indexOf()
+        var arr = ['a','b','c'];
+        alert($.inArray('b',arr));      //返回值：如果有，返回1，如果没有返回-1。
+
+    4.$.poxy(fn,obj)：改变this指向
+        function show(n1,n2) {
+            alert(n1);
+            alert(n2);
+            alert(this);
+        }
+        show(1,2);                       //show()调用前是window，结果为window
+        $.proxy(show,document)(1,2);     //修改指向并传参调用。
+        $.proxy(show,document,3,4);      //修改指向并传参，没有调用，在事件函数中很有用。
+        $.proxy(show,document,5)(6);     //也可以混合传参
+
+    5.$.parseJson(str)：将标准格式Json字符串转换为Json对象
+        1.符合JSon格式
+        2.属性和值必须加双引号
+        3.值为number可以不加双引号
+        var b = '{"name":"hello"}';
+        var name = $.parseJSON(b).name;
+
+        eg:
+        1.字符串里不允许"控制字符"如tab或换行符,避免转义,报错
+        $.parseJSON('{"name": "Code\\tPlayer\\n"}');
+
+
+    6.$.makeArray()：将一个类数组对象转化为数组
+        1.类数组对象转化为数组,使用数组的一些方法
+        var elems = document.getElementsByTagName("div"); // returns a nodeList
+        var arr = jQuery.makeArray(elems);
+        arr.reverse(); // use an Array method on list of dom elements
+        $(arr).appendTo(document.body);
+
+    7.$.param()：serialize的核心，用来对一个数组或对象按照key/value进行序列化
+            var obj = {a:1,b:2,c:3};
+            var k = $.param(obj);       //a=1$b=2$c=3</pre>

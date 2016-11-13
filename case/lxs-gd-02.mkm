@@ -1,0 +1,14 @@
+<MKM version="2.0" imageFileUrl="file:///D:/wamp/www/github/notebook/case/lxs-gd-02.png">
+  <Marks>
+    <LengthMark direction="12" color="16711680" length="362" x="127" y="154"/>
+    <LengthMark direction="12" color="16711680" length="128" x="497" y="155"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="304" y="146" textMaxWidth="100" offsetX="25" offsetY="10" text="左侧div"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="518" y="147" textMaxWidth="100" offsetX="25" offsetY="10" text="右侧aside"/>
+    <LengthMark direction="12" color="16711680" length="499" x="127" y="110"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="380" y="103" textMaxWidth="100" offsetX="25" offsetY="10" text="居中，子模块浮动布局，清浮动"/>
+    <RectMark color="16711680" x="412" y="207" offsetX="66" offsetY="38"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="483" y="236" textMaxWidth="100" offsetX="25" offsetY="10" text="定位布局"/>
+    <TextMark defaultDirection="10" direction="10" color="16711680" x="162" y="24" textMaxWidth="100" offsetX="27" offsetY="16" text="h2 logo"/>
+    <TextMark defaultDirection="10" direction="10" color="16711680" x="394" y="26" textMaxWidth="123" offsetX="30" offsetY="12" text="ul导航，a显示block"/>
+  </Marks>
+</MKM>

@@ -1,0 +1,95 @@
+<pre style="text-indent:0;">1.音频
+    1.标签&lt;audio>
+        1.大多数音频是通过插件(比如Flash)来播放的。然而，并非所有浏览器都拥有同样的插件
+        2.HTML5 规定了一种通过 audio 元素来包含音频的标准方法。
+        3.audio元素能够播放声音文件或者音频流。
+
+            &lt;audio src="song.ogg" controls="controls">
+            Your browser does not support the audio tag.
+            &lt;/audio>
+
+    2.标签属性
+
+        1.src：播放的音频的 URL
+            1.允许多个 source 元素。source 元素可以链接不同的音频文件。浏览器将使用第一个可识别的格式
+                &lt;audio controls="controls">
+                  &lt;source src="song.ogg" type="audio/ogg">
+                  &lt;source src="song.mp3" type="audio/mpeg">
+                Your browser does not support the audio tag.
+                &lt;/audio>
+            2.支持的音频格式
+                1.Ogg Vorbis：Firefox 3.5/Opera 10.5/Chrome 3.0
+                2.MP3：IE 9/Chrome 3.0/Safari 3.0
+                3.Wav：Firefox 3.5/Opera 10.5/Safari 3.0
+        2.control：播放控件
+            1.值：control
+            2.显示添加播放、暂停和音量控件。
+
+        3.autoplay：自动播放
+            1.值：autoplay
+            2.如果出现该属性，则音频在就绪后马上播放。
+        4.loop：循环播放
+            1.值：loop
+            2.如果出现该属性，则每当音频结束时重新开始播放。
+
+        5.preload：预加载
+            1.值：preload
+            2.如果出现该属性，则音频在页面加载时进行加载，并预备播放。
+            3.如果使用 "autoplay"，则忽略该属性。
+
+2.视频vedio
+    1.标签&lt;vedio>
+        &lt;video src="movie.ogg" width="320" height="240" controls="controls">
+            Your browser does not support the video tag.
+        &lt;/video>
+    2.标签属性
+        1.src：要播放的视频的URL
+            1.允许多个source元素。source元素可以链接不同的视频文件。浏览器将使用第一个可识别的格式
+                &lt;video width="320" height="240" controls="controls">
+                    &lt;source src="movie.ogg" type="video/ogg">
+                    &lt;source src="movie.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                &lt;/video>
+            2.支持的视频格式
+                1.Ogg：适用于Firefox、Opera 以及 Chrome 浏览器
+                2.MPEG4：适用于 Safari 浏览器
+                3.WebM：适用于Firefox、Opera 以及 Chrome 浏览器
+
+        2.control：添加播放、暂停和音量控件
+            1.值：
+            2.如果出现该属性，则向用户显示控件，比如播放按钮。
+
+        3.width/height：播放器宽高，px
+        4.autoplay：自动播放
+            1.值：autoplay
+            2.如果出现该属性，则视频在就绪后马上播放。
+
+        5.loop：循环播放
+            1.值：loop
+            2.如果出现该属性，则当媒介文件完成播放后再次开始播放。
+        6.preload：预加载
+            1.值：preload
+            2.如果出现该属性，则视频在页面加载时进行加载，并预备播放。
+            3.如果使用 "autoplay"，则忽略该属性。
+
+    3.DOM
+        1.方法
+            1.play()
+            2.pause()
+            3.load()
+        2.属性
+            1.currentSrc    2.currentTime   3.videoWidth/videoHeight
+            4.duration      5.ended         6.error         7.paused
+            8.muted         9.seeking      10.volume
+            11.height/width
+
+        3.事件
+            1.onpause：暂停
+            2.onprogress：浏览器正在获取媒体数据时
+            3.onerror：文件加载发生错误时
+            4.ontimeupdate：播放位置改变时(比如快进)
+            5.onended：运行完
+            6.onabort：退出时
+            7.onemptied：发生故障不可用
+            9.onwaiting：当媒介已停止播放但打算继续播放时（比如当媒介暂停已缓冲更多数据）
+            10.onloadedmetadata：当元数据（比如分辨率和时长）被加载时运行的脚本</pre>

@@ -1,0 +1,109 @@
+<pre style="text-indent:0;">Echarts：JavaScript图标库，基于canvas类库ZRender
+
+1.canvas绘图机制
+    1.基于像素
+    2.单个html，类式画笔在画布上画画
+    3.Echarts基于canvas画图
+
+2.常见图形组件
+    1.标题、工具栏、图例、提示框
+    2.坐标轴
+
+3.echarts
+    1.Echarts.init()
+        1.初始化实例
+        2.setOption()：用配置的参数数据绘图
+
+    2.Option对象
+        1.title：标题
+        2.legend：图例
+        3.Axis：轴
+        4.series：数据
+            1.name,type,data
+
+4.交互组件
+    1.title：标题组件,负责显示整个图标的标题
+        1.Text：标题文字
+        2.Subtext：子标题
+        3.位置：两种方式
+            1.x,y
+            2.Left/top/right/bottom，标题位置,默认是px,也可以是关键字字符串
+        4.borderColor：标题的边框颜色
+        5.borderWidth：标题的边框宽度
+
+        var option = {
+            title: {
+                show:true,text:'标题',subtext:'副标题',left:'150',
+                borderColor:'red',borderWidth:5
+            }
+        };
+
+    2.toolbox：工具栏组件
+        1.show：是否显示工具栏
+        2.feature：具体现实的功能
+            1.saveAsImage：保存图片
+            2.Restore：还原
+            3.dataView：数据视图
+            4.dataZoom：缩放视图
+            5.magicType：动态类型切换
+
+        var option = {
+            toolbox: {
+                show:true,
+                feature: {
+                    dataView:{show:true},       //数据编辑查看工具
+                    restore:{show:true},        //还原初始数据工具
+                    dataZoom:{show:true},       //缩放工具
+                    saveImage:{show:true},      //保存图标图片工具
+                    magicType:{                 //动态切换图标类型工具
+                        type:['line','bar']
+                    }
+                }
+            }
+
+        };
+
+    3.tooltip：弹窗信息组件
+        1.show:true
+        2.
+
+    4.legend：图例组件
+    5.visualMap：视觉映射组件
+    6.dataZoom：数据区域缩放组件
+    7.timeline：时间线组件
+
+5.标记线和标记点
+    1.markline：标记线
+        1.最大值，平均值，最小值的标记线
+
+    2.markpoint：标记点
+        1.最大值，平均值，最小值的标记点
+        2.任意位置的标记点
+
+    series: {
+        markeline: {
+            data: [
+                {type:'max',name:'最大值'},
+                {type:'min',name:'最小值'}
+            ]
+        },
+        markepoint: {
+            data: [
+                {type:'average',name:'平均值'}
+            ]
+        }
+    }
+
+
+6.图
+    1.直线图
+    2.折线图
+    3.饼图：展示百分比，type:'pie'
+        1.center：圆心坐标
+        2.radius：半径
+        3.name：图例名字
+        4.selectedMode：是否支持多选
+
+    4.仪表图：展示数据的特点
+        1.type:'gauge'
+        2.可以动态的修改图标数据</pre>

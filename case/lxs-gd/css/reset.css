@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-30 13:44:46
+ * @version $Id$
+ */
+/*
+=======
+默认样式
+=======
+ */
+/* line 15, ../sass/reset.scss */
+body, div, ul,dl,ol,li, h1, h2, h3, p, figure {
+  padding: 0;
+  margin: 0; }
+
+/* line 19, ../sass/reset.scss */
+body {
+  background: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+
+/* line 24, ../sass/reset.scss */
+li {
+  list-style: none; }
+
+/* line 28, ../sass/reset.scss */
+a {
+  text-decoration: none; }
+
+/* line 32, ../sass/reset.scss */
+input, button {
+  outline: none; }
+
+/*
+=======
+工具样式
+======
+ */
+/* line 41, ../sass/reset.scss */
+.none {
+  display: none; }
+
+/* line 45, ../sass/reset.scss */
+.clear-float:after {
+  content: '';
+  display: table;
+  clear: both;
+  height: 0; }

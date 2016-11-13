@@ -1,0 +1,152 @@
+<pre style="text-indent:0;">组件开发的选项：可参考ajax([options])
+组件开发核心：选项，方法，自定义事件三者分离。
+自定义事件函数与函数表达式参数：
+    1.都已在对象中，定义了执行位置
+    2.自定义事件：可以利用事件允许重复绑定的形式，新开一个函数添加新的代码，不冲突，利于多人协作
+    3.函数表达式参数：只能在默认参数或配置参数这个位置持续添加代码，不利于多人协作。
+
+组件开发自定义事件
+    1.事件的特性：事件流，可以重复绑定事件函数，不冲突
+    2.给实例对象绑定事件函数，this指向实例对象
+
+1.组件开发
+    1.定义
+        1.组件：适用于多组对象，根据配置参数和调用方法不同，实现代码复用的一种形式
+        2.作用
+            1.提高代码的复用性
+            2.适用于不同的对象，根据由配置参数调控，可定制性
+
+        3.组件分类：
+            1.UI组件：具体效果(拖拽，选项卡)
+            2.功能组件：完成实际的功能
+
+        4.基于面向对象的复杂化
+
+2.组件核心
+    1.选项options：可定制的传参，JSON
+        1.选项：
+            1.数据参数：用于数据初始化
+            2.函数表达式参数：函数体可以自定义，执行位置对象中已经定义
+
+        2.选项实现
+            1.默认参数：
+                1.开发者定义，一般为对象属性，this.settings = {}
+            2.配置参数：
+                1.用户定义，一般为obj.init(option)
+                2.内部执行enxtend(opntion,this.settings)，和默认参数进行合并覆盖
+                3.传参为JSON，有预定义的传参，也可以根据需要进行配置。配置会覆盖默认参数。
+            3.参数合并
+                1.参数顺序问题：用JSON传参，因为JSON整体是一个值，函数传参时就不会有顺序问题
+                2.参数个数问题：设定一个默认的参数，解决函数传参undefined
+
+    2.方法(methods)：对象的方法，可根据情况调用，可以传参
+
+    3.自定义事件(events)：实例对象绑定的自定义事件函数
+        1.已定义执行的时刻，但具体执行什么，由用户决定
+        2.利于多人协作，事件支持绑定多个事件函数
+
+    4.总结：
+        1.方法：对象的原型方法，实例对象可以选择调用
+        2.参数：作为方法的传参，参数也包含回调函数
+        3.自定义事件：实例对象绑定的事件函数，目的在于多人协作，基于事件函数的可重复绑定特性
+
+3.组件开发实现
+    1.window.onload：
+        1.对象实例化
+        2.调用对象方法，并传参初始化
+        3.自定义事件函数
+
+    $(function() {
+        var t1 = new Tab();                             //实例化对象
+        t1.init('div1',{                                //调用对象方法，并传参
+            event : 'mouseover',
+            delay : 200,
+            toDow : function() {alert('ok');}
+        });
+        t1.nowSel(2);
+
+        $(t1).on('beforeClick',function(){              //对象绑定的自定义事件
+            alert( t1.getContent() );
+        });
+        $(t1).on('afterClick',function(){
+            alert( t1.getContent() );
+        });
+
+        $('#input1').click(function(){
+            alert( t1.getContent() );
+        });
+
+    });
+
+    2.定义对象的构造函数
+        1.对象的属性
+        2.默认参数的配置
+
+        function Tab(){
+            this.oParent = null;
+            this.aInput = null;
+            this.aDiv = null;
+            this.iNow = 0;
+
+            this.settings = {                           //默认参数
+                event : 'click',
+                delay : 0,
+                toDow : function() {}                   //函数参数
+            };
+        }
+
+    3.定义原型方法
+        Tab.prototype.init = function(oParent,opt){
+            $.extend( this.settings , opt );            //合并配置参数和默认参数
+            this.oParent = $('#'+oParent);
+            this.aInput = this.oParent.find('input');
+            this.aDiv = this.oParent.find('div');
+
+            this.change();
+            this.setting.toDown();                      //调用参数中的函数
+        };
+        Tab.prototype.change = function(){
+            var This = this;
+            var timer = null;
+
+            this.aInput.on(this.settings.event,function(){
+                var _this = this;
+                if( This.settings.event == 'mouseover' && This.settings.delay ){
+                    timer = setTimeout(function(){
+                        show(_this);
+                    },This.settings.delay);
+                }
+                else{
+                    show(this);
+                }
+
+            }).mouseout(function(){
+                clearTimeout(timer);
+            });
+
+            function show(obj){
+                $(This).trigger('beforeClick');         //触发对象的事件函数
+                This.aInput.attr('class','');
+                This.aDiv.css('display','none');
+
+                $(obj).attr('class','active');
+                This.aDiv.eq( $(obj).index() ).css('display','block');
+                This.iNow = $(obj).index();
+
+                $(This).trigger('afterClick');
+            }
+        };
+
+        Tab.prototype.nowSel = function(index){
+            this.aInput.attr('class','');
+            this.aDiv.css('display','none');
+
+            this.aInput.eq(index).attr('class','active');
+            this.aDiv.eq(index).css('display','block');
+
+            this.iNow = index;
+        };
+
+        Tab.prototype.getContent = function(){
+            return this.aDiv.eq(this.iNow).html();
+        };</pre>

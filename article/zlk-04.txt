@@ -1,0 +1,126 @@
+<pre style="text-indent:0;">1.FileUpload内部上传
+    1.&lt;input type="file">标签每出现一次，一个FileUpload对象就会被创建。
+    1.input元素：即FileUpload对象
+        1.value：用户文件的名称
+            1.表单被提交的时候，浏览器会向服务器发送选中的文件的内容而不仅仅是发送文件名。
+            2.文件名只可读，不可更改
+
+        2.onchange：上传文件时会触发
+            document.getElementById()来访问 FileUpload 对象。
+        3.files：文件列表
+            1.size：文件大小
+            2.type：文件类型
+
+    2.类式ev.dataTransfer对象
+
+2.dataTransfer外部拖拽
+    1.ev.dataTransfer：拖放对象(一般用于拖放的ondragstart和ondrop事件)
+        1.setData(name,value)：设置数据，必须是字符串
+            1.可以设置多条数据，类式cookie，然后接受多个，进行处理
+                ev.dataTransfer.setData("Text",ev.target.id);   //传递名和值
+                ev.dataTransfer.setData("name",'hello');        //传递名和值
+
+        2.getData(name)：获得数据
+            var data = ev.dataTransfer.getData("Text");
+            var value = ev.dataTransfer.getData("name");
+
+        3.effectAllowed：设置光标样式
+            1.none,copy,copyLink
+                ev.dataTransfer.effectAllowed = 'copy';
+        4.setDragImage(ele,x,y)：
+            1.ele：可以设置拖放出来显示为其他元素，可以设置为图片
+            2.x,y：鼠标处于该元素上坐标
+                var oImg = document.getElementBy('img');
+                ev.dataTransfer.setDragImage(oImg.0,0);
+
+        5.files：获取外部文件，返回一个filesList列表
+            1.type：文件类型
+                var type = ev.dataTransfer.files[0].type;
+            2.size：文件大小
+
+3.FormData对象
+    1.定义
+        1.FormDate：表单数据对象
+        2.ajax一般只能发送文本格式：Content-Type:application/x-www-form-urlencoded
+        3.如果发送图标：Content-Type:multipart/form-data
+        4.FormDate：可以将图片封装为表单数据发送
+        5.可以使用一系列的键值对来模拟一个完整的表单，然后使用XMLHttpRequest发送这个"表单"。
+    2.方法
+        1.append('字段名','字段值')：添加字段
+            var oMyForm = new FormData();
+            oMyForm.append("username", "Groucho");
+            oMyForm.append("accountnum", 123456); // 数字123456被立即转换成字符串"123456"
+            oMyForm.append("userfile", fileInputElement.files[0]);
+
+    3.使用
+        1.&lt;form>表单初始化FormData对象方式上传文件
+            &lt;form id="uploadForm" enctype="multipart/form-data">        //enctype="multipart/form-data"属性
+                &lt;input id="file" type="file" name="file"/>              //服务端查询参数名为file获取文件输入流对象
+                &lt;button id="upload" type="button">upload&lt;/button>
+            &lt;/form>
+
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                cache: false,                                           //上传文件不需要缓存
+                data: new FormData($('#uploadForm')[0]),
+                processData: false,                                     //data值是FormData对象，不需要对数据做处理
+                contentType: false                                      //已经声明了属性
+            }).done(function(res) {
+            }).fail(function(res) {});
+
+        2.使用FormData对象添加字段方式上传文件
+
+            &lt;div id="uploadForm">
+                &lt;input id="file" type="file" multiple="multiple"/>
+                &lt;button id="upload" type="button">upload&lt;/button>
+            &lt;/div>
+
+
+            var formData = new FormData();
+            formData.append('file', $('#file')[0].files[0]);            //插入文件对象
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function(res) {
+            }).fail(function(res) {});
+
+
+4.FileReade对象
+    1.方法
+        1.readAsDateURL(file)：读取文件
+            1.参数为要读取的文件对象，读取为DateUrl
+
+        2.readAsText(fs)：读取成文本。
+        3.readAsArrayBuffer(sf)：将文件读取成ArrayBuffer。
+        4.readAsBinaryString(fs)：读取成二进制字符串。
+        5.abort()：中止读取。然后readyState变为2。
+    2.事件
+        1.onload：当文件读取成功时触发
+            1.this.result：用来获取读取的文件数据，如果是图片，返回base64格式的图片数据
+                oDiv.ondrop = function(ev) {
+                    ev.preventDefault();
+                    var fs = ev.dataTransfer.files;
+                    var fd = new FileReader();
+                    fd.readAsDateURL(fs[0]);
+                    fd.onload = function() {
+                        oImg.src = this.result;
+                    };
+                };
+
+        2.onloadend，读取完成，无论是否读取成功。
+        3.onprogress，当读取Blob内容时。
+        4.onerror，读取出现错误。
+        5.onloadstart，读取开始。
+        6.onabort，读取操作中止。
+
+    2.属性，所有属性都是只读的：
+        1.error，读取文件时，出现的DOMError。
+        2.readyState，读取状态；0，没有数据加载；1，数据正在加载；2，读取已经完成。
+        3.result，文件内容；该属性只在读取操作完成后才有效，并且格式取决于读取时使用的方法。
+            1.可以作为src，显示图片
+            2.作为innerHTML，作为内容</pre>

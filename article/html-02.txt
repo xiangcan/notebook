@@ -1,0 +1,124 @@
+<pre style="text-indent:0;">1.Web存储
+    1.cookie：不适合储存大量数据
+        1.数据储存于计算机，每次访问页面都会随着请求一起发送
+        2.静态请求也会发送cookie
+        3.储存：每条最大4kb，一个域名储存100个cookie
+        4.路径：创建的cookie可以被该网站目录或子目录下的文件访问
+        5.域：域之间是不能互相访问cookie
+
+    2.HTML5本地存储
+        1.数据只在需要时才发送给服务器
+        2.不影响网站性能的情况下可以存储大量数据
+        3.对于不同的网站，数据存储于不同的区域，并且一个网站只能访问其自身的数据。
+        4.HTML5使用JavaScript来存储和访问数据。
+
+        5.特定：
+            1.储存量：5M，储存在本地
+            2.在客户端完成，不会请求服务器处理
+            3.sessionStorage数据：不共享
+              localStorage：数据共享
+
+
+2.存储类型
+    1.localStorage：永久储存，可以手动删除
+        localStorage.lastname="Smith";
+
+        1.对用户访问页面次数统计
+            if (localStorage.pagecount) {
+                localStorage.pagecount=Number(localStorage.pagecount) +1;
+            }else {
+                localStorage.pagecount=1;
+            }
+            document.write("Visits "+ localStorage.pagecount + " time(s).");
+
+    2.sessionStorage：针对回话的临时储存
+        1.窗口的临时储存：页面关闭，储存消失
+            sessionStorage.lastname="Smith";
+
+3.储存方法
+    1.setItem(key,value)：设置数据
+        1.设置数据：key/value，字符串
+        2.可以用获取属性的形式操作
+            window.sessionStorage.setItem('name','jack');
+
+    2.getItem(key)：获取数据
+        1.通过key来获取对应的value
+            var name = window.sessionStorage.getItem('name');
+    3.removeItem(key)
+        1.删除属于，通过key来删除相应的value
+            window.sessionStorage.removeItem('name');
+    4.clear()
+        1.删除全部储存的值
+            window.sessionStorage.clear();
+
+4.存储事件
+    1.onstorage：存储事件
+        1.当数据有修改或删除的情况下触发
+        2.对数据进行改变的该窗口不触发，共享该属性的窗口会触发
+
+    2.事件属性
+        1.key：修改或删除key值，如果是调用clear()，key为null
+        2.newValue：新设置的值，如果是调用removeStorage()，key为null
+        3.oldValue：改变前的value值
+        4.storageArea：当前的storage对象
+        5.url：修改数据的窗口文档url
+
+        //sessionStorage：由于是临时的，必须同窗口才会触发，如iframe嵌套框架会触发
+
+
+5.使用
+    1.窗口关闭时，保存信息
+        //页面打开时提取storage
+        if(window.localStorage.getItem('name')) {
+            aInput[0].value = window.localStorage;
+        }
+        for(var a=0;a&lt;aInput.length;i++) {
+            //多选的值是写在属性里的，只需匹配checked即可
+            if(aInput[i].value == window.localStorage.getItem('sex')) {
+                aInput[i].checked = true;
+            }
+        }
+
+        //页面关闭时存储值
+        window.onunload = function() {
+            if(aInput[0].value) {
+                window.localStorage.setItem('name',aInput[0].value);
+            }
+            //保存多选的值
+            for(var i=0;i&lt;aInput.length;i++) {
+                aInput[i].checked == true) {
+                    window.localStorage.setItem('sex',aInput[i].value);
+                }
+            }
+
+    2.利用事件进行数据同步更新(购物车)
+        for(var i=0;i&lt;oInput.length;i++) {
+            oInput[i].onclick = function() {
+                //点击时，若选中，则存入'by'
+                if(this.checked) {
+                    window.localStorage.setItem('by',this.value);
+                }else {
+                //单击时，若取消，则存入'noby'
+                    window.localStorage.setItem('noby',this.value);
+                }
+            };
+        }
+        window.addEventListener('storage',function(ev) {
+            //如果key为by，则说明现在的状态时true
+            if(ev.key == 'by') {
+                for(var i=0;i&lt;aInput.length;i++) {
+                    //如果改变的是之前为true的，则checked变为false
+                    if(ev.newValue == aInput[i].value]) {
+                        aInput[i].checked = false;
+                    }
+                }
+            //如果key为noby，则说明现在的状态时false
+            }else if(ev.key == 'noby') {
+                for(var i=0;i&lt;aInput.length;i++) {
+                    //如果改变的是之前为false的，则checked为true
+                    if(ev.newValue == aInput[i].value) {
+                        aInput[i].checked = true;
+                    }
+                }
+            }
+        },false);</pre>

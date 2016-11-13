@@ -1,0 +1,232 @@
+<pre style="text-indent:0;">
+1.跨域
+    1.同源策略
+        1.JavaScript或Cookie只能访问同域下的内容，禁止了跨域调用其他页面的内容(安全)
+        2.浏览器中不同域的框架之间是不能进行js的交互操作的
+
+        3.判断标准
+            1.protocol  2.端口(如果指定)  3.域名(目录)
+                http:// www . google : 8080 / script/jquery.js
+
+            2.三个条件有一个不成立，即为跨域
+                1.同一目录，端口或协议不同也不行
+                2.域名和域名对应IP也不行
+                3.主域相同，子域不同，不允许
+                    http://www.haorooms.com/a.js      http://about.haorooms.com/b.js
+                    http://www.haorooms.com/a.js      http://haorooms.com/b.js
+
+                4.
+    2.跨域
+        1.跨域：指通过js在不同的域之间进行数据传输或通信
+        1.跨域并非浏览器限制了跨域请求，而是请求可以正常发起，但返回结果被浏览器拦截了
+        2.有些浏览器不允许从HTTPS协议的域跨域访问HTTP协议，比如Chrome和Firefox，这些浏览器在请求还未发出的时候就会拦截请求
+
+
+2.跨域方法
+    1.jsonp跨域
+        1.原理：
+            1.<script>可以跨域加载脚本
+            2.利用<script>标签的src属性引入文件，url上发送回调函数名，服务器传参JSON，返回回调函数的调用字符串
+            3.js文件载入成功后会执行我们在url参数中指定的函数
+                http://h5.jd.com/dir/ajax.js:
+                    $.ajax({
+                            url: "...",
+                            dataType: 'jsonp',
+                            jsonp:'callback',           //指定jsonp回调函数名
+                            success: function(data) {
+                            }
+                            ...
+                    });
+
+    2.中间代理跨域
+        1.原理：
+            1.通过后台文件跨域获取内容，可以是PHP、JSP、c++等任何具备网络通讯功能的语言
+            2.前端请求后台文件，获得最终的跨域内容
+
+        2.实现：
+            1.客户端的xmlhttprequest先请求本域的后台文件query.php，
+            2.由后台文件query.php去和不同域的data.php进行通讯，
+            3.后端文件获取后，会响应输出内容
+
+        3.这是后端的事情
+
+    3.CORS跨域资源共享
+        1.CORS：Cross-Origin Resource Sharing，跨域资源共享，定义了必须在访问跨域资源时，浏览器与服务器如何沟通
+        2.原理：
+            1.使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是失败
+            2.HTML5中提供的XMLHttpRequset Level 2(即XHR2)，允许浏览器跨域请求
+            3.IE10以下不支持，需要浏览器和服务器同时支持
+
+            4.关键：服务器实现了CORS接口，就可以跨源通信
+
+        3.实现
+            1.对方
+                1.PHP
+                    header("Access-Control-Allow-Origin:*");            //*：允许所有的域名跨域访问，有风险
+                    header("Access-Control-Allow-Methods:POST,GET");
+                    header('Access-Control-Allow-Credentials:true');    //可选，是否允许发送Cookie
+                    echo 'Cross-domain Ajax';
+
+                2.Apache：
+                    1.Apache需要使用mod_headers模块来激活HTTP头的设置，它默认是激活
+                    2.只需要在Apache配置文件的<Directory>,<Location>, <Files>或<VirtualHost>的配置以下内容：
+                        Header set Access-Control-Allow-Origin *
+
+            2.本地JS：普通ajax请求，url写全
+                var xhr = new XMLHttpRequest(); ;
+                xhr.open('GET', 'http://b.com/ajax.php', true);
+                xhr.withCredentials = true;                         //打开cookie发送，放在open()请求开始后面
+
+                xhr.onload = function () {                          //onload()：新添加事件，请求响应成功
+                  alert(xhr.response);//reposHTML;
+                };
+                xhr.onerror = function () {
+                 alert('error making the request.');
+                };
+                xhr.send();
+
+        4.CORS与JSONP相比，无疑更为先进、方便和可靠。
+            1.JSONP只能实现GET请求，而CORS支持所有类型的HTTP请求。
+            2.使用CORS，开发者可以使用普通的XMLHttpRequest发起请求和获得数据，比起JSONP有更好的错误处理。
+            3.JSONP主要被老的浏览器支持,而绝大多数现代浏览器都已经支持了CORS。IE7还是要用jsonp方式]
+
+    4.postMessage跨域
+        1.postMessage():
+            1.给另外一个窗口发送信息
+            2.用于两个页面数据传递，既可以跨域，也可以同域
+            3.window下的全局方法
+                参数1:发送的数据
+                参数2:接受消息的域名,带上http协议
+
+
+        2.本地打开一个窗口，让它发送信息
+            1.弹出一个新窗口
+                var domain = 'http://haorooms.com';
+                var myPopup = window.open(domain + '/Listener.html','myWindow');
+
+            2.周期性发送消息
+                setTimeout(function(){
+                    var message = {name:"站点",sex:"男"};          //传递数据，obj等
+                    myPopup.postMessage(message,domain);           //发送消息
+                },1000);
+
+        3.本地接收信息
+            1.message事件:窗口接收到通过postMessage发送的数据时触发
+                1.ev.data:保存接收到的数据内容
+                2.ev.origin:消息来源的域
+
+            2.监听消息反馈
+            window.addEventListener('message',function(event) {
+                if(event.origin !== 'http://haorooms.com') return;      //这个判断一下是不是我这个域名跳转过来的
+                console.log('received response:  ',event.data);
+            },false);
+
+        4.使用iframe跨域
+            1.捕获本地iframe
+                var domain = 'http://haorooms.com';
+                var iframe = document.getElementById('myIFrame').contentWindow;
+
+            2.让iframe发送消息
+                setTimeout(function(){
+                    var message = {name:"站点",sex:"男"};      //你在这里也可以传递一些数据，obj等
+                    console.log('传递的数据是:  ' + message);
+                        //send the message and target URI
+                    iframe.postMessage(message,domain);
+                },1000);
+
+            3.本地接受数据
+                1.响应事件
+                    window.addEventListener('message',function(event) {
+                        if(event.origin !== 'http://haorooms.com') return;
+                        console.log('message received:  ' + event.data,event);
+                        event.source.postMessage('holla back youngin!',event.origin);
+                    },false);
+
+                2.message事件：
+                    1.source：消息源，消息的发送窗口/iframe。
+                    2.origin：消息源的URI(可能包含协议、域名和端口)，用来验证数据源。
+                    3.data：发送方发送给接收方的数据。
+
+                3.iFrame.contentWindow.postMessage(),即接受消息的window调用该方法
+
+
+    5.document.domain跨子域
+        1.原理
+            1.在跨域的两个页面中设置document.domain
+            2.修改document.domain的方法只适用于不同子域的框架间的交互。
+            3.contentWindow：可取得子窗口的window对象
+
+        2.实现
+            1.在页面 http://www.haorooms.com/a.html中设置document.domain
+                <iframe id = "iframe" src="http://haorooms.com/b.html" onload = "test()"></iframe>
+                <script type="text/javascript">
+                    document.domain = 'haorooms.com';//设置成主域
+                    function test(){
+                        alert(document.getElementById('#iframe').contentWindow);
+                    }
+                </script>
+
+            2.在页面http:// haorooms.com/b.html中设置document.domain，
+                1.在iframe载入这个页面也设置document.domain，使之与主页面的document.domain相同
+                    document.domain = 'haorooms.com';
+
+    6.window.name跨域
+        1.window.name：
+            1.在一个窗口(window)的生命周期内，窗口载入的所有的页面都是共享一个window.name的
+            2.每个页面对window.name都有读写的权限，window.name是持久存在一个窗口载入过的所有页面中的。
+            3.iframe.contentWindow：获取子窗口的window对象
+
+        2.原理：
+            1.由于当前页面不可切换地址，新建一个内部窗口iframe，引入跨域地址
+            2.跨域页面将数据放在window.name中
+            3.当前页面监听iframe，加载后将url改为本地的代理网页，window.name还存在
+            4.当前页面获取本地代理网页的window.name，避免了跨域
+
+        2.实现
+            1.三个页面。
+                1.本域
+                    应用页面：a.com/app.html
+                    代理文件：a.com/proxy.html：，一般是一个没有任何内容的html文件，需要和应用页面在同一域下。
+                2.跨域
+                    数据页面：b.com/data.html：应用页面需要获取数据的页面
+
+            2.应用页面：(a.com/app.html)中创建一个iframe，把其src指向数据页面（b.com/data.html）。
+                1.数据页面把数据附加到这个iframe的window.name上，data.html代码如下：
+                    <script type="text/javascript">
+                        window.name = 'I was there!';    // 这里是要传输的数据，大小一般为2M，IE和firefox下可以大至32M左右
+                                                         // 数据格式可以自定义，如json、字符串
+                    </script>
+
+                2.应用页面中(a.com/app.html)中监听iframe的onload事件
+                    1.事件中设置这个iframe的src指向本地域的代理文件（代理文件和应用页面在同一域下，所以可以相互通信）。
+
+                    <script type="text/javascript">
+                        var state = 0,
+                        iframe = document.createElement('iframe'),
+                        loadfn = function() {                           //监听ifram加载
+                            if (state === 1) {
+                                var data = iframe.contentWindow.name;    //读取数据
+                                alert(data);    //弹出'I was there!'
+                            } else if (state === 0) {
+                                state = 1;
+                                iframe.contentWindow.location = "http://a.com/proxy.html";    //iframe中修改地址，设置的代理文件
+                            }
+                        };
+                        iframe.src = 'http://b.com/data.html';          //src指向数据页面
+
+                        if (iframe.attachEvent) {
+                            iframe.attachEvent('onload', loadfn);
+                        } else {
+                            iframe.onload  = loadfn;
+                        }
+
+                        document.body.appendChild(iframe);
+                    </script>
+
+                3.获取数据以后销毁这个iframe，释放内存；这也保证了安全（不被其他域frame js访问）。
+                        iframe.contentWindow.document.write('');
+                        iframe.contentWindow.close();
+                        document.body.removeChild(iframe);
+
+
+</pre>

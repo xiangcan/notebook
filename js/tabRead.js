@@ -12,18 +12,18 @@ define(['jquery'],function($) {
 
     $.extend(TabRead.prototype,{
         init: function() {
-            var ikey = true;
-            var str,scroll;
+            var scroll;
 
             $btn.on('click',function() {
                 var $contentBox = $(this).siblings('.panel-content').eq(0);
                 var that = $(this);
 
-                if(ikey) {
+                // 如果pre为空执行
+                if(!this.pre) {
                     scroll = $(window).scrollTop();
-                    str = $contentBox.html();
+                    this.pre = $contentBox.html();
                     // 加载对应文章
-                    $.get('js/'+$contentBox.attr('data-main')+'.txt',function(data) {
+                    $.get('article/'+$contentBox.attr('data-main')+'.txt',function(data) {
                         $contentBox.html(data);
                         // this指向ajax对象
                         that.html('已阅');
@@ -32,17 +32,19 @@ define(['jquery'],function($) {
                         that.addClass('back-top');
                         var left = $contentBox.offset().left + $contentBox.outerWidth() - that.outerWidth() -10;
                         that.css({
-                            'left':left
+                            'left':left,
                          });
                         ikey = false;
                     });
                 }else {
-                    $contentBox.html(str);
+                    $contentBox.html(this.pre);
                     that.html('阅读全文');
                     ikey = true;
                     that.removeClass('back-top');
                     $(window).scrollTop(scroll);
+                    this.pre = '';
                 }
+            return false;
             });
         }
     });

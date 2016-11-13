@@ -1,0 +1,161 @@
+<pre style="text-indent:0;">1.概念
+    1.定义
+        1.HTML5 Geolocation API 用于获得用户的地理位置。
+        2.鉴于该特性可能侵犯用户的隐私，除非用户同意，否则用户位置信息是不可用的。
+        3.对于拥有GPS的设备，比如iPhone，地理定位更加精确
+
+    2.LBS：基于位置的服务
+
+2.地理定位使用
+    1.navigate.geolocation对象
+        1.只有当浏览器支持地理定位时，才会有这个属性，可以作为判断来使用
+        2.是一个对象，包含整个地理定位API，这个API的主要方法是getCurrentPositon，获取浏览器的位置。
+
+        3.方法
+            1.getCurrentPosition(successCallback,errorCallback,positionOptions)：单次定位请求
+                1.successCallback：获取定位成功时，调用该函数，传入一个position对象，对象名可以自己取
+                    1.position对象属性：
+                        1.coords.latitude：十进制数的纬度
+                        2.coords.longitude：十进制数的经度
+                        3.coords.accuracy：位置精度
+                        4.coords.altitude： 海拔，海平面以上以米计
+                        5.coords.altitudeAccuracy：位置的海拔精度
+                        6.coords.heading：方向，从正北开始以度计
+                        7.coords.speed：速度，以米/每秒计
+                        8.timestamp：响应的日期/时间
+
+                    navigator.geolocation.getCurrentPosition(showPosition,showError);
+
+                2.errorCallback：可选参数，获取失败，调用该函数，传参error对象
+                    1.error.code：失败类型编号
+                        1：用户不允许地理定位
+                        2：无法获取当前位置
+                        3：操作超时
+                        4：未知错误
+                    2.数据收集：可选
+                        enableHighAcuracy：更精确的查找，请求事件会变长，默认false
+                        timeout：获取位置允许得最长时间，默认infinity
+                        maximumAge：位置可以缓存的时间，默认0
+
+                    navigator.geolocation.getCurrentPosition(showPosition,showError,{timerout:2000});
+
+                3.positionOptions：自定义配置
+
+            2.watchPosition(successCallback)：连续定位请求
+                1.一般位置变了才能连续请求，位置不动走error
+                2.返回用户的当前位置，并继续返回用户移动时的更新位置（就像汽车上的GPS）
+                3.成功时，调用showPosition函数，并传参position对象
+
+                     navigator.geolocation.watchPosition(successCallback,errorCallback);
+
+            3.clearWatch()：关闭连续请求
+                1.停止watchPosition()方法
+                    function showError(error) {
+                        navigator.geolocation.clearWatch();
+                    }
+
+        4.实例
+            var x=document.getElementById("demo");
+            function getLocation() {
+                //判断浏览器是否支持地理定位
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition,showError);
+                }
+                else{
+                    x.innerHTML="Geolocation is not supported by this browser.";}
+                }
+
+            function showPosition(position) {
+                //返回地理位置
+                var latlon=position.coords.latitude+","+position.coords.longitude;
+                //获取Google API地图图像
+                var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+                document.getElementById("mapholder").innerHTML="&lt;img src='"+img_url+"' />";
+            }
+
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        x.innerHTML="User denied the request for Geolocation."
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        x.innerHTML="Location information is unavailable."
+                        break;
+                    case error.TIMEOUT:
+                        x.innerHTML="The request to get user location timed out."
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        x.innerHTML="An unknown error occurred."
+                        break;
+                }
+            }
+
+3.调用地图API
+    1.百度地图API
+        1.head添加API地址
+            &lt;script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥">&lt;/script>
+        2.API使用
+            &lt;script type="text/javascript">
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var x = position.coords.longitude;
+                    var y = position.coords.latitude;
+
+                    var map = new BMap.Map("allmap");                           //传入ID，创建Map的图形实例对象
+                    var pt = new BMap.point(x,y);                               //获取当前位置对象，可以自己设置坐标
+                    map.centerAndZoom(pt, 11);                                  //根据位置，初始化地图，配置坐标位置和地图级别，级别大，显示的范围大
+                    var marker = new BMap.Marker(pt);                           //创建地图标注点
+                    map.addOverlay(marker);                                     //把标注添加到地图中
+                    map.setCurrentCity("北京");                                 //设置地图默认显示的城市，此项是必须设置的
+                    var control = new BMap.MapTypeControl();
+                    map.addControl(control);                                    //添加地图类型控件，可以切换卫星、三维、地图
+
+                    map.enableScrollWheelZoom(true);                            //开启鼠标滚轮缩放功能
+
+                    //创建自定义信息窗口
+                    var opts = {
+                        width : 200,                                            //信息窗口宽度
+                        height: 100,                                            //信息窗口高度
+                        title : "海底捞王府井店" ,                              // 信息窗口标题
+                        enableMessage:true,                                     //设置允许信息窗发送短息
+                        message:"亲耐滴，戳下面的链接看下地址喔~"
+                        }
+                        var infoWindow = new BMap.InfoWindow("地址：深圳龙华", opts);  // 创建信息窗口对象
+                        marker.addEventListener("click", function(){                   //给标注添加点击事件
+                            map.openInfoWindow(infoWindow,point);                      //开启信息窗口
+                    });
+            &lt;/script>
+
+        3.显示地图
+            &lt;div id="allmap">
+
+    2.Google地图API
+        var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+        document.getElementById("map").innerHTML="&lt;img src='"+img_url+"' />";
+
+4.地理定位知识
+    1.地理定位API
+        1.地理定位与Google Maps API：这是两个完全不同的API。
+        2.地理定位API只关注你的全球位置信息，Google maps API 是Google 提供的一个JavaScript库，运行你访问所有Googlemaps的功能。
+        3.如果需要在一个地图中显示用户的位置，Google的API可以提供一种更便捷方法来实现这个功能。
+        4.地理位置规范指出，所有浏览器必须得到用户的统一才能使用他们的地址。
+
+    2.地理API如何确定你的位置
+        1.IP定位：
+            1.电脑的IP地址可以映射一个位置。
+            2.基于IP地址的位置信息，使用一个外部数据库将IP地址映射到一个物理地址，这种方法的好处是在任何地方都可以使用，不过，IP地址通常解析为其他位置，比如你的ISP本地分局的位置而不是你的具体位置。可以认为这种方法在城市级比较可靠。
+        2.GPS：全球定位系统
+            1.利用卫星提供极其精确的位置信息，位置数据可能包括高度、速度和朝向信息。
+            2.要使用GPS，你的设备必须能看到天空，而且可能需要花很长时间才能得到位置，另外GPS也很耗电。
+
+        3.蜂窝电话定位
+            1.蜂窝电话三角定位可以根据你与一个或多个蜂窝电话基站的位置来确定你的位置，基站越多，位置越准确。
+            2.室内也可以使用，而且比GPS快的多。但是如果位置偏僻，附近基站少，定位精度难以保证。
+
+        4.WiFi定位
+            1.使用一个或多个WiFi接入点来完成三角定位，这种方法可能很准确，也可在室内使用，而且速度很快。显然，这要求你的位置相对处于静态。
+
+        //浏览器可能首先使用蜂窝电话三角定位，如果这种方法可行，你会得到一个大致的位置，然后再用WiFi或GPS提供一个更精确的定位。
+
+    3.地理位置：
+        1.经度：南北极连线
+        2.纬度：东西连接线</pre>

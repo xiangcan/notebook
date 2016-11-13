@@ -1,0 +1,127 @@
+<pre style="text-indent:0;">1.animate定义
+    1.定义
+        1.从一个Css状态转化为另一个Css状态
+        2.Css属性是逐渐改变的，可以自定义过程
+
+    2.animate属性
+        1.默认只有数字值的样式可以创建运动，字符串值不行，如background-color:red
+            1.色彩动画不在核心jquery库，需要从 jQuery.com 下载 Color Animations 插件
+
+        2.css样式使用DOM名称，如"fontSize"来设置；而非CSS名称(如"font-size")
+        3.如果style值于现在一样，运动就没有变化，类式占位符
+        4.使用 "+=" 或 "-=" 来创建相对运动
+            height:'+=150px'
+        5.属性值需要用""包围，当然数字可以省略，如果没有单位，默认px
+            $("div").animate({width:"1000px",fontSize:20});
+
+    3.预定义属性值
+        1.show：height:'show'，显示
+        2.hide：height:'hide'，消失，即height=0
+        3.toggle：height:'toggle'，切换
+
+2.animate使用
+    1.语法1：$(selector).animate(styles,speed,easing,callback)
+        1.属性
+            1.styles：目标Css样式，JSON字符串
+
+            2.speed：运动速度，改变Css所经历的时间
+                1.毫秒(默认400)
+                2.关键字：slow/normal/fast
+            3.easing：速度函数
+                    1.linear    2.swing(慢快慢)
+            5.callback：回调函数，运动执行完的函数
+                $("#box").animate({height:"300px"},3500,"linear",ShowMsg());
+
+    2.语法2，有setp配置：$(selector).animate(styles,options)
+        1.options：运动的额外选项，json写法
+        2.options可选值：
+            1.speed：设置运动的速度
+            2.easing：规定要使用的easing函数
+            3.callback：规定运动完成之后要执行的函数
+            4.step：规定运动的每一步完成之后要执行的函数
+                1.step：function(a,b) {}
+                2.传入两个值
+                    1.a：检测定时器的每一次变化
+                    2.b：检测运动的完成比例，b.pos为0.1
+            5.queue：布尔值，运动是否存入队列中，如果为false，则运动将立即开始
+                1.queue：false，该运动不放入队列，后面的那个运动和当前这个运动一起运行
+                2.queue：true，放入队列，与默认一样
+            6.specialEasing：来自styles参数的一个或多个CSS属性的映射，以及它们的对应easing函数
+
+                $('#box').animate(
+                    {width:'+=200'}, {       //第二个参数为step配置
+                    duration:1000,
+                    easing:'linear',
+                    callback:function() {alert(1);},
+                    step:function(a,b) {
+                        //a:检测定时器的每一次变化
+                        //b:检测运动的比例值，b.pos值为0~1
+                    }
+                });
+
+3.animate链式操作
+    1.JQ链式写法
+        $('#box').animate({width:'300px'}).animate({height:'200px',500,''})
+    2.利用回调函数
+        $('#box').animate({width:300},400,'linear',function() {
+            $(this).animate({height:300},400,'linear',function(){alert('ok');})
+        })；
+
+4.运动队列
+    非队列：$('div').animate({width:'200px',height:'200px'});       //一起执行
+    队列：存在多个animate时，存入队列，依次运行
+    1.定义
+        1.运动队列：元素接受多个运动时，会把它存入一个队列中，依次执行
+            $("div").animate({ height: 300 }, 2000);            // 运动队列1；
+            $("div").animate({ width: 300 }, 2000);             // 运动队列2；
+
+        2.运动类式一个定时器，是异步执行，下面的语句会先执行。
+            $('#div1').animate({width:200},1000,'linear');
+            alert(1);                                           //这一行反而先执行
+
+        2.链式操作，运动是存在一个队列里，会依次执行
+            $('#div1').animate({width:200}).animate({height:200},1000,'linear');
+
+         $("#b1").click(function () {
+
+            $("div").queue(function () {
+                $("div").css("background-color", "green");  // queue():添加一个方法到运动队列；
+                $("div").dequeue();
+            });
+
+            $("div").animate({ height: 100 }, 2000);        // 运动队列3；
+            $("div").animate({ width: 100 }, 2000);         // 运动队列4；
+        });
+
+        $("#b2").click(function () {
+            //$("div").stop();                // 只停止当前运动队列。其他的运动队列还是会继续执行；
+            //$("div").stop(true);            // 停止当前运动队列中的所有运动；
+            $("div").stop(true, true);      // 会立刻执行完当前运动，然后停止后面所有的运动队列；
+        });
+
+5.运动取消
+    1.stop(stopAll,gotoEnd):停止当前进行的运动
+        1.没有参数：默认阻止当前发生的运动，不能阻止后续的运动
+        2.第一个参数：清除运动队列，true：取消后续所有的运动
+        3.第二个参数：立即完成当前运动，true：停在当前该运动的指定目标点
+            $('#btn').click(function() {
+                $('box').stop(true,true);       //停止后续运动，完成当前运动，可用于清除队列
+            });
+
+        4.总结：
+            1.stop(true)：立即停止
+            2.stop(true,true)：用于清除队列！！！取消队列运动，停止当前运动目标点
+            3.stop(true,false)：直接跳到运动目标点，与finish()类似
+
+    2.finish():停止所有运动，并停止在所有的运动的目标点
+        $('#div4').finish();
+
+    3.delay(t)：运动延迟，针对的是后续的运动
+        $('#div4').animate({width:200}).delay(3000).animate({height:200})
+    });
+
+6.运动问题
+    1.判断元素是否处于运动中
+        if(!$('#div2').is(':animated')) {
+            //如果没有，则添加新的动画
+        }</pre>

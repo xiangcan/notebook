@@ -1,0 +1,299 @@
+<pre style="text-indent:0;">requireJS：基于AMD规范的JS模块加载器
+    1.网页加载JS过多，阻塞浏览器                 //基于AMD规范编程，异步加载文件，解决阻塞
+    2.JS文件存在依赖，必须严格保证加载顺序       //require管理模块之间的依赖性，便于代码编写和维护
+
+requireJS：工具，用于客户端的模块管理。
+    1.客户端的代码分成一个个模块，实现异步或动态加载，从而提高代码的性能和可维护性
+    2.它的模块管理遵守AMD规范
+
+RequireJS的基本思想：
+    1.通过define方法，将代码定义为模块
+    2.通过require方法，实现代码的模块加载。
+    3.将require.js嵌入网页，进行模块化编程
+        &lt;script data-main="scripts/main" src="scripts/require.js">&lt;/script>
+    4.data-main属性用于指定主文件，用户自定义的代码就放在这个main.js文件中
+
+1.原始方法加载
+    &lt;script src="1.js">&lt;/script>
+    &lt;script src="2.js">&lt;/script>
+    &lt;script src="3.js">&lt;/script>
+
+    1.依次加载多个文件，加载的时候，浏览器会停止网页渲染，加载文件越多，网页失去响应的时间就会越长
+    2.由于js文件之间存在依赖关系，因此必须严格保证加载顺序，依赖性最大的模块一定要放到最后加载
+    3.当依赖关系很复杂的时候，代码的编写和维护都会变得困难
+
+2.requireJS加载
+    1.requireJS引入(也要避免阻塞)
+        1.放在网页底部：&lt;script src="js/require.js" data-main="js/main">&lt;/script>
+        2.添加异步属性：&lt;script src="js/require.js" defer async="true" data-main="js/main" >&lt;/script>
+            1.defer：兼容IE
+
+    2.data-main：网页主模块，即入口文件
+        1.requireJS默认js，后缀可以不写
+
+    3.requireJS的每个模块都是一个单独的js文件！！！
+        1.如果加载多个模块，就会发出多次HTTP请求，会影响网页的加载速度
+        2.require.js提供了一个优化工具，模块部署完成后可以将多个模块合并在一个文件中，减少HTTP请求数
+
+3.requireJS API
+    1.require.config({})：配置模块
+        1.API
+            1.paths：指定模块的加载路径，可以为每个模块加载多个路径，本地文件可以省略js后缀
+            2.baseurl：指定本地模块位置的基准目录，即本地模块的路径是相对于哪个目录的。该属性通常由require.js加载时的data-main属性指定
+            3.shim：帮助require.js加载非AMD规范的库
+
+                // main.js
+                require.config({
+                    paths: {
+                　　"jquery": "jquery.min",
+                　　"underscore": "underscore.min",
+                    }
+                });
+
+        2.模块路径
+            1.默认当前文件目录
+                require.config({
+                    paths: {
+                　　"jquery": "jquery.min",
+                　　"underscore": "underscore.min",
+                    }
+                });
+
+            2.其他目录下的模块
+                1.定位法
+                    "jquery": "lib/jquery.min",
+
+                2.baseUrl(改变基目录)
+                    require.config({
+                　　　　baseUrl: "js/lib",
+                　　　　paths: {
+                　　　　　　"jquery": "jquery.min",
+                　　　　　　"underscore": "underscore.min",
+                　　　　}
+                　　});
+
+            3.其他主机上的模块
+                "jquery": "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"
+
+        3.非AMD规范的模块
+            1.有些库不符合AMD写法
+            2.在用require()加载之前，require.config()方法的shim定义一些特征
+
+            　　require.config({
+            　　　　shim: {                                     //shim：配置不兼容模块
+            　　　　　　'underscore':{                          //模块名
+            　　　　　　　　exports: '_'                        //exports：输出的变量名
+            　　　　　　},
+
+                        //JQ插件写法
+            　　　　　　'jquery.scroll': {
+            　　　　　　　　deps: ['jquery'],                   //deps：模块的依赖性
+            　　　　　　　　exports: 'jQuery.fn.scroll'
+            　　　　　　}
+            　　　　}
+            　　});
+
+    2.require([module], callback)：加载模块
+        1.定义
+            1.[module]：数组，依赖模块
+            2.callback：模块加载成功之后的回调函数
+                1.参数：加载模块的输出值
+
+            // main.js
+        　　require(['jquery', 'underscore', 'backbone'], function ($, _, Backbone){              //异步加载模块
+        　　　　// some code here                                                                 //加载依赖后执行
+        　　});
+
+        2.require方法也可以用在define方法内部
+            define(function (require) {
+               var otherModule = require('otherModule');
+            });
+
+        3.动态加载
+            define(function ( require ) {
+                var isReady = false, foobar;
+
+                require(['foo', 'bar'], function (foo, bar) {       //加载模块
+                    isReady = true;
+                    foobar = foo() + bar();
+                });
+
+                return {
+                    isReady: isReady,
+                    foobar: foobar
+                };
+            });
+
+        4.加载JSONP
+            require( [
+                "http://someapi.com/foo?callback=define"            //JSONP的callback为define，define类式一个函数调用
+            ], function (data) {
+                console.log(data);                                  //接受数据
+            });
+
+        5.错误处理的回调函数，第三个函数参数
+            require([ "backbone" ],function ( Backbone ) {
+                    return Backbone.View.extend({ /* ... */ });
+                },
+                function (err) {                                    //接受一个err对象
+                    // ...
+                }
+            );
+
+    3.define([moudel],function)：定义模块，被加载时自动调用
+
+4.AMD difine
+    1.定义
+        1.require.js加载的模块，采用AMD规范，模块必须按照AMD的规定来写。
+        2.模块必须采用特定的define()函数来定义，依赖关系明确，不会污染全局变量
+        3.RequireJS要求每个模块放在一个单独的文件里
+        4.AMD模式可以用于浏览器环境，并且允许非同步加载模块，也可以根据需要动态加载模块
+
+    2.define([moudel],function)：定义模块
+        1.独立模块
+            // load.js
+            define(function () {
+                return {
+                    method1: function() {},                 //1.模块输出值
+                    method2: function() {},
+                };
+            });
+
+            // main.js
+        　　require(['load'], function (load){               //2.传参即模块输出值
+        　　　　alert(load.method1);
+        　　});
+
+        2.依赖其他模块
+            define(['myLib'], function(myLib){
+        　　　　function foo(){
+        　　　　　　myLib.doSomething();
+        　　　　}
+        　　　　return {
+        　　　　　　foo : foo
+        　　　　};
+            });
+
+            1.依赖过多的批量加载写法
+                define(
+                    ['dep1', 'dep2', 'dep3', 'dep4', 'dep5', 'dep6', 'dep7', 'dep8'],
+                    function(dep1, dep2, dep3, dep4, dep5, dep6, dep7, dep8){
+                        ...
+                    }
+                );
+
+                define(
+                    function (require) {
+                        var dep1 = require('dep1'),
+                            dep2 = require('dep2'),
+                            dep3 = require('dep3'),
+                            dep4 = require('dep4'),
+                            dep5 = require('dep5'),
+                            dep6 = require('dep6'),
+                            dep7 = require('dep7'),
+                            dep8 = require('dep8');
+                            ...
+                    }
+                });
+
+5.requireJS插件
+    1.domready插件，可以让回调函数在页面DOM结构加载完成后再运行。
+    　　require(['domready!'], function (doc){
+    　　　　// called once the DOM is ready
+    　　});
+
+    2.text和image插件，则是允许require.js加载文本和图片文件。
+    　　define([
+    　　　　'text!review.txt',
+    　　　　'image!cat.jpg'
+    　　　　],
+
+    　　　　function(review,cat){
+    　　　　　　console.log(review);
+    　　　　　　document.body.appendChild(cat);
+    　　　　}
+    　　);
+
+6.优化器r.js
+    1.定义
+        1.RequireJS提供一个基于node.js的命令行工具r.js，用来压缩多个js文件
+        2.它的主要作用是将多个模块文件压缩合并成一个脚本文件，以减少网页的HTTP请求数。
+
+    2.使用
+        1.npm install -g requirejs：安装r.js
+        2.node r.js -o &lt;arguments>：执行压缩
+            1.&lt;arguments>表示命令运行时，所需要的一系列参数
+                node r.js -o baseUrl=. name=main out=main-built.js
+
+            2.可以将参数写入一个文件，假定文件名为build.js
+                //多个模块压缩合并成一个main.js
+
+                ({
+                    appDir: './',
+                    baseUrl: './js',
+                    dir: './dist',
+                    modules: [
+                        {
+                            name: 'main'
+                        }
+                    ],
+                    fileExclusionRegExp: /^(r|build)\.js$/,
+                    optimizeCss: 'standard',
+                    removeCombined: true,
+                    paths: {
+                        jquery: 'lib/jquery',
+                        underscore: 'lib/underscore',
+                        backbone: 'lib/backbone/backbone',
+                        backboneLocalstorage: 'lib/backbone/backbone.localStorage',
+                        text: 'lib/require/text'
+                    },
+                    shim: {
+                        underscore: {
+                            exports: '_'
+                        },
+                        backbone: {
+                            deps: [
+                                'underscore',
+                                'jquery'
+                            ],
+                            exports: 'Backbone'
+                        },
+                        backboneLocalstorage: {
+                            deps: ['backbone'],
+                            exports: 'Store'
+                        }
+                    }
+                })
+
+        3.文件参数
+            appDir：项目目录，相对于参数文件的位置。
+            baseUrl：js文件的位置。
+            dir：输出目录。
+            modules：一个包含对象的数组，每个对象就是一个要被优化的模块。
+            fileExclusionRegExp：凡是匹配这个正则表达式的文件名，都不会被拷贝到输出目录。
+            optimizeCss: 自动压缩CSS文件，可取的值包括“none”, “standard”, “standard.keepLines”, “standard.keepComments”, “standard.keepComments.keepLines”。
+            removeCombined：如果为true，合并后的原文件将不保留在输出目录中。
+            paths：各个模块的相对路径，可以省略js后缀名。
+            shim：配置依赖性关系。如果某一个模块不是AMD模式定义的，就可以用shim属性指定模块的依赖性关系和输出值。
+            generateSourceMaps：是否要生成source map文件。
+
+        4.其他参数文件
+            //将模块文件压缩合并成两个文件，第一个是main.js（指定排除infrastructure.js），第二个则是infrastructure.js
+            ({
+                mainConfigFile : "js/main.js",
+                baseUrl: "js",
+                removeCombined: true,
+                findNestedDependencies: true,
+                dir: "dist",
+                modules: [
+                    {
+                        name: "main",
+                        exclude: [
+                            "infrastructure"
+                        ]
+                    },
+                    {
+                        name: "infrastructure"
+                    }
+                ]
+            })</pre>

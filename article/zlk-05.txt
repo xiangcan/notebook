@@ -1,0 +1,80 @@
+<pre style="text-indent:0;">1.弹出层滑动，底层一起滑动
+    1.问题：
+        1.body头部有一个模拟下拉的选择框，下拉选择有滚动轴
+        2.给body一个touchmove的preventdefault()阻止事件，手机端滑动div还是会导致底部body的滑动
+        3.给div一个阻止冒泡的事件stopPropagation()，移动端依然不行
+
+    2.解决
+        1.思路：滚动轴滚到底部的时候，会触发body的滑动
+        2.事件滚到底部的时候对表层的div做一个touchmove的阻止。
+            1.到达滚动轴底部，向下滑动，阻止事件
+            2.向上滑动，开启事件
+        3.需要判断touchmove的方向
+
+    3.代码
+        1.判断滑动方向
+            $("body").on("touchstart", function(e) {
+                e.preventDefault();
+                startX = e.originalEvent.changedTouches[0].pageX,
+                startY = e.originalEvent.changedTouches[0].pageY;
+            });
+            $("body").on("touchmove", function(e) {
+                e.preventDefault();
+                moveEndX = e.originalEvent.changedTouches[0].pageX,
+                moveEndY = e.originalEvent.changedTouches[0].pageY,
+                X = moveEndX - startX,
+                Y = moveEndY - startY;
+
+                if ( Math.abs(X) > Math.abs(Y) && X > 0 ) {
+                    alert("left 2 right");
+                }
+                else if ( Math.abs(X) > Math.abs(Y) && X &lt; 0 ) {
+                    alert("right 2 left");
+                }
+                else if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+                    alert("top 2 bottom");
+                }
+                else if ( Math.abs(Y) > Math.abs(X) && Y &lt; 0 ) {
+                    alert("bottom 2 top");
+                }
+                else{
+                    alert("just touch");
+                }
+            });
+
+        2.阻止事件
+            $('#haorooms底层背景').bind("touchmove", function (e) {
+                e.preventDefault();
+            });
+            $(".滚动的父亲").bind("touchstart", function (events) {
+                startY = events.originalEvent.changedTouches[0].pageY;
+            });
+            $(".滚动的父亲 ul").bind("touchmove", function (e) {
+                var ulheight = $(this).height();
+                var scrollTop = $(this).scrollTop();
+                var scrollheight = $(this)[0].scrollHeight;
+                if (ulheight + scrollTop + 20 >= scrollheight) {        //滚到底部20px左右
+                    $(".滚动的父亲").bind("touchmove", function (event) {
+                        moveEndY = event.originalEvent.changedTouches[0].pageY,
+                                theY = moveEndY - startY;
+                        if (theY > 0) {                                  //用上面的abs()更加准确！
+                            $(".滚动的父亲").unbind("touchmove");
+                        }
+                        if (theY &lt; 0) {
+                            event.preventDefault();
+                        }
+                    })
+                }
+                if (scrollTop &lt; 20) {//滚到顶部20px左右
+                    $(".滚动的父亲").bind("touchmove", function (event) {
+                        moveEndY = event.originalEvent.changedTouches[0].pageY,
+                                theY = moveEndY - startY;
+                        if (theY > 0) {
+                            event.preventDefault();
+                        }
+                        if (theY &lt; 0) {
+                            $(".滚动的父亲").unbind("touchmove");
+                        }
+                    })
+                }
+            });</pre>

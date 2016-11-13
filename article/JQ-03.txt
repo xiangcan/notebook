@@ -1,0 +1,228 @@
+<pre style="text-indent:0;">核心：给元素绑定事件和事件函数
+问题：事件绑定，根据语言环境，只是为当时的元素给予绑定
+    后面新增的元素不会有该事件，这就需要进行事件委托
+JQ与JS事件
+    1.JQ事件没有on
+    2.JQ事件绑定都是函数法，而JS有赋值法，所以不存在同一事件，后面的事件函数覆盖前面的问题
+
+事件：JS和HTML之间的交互是通过用户和浏览器操作页面时引发的事件来处理的。
+当文档或者它的某些元素发生变化或操作时，浏览器会自动生成一个事件。
+    1.浏览器加载完一个文档后，会生成一个事件
+    2.用户点击时，会生成一个事件
+
+1.事件对象
+    1.event对象:JQ中已做兼容处理
+        1.event传参给事件函数对象
+            $('div').one('click',function(ev) {});
+
+    2.属性
+        1.鼠标坐标值
+            ev.clientX
+            ev.clientY
+
+        2.ev.target:事件源
+        3.ev.delegateTarget:委托对象
+        4.ev.type:事件类型，即事件名
+        5.ev.which:键盘值
+        6.ev.metaKey:获取键盘事件中的ctrl键，因为各浏览器对该键的定义不同
+
+    3.方法
+        1.ev.preventDefault():阻止默认事件
+        2.ev.stopPropagation():阻止冒泡的操作
+        3.return false:阻止默认事件+阻止冒泡的操作
+
+
+2.事件函数绑定
+    1.JQ事件绑定
+        1.与JS相比不要on，且写法采用函数化
+            $('#btn').click(fn);
+
+    2.on():事件函数绑定
+        1.格式：on(evName,[data],fn)
+        2.一个事件，绑定多个事件函数，不会覆盖，依次触发
+        3.多个事件，可以一起绑定同一个事件函数
+            $('div').on('click mouseover',function() {  //不同事件，同一事件函数
+                alert(this.innerHTML);
+            });
+
+            $('div').on({                               //不同事件，不同事件函数
+                'click': function () {
+                    alert(123);
+                },
+                'mouseover': function () {
+                    alert(456);
+
+        4.第二个参数可以传入一个Json数据
+            2.作用：让事件函数携带一些数据
+            2.通过ev.data获取
+                $('#box').on('click',{name:'hello'},function(ev) {
+                    str = ev.data.name
+                });
+
+    3.one():事件函数只执行一次
+        1.与on()一样，只不过只会执行一次
+
+    4.bind()：事件函数绑定
+        1.语法：$(selector).bind(event,data,function)
+            1.参数：
+                1.event：事件
+                2.data：可选，传递给事件对象的额外数据对象
+                3.function：事件函数
+
+                $("button").bind("click",function(){
+                  $("p").slideToggle();
+                });
+
+        2.总结
+            1.on和bind没啥区别，旧版本用bind()，on是新出来的，建议用on
+
+    5.合成绑定
+        1.hover(fn1,fn2)：用于模拟光标移入执行fn1，移出执行fn2
+            $('#div1').hover(function() {
+                alert(1);           //替代mouseenter
+            },function() {
+                alert(2);           //替代mouseleave
+            });
+
+        2.toggle(fn1,fn2)：模拟鼠标点击
+            1.模拟鼠标单击事件，第一次单击，执行fn1,第二次单击，执行fn2,如此循环
+                $('#div1').toggle(function() {
+                alert(1);
+                },function() {          //可用于连续单击的需求下
+                    alert(2);
+                });
+
+            2.应用
+                1.切换元素的可见状态，如果可见，单击后切换为隐藏，若隐藏，切换为可见。
+                    $('#div1').toggle(function() {
+                        $(this).toggle();       //还是需要写两个函数
+                    },function() {
+                        $(this).toggle();
+                    });
+
+
+3.事件取消
+    1.off():取消事件，所有该事件的函数都不再执行。
+        1.指定事件和事件函数：off(evName,[fnName])
+            $('div').off('mouseover');      //参数可以指定具体事件
+
+        2.没有参数，取消所有
+            $('div').off();                 //取消所有事件
+
+    2.unbind(evName,fnName)：取消所有事件
+        1.不写参数是取消所有
+        2.老版本方法，不建议使用
+
+4.事件委托
+    1.delegate():事件委托，利用冒泡，改变当前事件的触发对象，
+        $('ul').delegate('li','click',fn);          //fn为ul的事件函数
+
+        1.分析:事件源为li,冒泡给ul,触发ul绑定的事件函数
+        2.this指向事件源，JQ做了修正
+        3.ev对象
+            1.ev.delegateTarget:委托对象，JS默认this
+            2.ev.target:事件源，JQ修正后的this
+
+    2.undelegate():阻止进行事件委托
+        $('ul').undelegate();       //ul不再接受冒泡过来的事件，触发事件函数
+
+    3.on(event,ele,fn)：事件委托
+        $('ul').on('click','li',fn);
+
+5.键盘鼠标事件
+    1.鼠标操作时触发的
+
+    2.属性
+        1.ev.pageX：相对于文档左边缘的鼠标位置
+          ev.pageY：相对于文档上边缘的鼠标位置
+
+        2.ev.which=>keyCode,键值
+            1.用于记录鼠标键值
+                $('document').keydown(function(ev) {
+                    console.log(ev.which);
+                });
+
+        3.ctrlKey:布尔值,检测ctrl键是否按下
+
+
+6.默认事件行为
+    1.ev.preventDefault():阻止默认事件
+    2.ev.stopPropagation():阻止冒泡的操作
+    3.return false:阻止默认事件+阻止冒泡的操作
+
+7.JQ事件收集
+    1.JQ与JS事件是一样的，区别在于写法
+        1.JQ不要on
+        2.JQ采用函数化
+
+    2.事件列表
+        bind()                      向匹配元素附加一个或更多事件处理器
+        blur()                      触发、或将函数绑定到指定元素的 blur 事件
+        change()                    触发、或将函数绑定到指定元素的 change 事件
+        click()                     触发、或将函数绑定到指定元素的 click 事件
+        dblclick()                  触发、或将函数绑定到指定元素的 double click 事件
+        delegate()                  向匹配元素的当前或未来的子元素附加一个或多个事件处理器
+        die()                       移除所有通过 live() 函数添加的事件处理程序。
+        error()                     触发、或将函数绑定到指定元素的 error 事件
+        event.isDefaultPrevented()  返回 event 对象上是否调用了 event.preventDefault()。
+        event.pageX                 相对于文档左边缘的鼠标位置。
+        event.pageY                 相对于文档上边缘的鼠标位置。
+        event.preventDefault()      阻止事件的默认动作。
+        event.result                包含由被指定事件触发的事件处理器返回的最后一个值。
+        event.target                触发该事件的 DOM 元素。
+        event.timeStamp             该属性返回从 1970 年 1 月 1 日到事件发生时的毫秒数。
+        event.type                  描述事件的类型。
+        event.which                 指示按了哪个键或按钮。
+        focus()                     触发、或将函数绑定到指定元素的 focus 事件
+        keydown()                   触发、或将函数绑定到指定元素的 key down 事件
+        keypress()                  触发、或将函数绑定到指定元素的 key press 事件
+        keyup()                     触发、或将函数绑定到指定元素的 key up 事件
+        live()                      为当前或未来的匹配元素添加一个或多个事件处理器
+        load()                      触发、或将函数绑定到指定元素的 load 事件
+        mousedown()                 触发、或将函数绑定到指定元素的 mouse down 事件
+        mouseenter()                触发、或将函数绑定到指定元素的 mouse enter 事件
+        mouseleave()                触发、或将函数绑定到指定元素的 mouse leave 事件
+        mousemove()                 触发、或将函数绑定到指定元素的 mouse move 事件
+        mouseout()                  触发、或将函数绑定到指定元素的 mouse out 事件
+        mouseover()                 触发、或将函数绑定到指定元素的 mouse over 事件
+        mouseup()                   触发、或将函数绑定到指定元素的 mouse up 事件
+        one()                       向匹配元素添加事件处理器。每个元素只能触发一次该处理器。
+        ready()                     文档就绪事件（当 HTML 文档就绪可用时）
+        resize()                    触发、或将函数绑定到指定元素的 resize 事件
+        scroll()                    触发、或将函数绑定到指定元素的 scroll 事件
+        select()                    触发、或将函数绑定到指定元素的 select 事件
+        submit()                    触发、或将函数绑定到指定元素的 submit 事件
+        toggle()                    绑定两个或多个事件处理器函数，当发生轮流的 click 事件时执行。
+        trigger()                   所有匹配元素的指定事件
+        triggerHandler()            第一个被匹配元素的指定事件
+        unbind()                    从匹配元素移除一个被添加的事件处理器
+        undelegate()                从匹配元素移除一个被添加的事件处理器，现在或将来
+        unload()                    触发、或将函数绑定到指定元素的 unload 事件
+
+
+8.on()
+    1.定义
+        1.JQ1.7开始，提供绑定事件处理的所有功能，取代之前的所有方法
+        2.事件绑定函数不会覆盖
+
+    2.事件绑定
+        1.ele.on(eventName,[data],fn)
+            1.eventName：string，一个或多个事件类型和可选的命名空间，用空格隔开
+            2.data：可选，传递给事件函数的数据，ev.data
+            3.
+
+        2.ele.on( eventsMap,[data])
+            1.eventsMap：JSON，属性名为eventName，属性值为fn
+            2.data：可选，传递给事件函数的数据，ev.data
+
+        $("p").on("click", fn);
+
+    3.事件委托
+        1.格式：
+            ele.on(eventName,selector,[data],fn)
+            ele.on( eventsMap,selector,[data])
+
+        2.参数
+            1.selector：后代事件源元素
+            2.fn：this指向事件源
+        $("div").on("click", "p", fn);</pre>

@@ -15,21 +15,11 @@ require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRea
     $('#codeBox').length>0 && new Autotype('codeBox');
     // 点击阅读图
     $('.btnRead').length>0 && new TabRead('btnRead');
-
-    // 搜索框
-    var btnInp = $('#btnInput');
-    var btnResult = $('#btnResult');
-    btnInp.on('click',function() {
-        btnResult.toggle();
-        return false;
-    });
-    $(document).on('click',function() {
-        btnResult.hide();
-    });
-
     // 获取时间
     var iTime;
-    setInterval(function() {
+    getTime();
+    setInterval(getTime,30001000);
+    function getTime() {
         var nTime = new Date();
         var iYear = nTime.getFullYear();
         var iMoth = nTime.getMonth()+1;
@@ -47,7 +37,6 @@ require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRea
 
         iTime = iYear+'年'+iMoth+'月'+iDay+'日 '+week;
         $('#navTime').html(iTime);
-    },30001000);
-
+    }
 
 });

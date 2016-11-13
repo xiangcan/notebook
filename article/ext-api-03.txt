@@ -1,0 +1,284 @@
+<pre style="text-indent:0;">指定文件编码：@chartset "UTF-8";
+
+Sass
+    1.Css预处理器，为Css增加编程的特性，然后编译成正常的Css文件
+
+    2.Sass与SCSS是一个东西，只是语法格式不一样
+        1.Sass后缀.sass，基于Ruby开发，严格的缩进式语法，不带{}和;
+            body
+              color: #fff
+              background: #f36
+        2.SCSS后缀.scss，与普通的css语法类式
+
+    3.Sass编译不支持GBK，需要将文件编码设为utf-8
+    4.文件路径最好不要有中文
+
+    5.css输出风格
+        嵌套输出方式：nested
+        展开输出方式：expanded
+        紧凑输出方式：compact
+        压缩输出方式：compressed
+
+2.变量声明：$
+    1.普通变量：全局使用
+        $width: 300px;
+
+    2.默认变量：设置默认值
+        $width: 300px !default;
+
+    3.全局变量与局部变量
+        1.全局变量：元素、选择器、函数、混合宏...的外面定义的变量
+            1.创建全局变量：
+                1.该值至少重复出现了两次
+                2.该值至少可能会被更新一次
+                3.该值所有的表现与变量相关
+            2.尽量不要声明一个只用在一处且不会更新的全局变量
+
+
+        2.局部变量：选择器内、函数内、混合宏内定义的变量
+            1.局部变量与全局变量重新，仍是局部变量
+
+            .block {
+              color: $color;//调用全局变量
+            }
+            em {
+              $color: red;//定义局部变量
+              a {
+                color: $color;//调用局部变量
+              }
+            }
+            span {
+              color: $color;//调用全局变量
+            }
+
+3.Sass嵌套
+    1.选择器嵌套：应该尽量避免选择器嵌套，否则css选择器很冗余
+        nav {
+          a {
+            color: red;
+            header & {                  //&：父类选择器
+              color:green;
+            }
+          }
+        }
+    2.属性嵌套：适合符合属性
+        .box {
+          border: {                     //注意冒号
+           top: 1px solid red;
+           bottom: 1px solid green;
+          }
+        }
+
+    3.伪类嵌套
+        .clearfix{
+            &:before, &:after {         //&：父类选择器
+                content:"";
+                display: table;
+            }
+        }
+
+4.代码复用
+    1.混合宏@mixin，@include
+        1.不带参数混合宏
+            @mixin border-radius{
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+            }
+
+        2.带参数混合宏，类似函数
+            @mixin border-radius($radius:5px){              //1.传参带值，调用时可以重新传参
+                -webkit-border-radius: $radius;
+                border-radius: $radius;
+            }
+
+            调用：@include border-radius;
+                  @include border-radius(50%);
+
+            @mixin border-radius($radius){                  //1.传参不带值
+              -webkit-border-radius: $radius;
+              border-radius: $radius;
+            }
+            调用：@include border-radius(50%);
+
+
+        3.复杂混合宏
+            @mixin center($width,$height){                  //1.可以传多个参数
+              width: $width;
+              height: $height;
+              position: absolute;
+              margin-top: -($height) / 2;
+              margin-left: -($width) / 2;
+            }
+            调用：@include center(500px,300px);
+
+            @mixin box-shadow($shadow...) {                 //2.多个参数可以用...代替，数组
+              @if length($shadow) >= 1 {
+                @include prefixer(box-shadow, $shadow);
+              } @else{
+                $shadow:0 0 4px rgba(0,0,0,.3);
+                @include prefixer(box-shadow, $shadow);
+              }
+            }
+            调用：@include box-shadow(0 0 1px rgba(#000,.5),0 0 2px rgba(#000,.2));
+
+    2.继承.class，@extend
+        1.继承基类的样式
+        2.Css编译后，会自动合并这些样式
+
+        .btn {
+          border: 1px solid #ccc;
+          padding: 6px 10px;
+          font-size: 14px;
+        }
+
+        .btn-primary {
+          background-color: #f36;
+          color: #fff;
+          @extend .btn;                 //继承某个选择器的样式
+        }
+
+
+        编译后：
+        .btn,.btn-primary {
+          border: 1px solid #ccc;       //相比宏，css文件自动合并，减少内存
+          padding: 6px 10px;
+          font-size: 14px;
+        }
+
+        .btn-primary {
+          background-color: #f36;
+          color: #fff;
+        }
+
+    3.占位符%placeholder，@extend
+        1.%声明的代码块，如果不被@extend调用的话，不会产生任何代码。
+        2.可以用来做Css方案备选
+        3.选择器@extend调用同一个占位，编译后会合并在一起
+
+        %mt5 {
+          margin-top: 5px;
+        }
+
+        .block {
+          @extend %mt5;
+
+          span {
+            @extend %pt5;
+          }
+        }
+
+        css编译后：
+        .btn, .block span {
+          margin-top: 5px;
+        }
+
+    4.总结：
+        1.混合宏：
+            1.缺点：只会原地复制代码，不能合并样式
+            2.优点：适合变量的传参
+
+        2.继承
+            1.缺点：无法传参，适用于已存在的基类样式复用，否则css会出现无效的选择器
+            2.优点：会将继承的代码通过组选择器合并在一起
+
+        3.占位符
+            1.缺点：无法传参
+            2.优点：效果与继承类式，会合并样式，而且不会在css中生成占位符的选择器
+    5.总结
+      1.@extend不可继承序列选择器(ul li)，会报错
+      2.
+
+5.插值#{}
+    1一般用于属性的字符串拼接
+        $properties: (margin, padding);
+        @mixin set-value($side, $value) {
+            @each $prop in $properties {
+                #{$prop}-#{$side}: $value;
+            }
+        }
+        .login-box {
+            @include set-value(top, 14px);
+        }
+
+6.注释
+    1.//：编译css会显示
+    2./**/：编译css不会显示，但是compressed输出时会忽略
+    3./*！*/：增加一个!，注释会保留
+
+7.属性值数据类型
+    1.数据类型
+        1.number
+        2.字符串：有引号或无引号
+            1.编译时一把不会改变数据类型
+            2.#{}插值使，会将有引号改为无引号
+                @mixin firefox-message($selector) {
+                  body.firefox #{$selector}:before {
+                    content: "Hi, Firefox users!";
+                  }
+                }
+                @include firefox-message(".header");
+
+        3.颜色值：编译后为16进制颜色
+        4.布尔值
+        5.空值
+        6.值列表：空格或逗号分开，如1.5em 1em / Arial,sans-srif
+            1.独立的值，也设为值列表
+
+    2.其他属性值
+        1.unicode范围
+        2.!important
+
+8.运算
+    1.数值运算
+        1.加法：变量和属性中都可以做加法
+            .box {
+              width: 20px + 8in;
+            }
+
+            1.in mm cm  pt pc px：绝对单位都可以运算，可以换算为px
+            2.ex em rem：相对单位不能运算
+            3.单位类型不同，不可计算
+
+        2.减法
+            $full-width: 960px;
+            $sidebar-width: 200px;
+
+            .content {
+              width: $full-width -  $sidebar-width;
+            }
+
+        3.乘法
+            .box {
+              width: 10px * 2;
+            }
+
+            1.只能提供一个单位
+            2.单位类型不同，也会报错
+
+        4.除法
+            p {
+              font: 10px/8px;             // 纯CSS，不是除法运算，需要添加括号
+              $width: 1000px;
+              width: $width/2;            // 使用了变量，是除法运算
+              width: round(1.5)/2;        // 使用了函数，是除法运算
+              height: (500px/2);          // 使用了圆括号，是除法运算
+              margin-left: 5px + 8px/2px; // 使用了加+号，是除法运算
+            }
+
+            1.如果都带有单位，单位会被约掉！！！
+            2.只能提供一个单位
+
+    2.颜色运算
+    color: #010203 + #040506;               //color: #050709;
+    color: #010203 * 2;                     //color: #020406;
+
+        1.原理：每两位进行数值运算
+    3.字符运算
+        1.通过+，进行字符串拼接
+            cursor: e + -resize;            //cursor: e-resize;
+
+        2.引号的就近原则
+            content: "Foo " + Bar;           //content: "Foo Bar";
+            font-family: sans- + "serif";    //font-family: sans-serif;</pre>
+
+

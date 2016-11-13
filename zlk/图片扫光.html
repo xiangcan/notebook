@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        /* 动画aniBlink */
+        @-webkit-keyframes aniBlink {
+        from {
+            margin-left:-440px
+        }
+        to {
+            margin-left:500px
+        }
+        }
+
+        .logo {
+            position:relative;
+            width:440px;
+            height:160px;
+            overflow:hidden;
+        }
+        .logo a {
+            display:inline-block
+        }
+        /* 伪元素：设置渐变背景，绝对定位 */
+        .logo a:before {
+            content:'';
+            position:absolute;
+            width:60px;
+            height:160px;
+            margin-top:0px;
+            margin-left:-440px;
+            overflow:hidden;
+            z-index:6;
+          overflow: hidden;
+          background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+          background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(50%, rgba(255, 255, 255, 0.2)), color-stop(100%, rgba(255, 255, 255, 0)));
+          background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+          background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
+
+          -webkit-transform: skewX(-25deg);
+          -moz-transform: skewX(-25deg);
+        }
+        .logo a:before {
+         -webkit-animation:aniBlink .8s ease-out forwards infinite;
+         -moz-animation:aniBlink .8s ease-out forwards infinite;
+         -o-animation:aniBlink .8s ease-out forwards infinite;
+         animation:aniBlink .8s ease-out forwards infinite;
+        }
+    </style>
+</head>
+<body>
+<div class="logo">
+    <a >
+        <img src="../images/js.jpg" style="width: 440px;height: 160px;" />
+    </a>
+</div>
+</body>
+</html>

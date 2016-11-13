@@ -1,0 +1,160 @@
+<pre style="text-indent:0;">1.拖放
+    1.拖放属性
+        1.在HTML5中，拖放是标准的一部分，任何元素都能够拖放。
+        2.标签属性，拖放的元素需加此属性
+            1.draggable="true"
+
+    2.拖放对象
+        1.ev.dataTransfer(一般用于ondragstart和ondrop事件)
+            1.setData(name,value)：设置数据，必须是字符串
+                1.可以设置多条数据，类式cookie，然后接受多个，进行处理
+                ev.dataTransfer.setData("Text",ev.target.id);   //传递id
+                ev.dataTransfer.setData("name",'hello');   //传递id
+            2.getData(name)：获得数据
+                var data = ev.dataTransfer.getData("Text");
+                var value = ev.dataTransfer.getData("name");
+            3.ev.target：放置目标
+
+            4.effectAllowed：设置光标样式
+                1.none,copy,copyLink
+                    ev.dataTransfer.effectAllowed = 'copy';
+            5.setDragImage(ele,x,y)：
+                1.ele：可以设置拖放出来显示为其他元素，可以设置为图片
+                2.x,y：鼠标处于该元素上坐标
+                    var oImg = document.getElementBy('img');
+                    ev.dataTransfer.setDragImage(oImg.0,0);
+
+            6.files：获取外部文件，返回一个filesList列表
+                1.type：文件类型
+                    var type = ev.dataTransfer.files[0].type;
+
+    3.拖放事件
+        1.拖动的元素
+            1.ondragstart：拖动前触发
+                1.ev.dataTransfer.setData()：设置数据
+                2.ev.target：放置目标
+                    oImg.ondragstart = function drag(ev) {
+                        ev.dataTransfer.setData("Text",ev.target.id);
+                        //数据类型:Text"，值:可拖动元素的id("drag1")
+                    }
+
+            2.drag：拖放前和拖放结束之间，连续触发
+            3.dragend：拖放结束触发，即释放鼠标
+                1.在ondrop后触发
+
+        2.放置目标元素
+            1.ondragenter：进入目标时触发,类似mouseover
+
+            2.ondragover：进入和离开之间，连续触发
+                1.使用ondrop时，需先在over上阻止默认事件：默认无法将数据/元素放置到其他元素中，
+                    oDiv.onondragover = function allowDrop(ev) {
+                        ev.preventDefault();
+                    }
+
+            3.ondragleave：离开目标元素触发，类似mouseout
+
+            3.ondrop：放置，在目标上释放鼠标
+                1.阻止默认事件：drop事件的默认行为是以链接形式打开
+                2.ev.dataTransfer.getData("Text")：获得被拖的数据
+                    oDiv.ondrop = function drop(ev) {
+                        ev.preventDefault();
+                        //接受值为拖放元素的ID
+                        var data = ev.dataTransfer.getData("Text");
+                        ev.target.appendChild(document.getElementById(data));
+                    }
+
+                &lt;div id="div1">&lt;/div>                       //拖动元素
+                &lt;img id="drag1" width="336" height="69" />  //拖动目标
+
+    4.总结
+        1.给需要拖动的元素添加属性draggable="true"
+        2.ondragstart事件中，被拖动元素将ID保存在ev中
+        3.ondragover事件中，放置目标元素清除默认事件
+        4.ondrop事件中，先清除默认事件，然后获取被拖动元素的ID，插入为子元素
+
+2.文件读取
+    1.FileReader：对象
+        1.readAsDateURL(file)：读取文件
+            1.参数为要读取的文件对象，读取为DateUrl
+        2.onload事件
+            1.当文件读取成功时触发
+            2.this.result：用来获取读取的文件数据，如果是图片，返回base64格式的图片数据
+
+            oDiv.ondrop = function(ev) {
+                ev.preventDefault();
+                var fs = dataTransfer.files;
+                var fd = new FileReader();
+                fd.readAsDateURL(fs[0]);
+                fd.onload = function() {
+                    oImg.src = this.result;
+                };
+            };
+
+4.拖动应用
+    1.拖动删除
+        1.删除一个li后，下标会变化
+        2.解决：删除后，重新获取下标index
+            for(var i=0;i&lt;oLi.length;i++) {
+                oLi.ondragstart = function(ev) {
+                    var ev = ev || event;
+                    var this.index = i;
+                    ev.dataTransfer.setDate('name',this.index);
+                };
+            }
+
+            oDiv.ondrop = function(ev) {
+                var ev = ev || event;
+                var name  = ev.dataTransfer.getDate('name');
+                oUl.removeChild(oUl[name]);
+
+                for(var i=0;i&lt;oLi.length;i++) {
+                    this.index = i;
+                }
+            };
+
+
+    2.拖拽上传文件
+        oDiv.ondrop = function(ev) {
+            var ev = ev || event;
+            //默认拖拽外部文件会直接打开
+            ev.preventDafault();
+            var fs = ev.dataTransfer.files;
+
+            for(var i=0;i&lt;fs.length;i++) {
+                if(fs[i].type.indexOf('image')!=-1) {
+                    var fd = new FileReader();
+                    fd.readAsDataURL[fs[i]];
+                    fd.onload = funtion() {
+                        oImg.src = this.result;
+                    };
+                }
+            }
+            }
+        };
+
+
+    3.拖拽去重
+        var jDate = {};
+        oDiv.ondrop = function(ev) {
+            var ev = ev || event;
+            ev.preventDefault();
+            var title = ev.dataTransfer.getDate('title');
+            var book = ev.dataTransfer.getDate('book');
+            //通过title来筛选
+            if(!jDate[title]) {
+                //如果没有改条目，添加进去
+                var oLi = document.createElement('&lt;li>'+text+'&lt;li>');
+                oUl.appendChild(oSpan);
+
+                //把title传入JSON
+                jDate.title = 'ok';
+            }else {
+                //如果有该条目，不添加条目，但数字加1，
+                for(var i=0;i&lt;oLi.length;i++) {
+                    if(oLi[i].innerHTML == title) {
+                        oSpan[i].innerHTML = parseInt(oSpan[i].innerHTML)+1;
+                    }
+
+                }
+            }
+        };</pre>

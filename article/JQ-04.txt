@@ -1,0 +1,57 @@
+<pre style="text-indent:0;">1.jquery插件一般有三种开发方式：
+    1.通过$.extend(obj)来扩展jQuery
+    2.通过$.fn.extend(obj)向jQuery添加实例
+    3.通过$.widget()应用jQuery UI的部件工厂方式创建
+
+2.$.fn.extend()开发插件
+    1.$.fn = jQuery.prototype
+    2.开发方式
+        1.$.fn.change = function() {}
+        2.$.fn.extend({change:function() {}});
+
+    3.实现
+        $.fn.pluginName = function() {
+            //your code here
+        }
+
+        1.利用面向对象开发插件
+            1.定义一个对象
+                var nFn= function(el, opt) {
+                    this.$element = el,
+                    this.defaults = {
+                        'color': 'red',
+                        'fontSize': '12px',
+                        'textDecoration':'none'
+                    },
+
+                    //对象的参数选项合并
+                    this.options = $.extend({}, this.defaults, opt)
+                    //$.extend({}, this.defaults, opt)有{}主要是为了创建一个新对象，保留对象的默认值。
+                }
+
+            2.定义对象的方法
+                nFn.prototype = {
+                    changecss: function() {
+                        return this.$element.css({
+                            'color': this.options.color,
+                            'fontSize': this.options.fontSize,
+                            'textDecoration': this.options.textDecoration
+                        });
+                    }
+                }
+            3.实例方法插件：把创建的对象作为插件
+                $.fn.myPlugin = function(options) {
+                    //创建nFn的实体
+                    var nFn= new nFn(this, options);
+                    //调用其方法
+                    return nFn.changecss();
+                }
+
+                ;(function($,window,document,undefined){
+                    $(function() {
+                        $('a').myPlugin({
+                            'color': '#2C9929',
+                            'fontSize': '20px'
+                        });
+                    });
+                })(jQuery,window,document);                 //匿名调用，传参，避免冲突</pre>

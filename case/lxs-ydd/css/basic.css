@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-31 20:29:10
+ * @version $Id$
+ */
+/*
+顶部导航
+======
+ */
+/* line 14, ../sass/basic.scss */
+.header {
+  width: 100%;
+  height: .45rem;
+  background-color: #333;
+  background: #333;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  position: fixed;
+  top: 0; }
+  /* line 26, ../sass/basic.scss */
+  .header .link {
+    height: .45rem;
+    line-height: .45rem;
+    text-align: center;
+    font-size: .16rem; }
+    /* line 34, ../sass/basic.scss */
+    .header .link li {
+      width: 25%;
+      float: left; }
+    /* line 39, ../sass/basic.scss */
+    .header .link a {
+      display: block;
+      color: #eee; }
+      /* line 44, ../sass/basic.scss */
+      .header .link a:hover {
+        background: #000; }
+
+/*
+广告
+=====
+ */
+/*
+2.底部内容
+=======
+ */
+/* line 61, ../sass/basic.scss */
+.footer {
+  width: 100%;
+  color: #777;
+  background-color: #222;
+  text-align: center;
+  padding: .1rem 0;
+  font-size: 0.14rem;
+  font-size: 14px;
+  clear: both; }
+  /* line 71, ../sass/basic.scss */
+  .footer li {
+    display: inline-block;
+    padding: .05rem; }
+  /* line 76, ../sass/basic.scss */
+  .footer a {
+    color: #777; }

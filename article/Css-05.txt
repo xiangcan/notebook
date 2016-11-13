@@ -1,0 +1,205 @@
+<pre style="text-indent:0;">Web设计采用Css像素
+具体一个Css像素值的大小决定于：
+    1.显示器物理尺寸和分辨率设置
+        1.不缩放,默认一个Css像素 = 一个设备像素
+    3.页面是否缩放
+        1.缩放,Css像素变大
+
+总结：
+    1.当缩放ZOOM=100%，Css像素 = 设备像素
+    2.当像素密度=1，屏幕分辨率 = 设备物理分辨率
+    3.分辨率与屏幕尺寸的关系
+        1.屏幕尺寸与分辨率大小没有什么关系，不是屏幕尺寸大，分辨率也大
+        2.仅有的关系：分辨率小，屏幕大，每个像素值显示的大，就模糊
+
+    4.移动端：Css像素称为设备独立像素
+
+1.显示器(viewing device)
+    1.屏幕分辨率：桌面设定的分辨率,可以通过系统设置修改
+
+    2.屏幕物理分辨率：用像素描述的显示器的尺寸
+        1.用像素来描述性的概念而已,一般用inch来描述
+        2.由于桌面分辨率与物理分辨率一致的情况下,显示效果最佳,
+          而一般情况,屏幕物理分辨率 = 屏幕分辨率,所以有了屏幕物理分辨率这个概念,作为屏幕分辨率的一个默认参考值。
+        3.设备的分辨率是固定的
+        4.PC端，可以通过 screen.width/height 属性来获取分辨率，设备像素为度量
+
+        4.分析：
+            1.描述显示器最大的显示总像素数,最多能画多少个网格
+            2.默认：屏幕分辨率 = 屏幕物理分辨率
+
+    3.总结：
+        1.由于液晶的显示原理与CRT不同,只有在桌面分辨率与物理分辨率一致的情况下,显示效果最佳
+        2.一般显示器分辨率 = 显示器的物理分辨率
+        3.如果将屏幕分辨率调小,即显示器上的网格数减少,显示的单个设备像素就会变大,会影响Css像素。
+
+2.像素px
+    1.定义
+        1.没有具体值大小,相对值
+        2.ppi高,则理论上像素值小。
+        3.图像采用类式点或方块的方式显示,图像是点或方块的集合。
+        4.每一个方块或点,即一个像素
+        5.每一个像素可以有各自的颜色值,rgb/cmyk色域。
+
+    2.设备像素
+        1.显示屏幕的最小物理单位，每个dp包含自己的颜色、亮度
+        2.设备像素值大小,由原始物理尺寸和设置的屏幕分辨率决定
+        3.设备总像素：水平像素数×垂直像素数
+        4.又称物理像素（physical pixel），设备能控制显示的最小单位，我们可以把这些像素看作成显示器上一个个的点。
+
+        5.由于px值本身就是相对的,设备像素值会影响Css像素值
+            1.默认,单个Css像素值 = 设备像素值
+            2.修改分辨率,设备尺寸固定,网格数变化,设备像素值大小变化,Css单个像素值也会变化
+
+    3.Css像素
+        1.Css属性值px,相对值，用于在页面上绘制内容
+        2.描述在屏幕上的显示大小
+        3.默认：一个设备像素(一个格子) = 一个Css像素
+        4.用户通过缩放,可以调整单个Css响度大小,修改显示效果
+
+    4.设备独立像素DP/DIP(移动端)
+        1.也叫密度无关像素)，可以认为是计算机坐标系统中得一个点，这个点代表一个可以由程序使用并控制的虚拟像素
+        2.android机中CSS 像素叫”设备独立像素”
+        3.设备独立像素通过相关系统转换为物理像素。
+
+    5.缩放
+        1.初始下,Css的像素大小与设备像素相等重叠。
+        2.元素宽度值没有变化,只是Css单个像素值大小相对于设备像素值增大,占据屏幕空间增大
+        3.放大200%,一个CSS像素变成一个设备像素的四倍。(宽度2倍，高度2倍，总共4倍)
+
+    6.总结：
+        1.根据电脑的分辨率,将屏幕划分为X*Y的网格,网格数即总像素数。
+        2.原始状态下,一个Css像素占据一个格子,与设备单个像素重叠
+        3.放大时,Css像素值增大,一个Css像素占据多个格子。
+        4.用户可以自行缩放,调整Css单个像素的大小,直到适合的阅读方式。
+        5.设备像素 =》一张固定尺寸的桌子
+          Css像素  =》放在桌子上的纸(大小可变)
+
+   6.实例
+      1.CSS像素与设备像素完全重叠
+       2.缩小，CSS像素开始收缩，一个设备像素覆盖了多个CSS像素
+       3.放大，CSS像素开始变大，一个CSS像素覆盖了多个设备像素
+
+
+3.分辨率(解析度)
+    1.定义：每英寸图像内有多少个像素点,描述图像的显示精确程度。
+        1.像素越多,越接近原始,越精细
+
+    2.单位：ppi
+    3.表达方式：
+        1.总像素数：水平像素数×垂直像素数
+        2.PPi：每英寸的像素数
+
+    4.总结：
+        1.当图像总像素数固定,分辨率(此时指ppi)下降,图像尺寸增加
+
+4.ppi与dpi
+    1.ppi:像素密度(用于电脑领域)
+        1.pixels per inch，即物理尺寸与设备分辨率像素的比值
+        2.图像中,每英寸所包含的像素数目
+        3.总像素：尺寸*ppi
+        4.密度越大，显示越细腻，细节越丰富
+
+    2.dpi:打印分辨率(用于印刷领域)
+        1.dots per inch
+        2.每英寸所能打印的点数
+
+5.尺寸
+    1.屏幕尺寸
+        1.screen.width/height
+        2.度量单位：设备像素
+        3.固定的
+        desktop_screen.jpg
+
+        4.PC与移动端
+            1.PC端：默认zoon=1，screen.width/height获取的是屏幕的分辨率，设备像素单位
+            2.移动端：
+
+    2.窗口尺寸
+        1.window.innerWidth/Height
+        2.度量单位：CSS像素
+        3.浏览器整个窗口的大小,包括滚动条
+        4.可以理解为在窗口内,你还有多少Css像素可以供布局
+        5.zoon=1时，screen.width = innerWidth(窗口铺满浏览器)
+        6.放大页面时，innerWidht减小
+           缩小页面时，innerWidth增大
+
+        4.兼容性：
+            1.缩放时,innerWidth/height值变小
+            2.Opera以设备像素度量,它不会变小
+        5.实例
+            1.页面不缩放
+        ·desktop_inner.jpg
+             2.页面缩放
+        desktop_inner_zoomed.jpg
+    4.滚动距离
+        1.window.pageXOffset/pageYOffset
+        2.页面的滚动距离,文档水平和垂直方向的滚动距离
+        3.度量单位：Css像素
+
+        4.问题：
+            理论上，如果用户向上滚动，然后放大，window.pageX/YOffset将会发生变化。
+            但是，浏览器为了想保持web页面的连贯，会在用户缩放的时候保持相同的元素位于可见页面的顶部。
+            这个机制并不能一直很完美的执行，但是它意味着在实际情况下window.pageX/YOffset并没有真正的更改，
+            被滚动出窗口的CSS像素的数量仍然大概相同,即滚出后,再缩放,它还是隐藏的。
+        5.实例
+            1.滚动后不缩放
+            desktop_page.jpg
+            2.滚动后缩放
+            desktop_page_zoomed.jpg
+
+6.视口(viewpotr)
+    1.定义
+        1.约束网站中最顶层的包含块元素:html
+        2.html的宽度 = 浏览器窗口的宽度
+        3.视口拥有浏览器窗口的高度和宽度
+        4.用于显示HTML文档
+
+    2.度量单位：Css像素
+    3.获取宽高：document.documentElement.clientWidth/height
+        desktop_client.jpg
+        desktop_client_smallpage.jpg
+
+    4.问题：
+      document.documentElement实际上指的是&lt;html>根元素。viewport要比它更高一层；它是包含&lt;html>元素的元素。
+      如果你给&lt;html>元素设置width属性。    document.documentElement.clientWidth和-Height给出的仍然是viewport的尺寸，
+      而不是&lt;html>元素的。这是一个特殊的规则，只对这个元素的这个属性对产生作用。在任何其他的情况下，使用的是元素的实际宽度。
+      总结：document.documentElement.clientWidth和-Height一直代表的是viewport的尺寸，不管&lt;html>元素的尺寸是多少。
+
+    5.document.documentElement.clientWidth/height与window.innerWidth/height
+        1.区别：视口尺寸不包括滚动条
+
+7.HTML页面尺寸
+    1.document.documentElement.offsetWidth/Height
+    2.度量单位：Css像素
+    3.兼容：IE度量的是viewpoint,而非HTML
+
+         desktop_documentwidth.jpg
+        desktop_offset.jpg
+        desktop_offset_smallpage.jpg
+
+8.事件坐标尺寸
+    1.pageX/Y:相对于html,Css像素度量,常用
+        desktop_pageXY.jpg
+    2.clientX/Y:相对于viewport,Css像素度量
+        desktop_clientXY.jpg
+    3.screenX/Y:相对于屏幕,设备像素度量,几乎不用
+        desktop_screenXY.jpg
+    4.兼容：IE不支持pageX/Y
+
+
+9.媒体查询
+    1.width/height
+        1.计算页面的宽度
+        2.使用documentElement.clientWidth/Height,即viewport。CSS像素度量。
+
+    2.device-width/height
+        1.计算屏幕的宽度
+        2.使用screen.width/height,屏幕的宽高。在设备像素度量。
+         desktop_screenXY.jpg
+    3.media query来探测屏幕尺寸
+
+    4.viewport区域适配于设备像素宽度
+        1.手机上视口一般是固定的，不像在浏览器上可以缩小窗口
+        2.视口使用设备像素
+        &lt;meta name="viewport" width="device-width"></pre>
