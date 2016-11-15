@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport：移动端设备屏幕不同，兼容各个设备的显示效果，页面没有滚动条，不出现缩放， -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>HTML5相册</title>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <style type="text/css">
+        /*获取滚动条方法
+            // Create the measurement node
+            var scrollDiv = document.createElement("div");
+            scrollDiv.style.overflow = 'scroll';
+            document.body.appendChild(scrollDiv);
+
+            // Get the scrollbar width
+            var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            console.warn(scrollbarWidth); // Mac:  15
+
+            // Delete the DIV
+            document.body.removeChild(scrollDiv);
+        */
+    </style>
+    <style type="text/css">
+        div,ul,body {
+            padding: 0;margin: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            border: none;
+            /*去除图片下方莫名产生的空白*/
+            vertical-align: middle;
+        }
+        .clearfix:after {
+            display: table;
+            content: '';
+            height: 0;
+            clear: both;
+        }
+
+        body {
+            background-color: #000000;
+            height: 100%;
+        }
+        .container li {
+            float: left;
+            overflow: hidden;
+        }
+
+        /*
+        1.充满屏幕：高度为100%，父级body也要设置为100%
+        2.盖在屏幕上：绝对定位
+        */
+        .large {
+            width: 100%;height: 100%;
+            position: absolute;left: 0;top: 0;
+            background-color: #000000;
+            z-index: 100;
+            display: none;
+        }
+
+    </style>
+    <script type="text/javascript" src="js/zepto.js"></script>
+</head>
+<body>
+    <ul class="container clearfix" id="container"></ul>
+    <!-- fadeIn -->
+    <div class="large animated fadeIn" id="largeContainer">
+        <img id="largeImage" />
+    </div>
+
+    <script type="text/javascript">
+
+
+        var total = 17;
+        var winWidth = $(window).width();
+        var scrollBarWidth = 17;
+        var render = function() {
+            // 图片之间的间距
+            var padding = 5;
+            // 单张图片宽度，防止超出宽度，Math.floor()，需要减去滚动条！！！
+            var imgWidth = Math.floor((winWidth-padding*3-scrollBarWidth)/4);
+
+            // 定义为空字符，否则第一次累加为undifined
+            var tmpl = '';
+            for(var i= 1;i<=total;i++) {
+                var p = padding;
+                // 每行第一个图片的padding-left：0
+                if( i%4 == 1) {
+                    p = 0;
+                }
+                var imgSrc = 'img/'+i+'.jpg';
+                // 设置li的宽高和padding
+                // 不使用img标签而是canvas加载图片，通过id索引
+                // li添加animate.css动画，class=animated bounceIn
+                // data-index：li的索引
+                tmpl += '<li class="animated bounceIn" data-index="'+i+'"style="width:'+imgWidth+'px;height:'+imgWidth+'px;padding-top:'+padding+'px;padding-left:'+p+'px;"><canvas id="cvs_'+i+'"></canvas>"></li>';
+
+                // 加载canvas图片
+                var oImg = new Image();
+                oImg.index = i;
+
+                // 只有在图片请求成功后才会触发该事件
+                oImg.onload = function() {
+                    // 获取canvas工具
+                    var cvs = $('#cvs_'+this.index)[0];
+                    // 设置画布的宽高
+                    cvs.width = imgWidth;
+                    cvs.height = imgWidth;
+
+                    var ctx = cvs.getContext('2d');
+                    // 设置设置图片的宽高，画布和图片都保持和li容器一致
+                    ctx.drawImage(this,0,0,imgWidth,imgWidth);
+                };
+                oImg.src = imgSrc;
+
+            }
+            // 生成Dom结构
+            $('#container').html(tmpl);
+        };
+        render();
+
+        // 兼容tab事件
+        var tab = tab?'tab':'click';
+        // 记录当前图片的ID，每次点击时获取到该ID
+        var currentID;
+        // 用事件代理给ul的每个li绑定事件
+        // 移动端使用tap事件
+        $('#container').delegate('li',tab,function() {
+            // 获取li的索引
+            var _index = currentID = $(this).attr('data-index');
+            loadImg(_index);
+        });
+
+        var largeImage = $('#largeImage');
+        // 添加图片加载的回调函数
+        function loadImg(index,callback) {
+            $('#largeContainer').css({
+                width: $(window).width(),
+                height: $(window).height()
+            }).show();
+            var imgSrc = 'img/'+index+'.large.jpg';
+
+            var oImg = new Image();
+
+            // 使用image对象的好处：可以动态调整，控制图片加载的过程
+            // 使用onload监控图面加载过程
+            oImg.onload = function() {
+                var w = this.width;
+                var h = this.height;
+                var winWidth = $(window).width();
+                var winHeight = $(window).height();
+
+                // 根据原本图片宽高比，计算设置后的图片宽高
+                var realHeight = h/w*winWidth;
+                var paddingTop = parseInt((winHeight-realHeight)/2)+'px';
+
+                var realWidth = w/h*winHeight;
+                var paddingLeft = parseInt((winWidth - realWidth)/2)+'px';
+                console.log(winWidth);
+                console.log(realWidth);
+
+
+                // 切换时，由于横竖需要设置padding-top而竖图设置padding-left，造成属性没有清楚
+                // 先清除图片元素身上的属性
+                largeImage.css({"width":'auto',"height":'auto',"padding-left":0,"padding-top":0});
+
+                // 计算图片的宽高比
+                // 动态调整图片
+                if(h/w > 1.2) {
+                    largeImage.attr('src',imgSrc).css({
+                        'height': winHeight,
+                        'padding-left':paddingLeft
+                    });
+                }else {
+                    largeImage.attr('src',imgSrc).css({
+                        'width': winWidth,
+                        'padding-top': paddingTop
+                    });
+                }
+
+                // 图片加载完成，如果没有传入回调函数则不调用
+                callback&&callback();
+
+            };
+            oImg.src = imgSrc;
+
+        }
+
+        // 关闭大图显示
+        $('#largeContainer').tap(function() {
+            $(this).hide();
+        })
+        .swipeLeft(function() {
+            // 图片ID加一位
+            currentID++;
+            if(currentID > total) {
+                // 重置为tatal，然后不进行操作
+                currentID = total;
+            }else {
+                loadImg(currentID,function() {              //添加t图片加载好的回调函数
+                    // addEventListener：满足chrome和火狐，适用移动端
+                    largeImage[0].addEventListener('webkitAnimationEnd',function() {
+                        largeImage.removeClass('animated bounceInRight');
+                        largeImage[0].removeEventListener('webkitAnimationEnd',function() {
+                            largeImage.removeClass('animated bounceInRight');
+                        });
+                    });
+                    // 如果class存在，重复添加时没有效果的
+                    largeImage.addClass('animated bounceInRight');
+                },false);
+
+            }
+        })
+        .swipeRight(function() {
+            // 图片ID减一位
+            currentID--;
+            if(currentID < 1) {
+                // 重置为0 ，然后不进行操作
+                currentID = 1;
+            }else {
+                loadImg(currentID,function() {              //添加t图片加载好的回调函数
+                    // addEventListener：满足chrome和火狐，适用移动端
+                    largeImage[0].addEventListener('webkitAnimationEnd',function() {
+                        largeImage.removeClass('animated bounceInRight');
+                        largeImage[0].removeEventListener('webkitAnimationEnd',function() {
+                            largeImage.removeClass('animated bounceInRight');
+                        });
+                    });
+                    // 如果class存在，重复添加时没有效果的
+                    largeImage.addClass('animated bounceInRight');
+                },false);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+<!--
+var imgSrc = 'img/'+index+'.large.jpg';
+$("#largeContainer").show();
+largeImage.attr('src', imgSrc);
+
+var w = largeImage.width();
+var h = largeImage.height();
+var winWidth = $(window).width();
+var winHeight = $(window).height();
+
+
+if(h > 1.2*w) {
+    largeImage.height(winHeight);
+}else {
+    largeImage.width(winWidth);
+}
+-->
+
+<!--
+动画事件：webkiAnimationEnd
+zepto.js：没有内置动画事件
+ -->
