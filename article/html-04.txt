@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">1.拖放
+<pre style="text-indent:0;">
+1.拖放
     1.拖放属性
         1.在HTML5中，拖放是标准的一部分，任何元素都能够拖放。
         2.标签属性，拖放的元素需加此属性
@@ -112,7 +113,6 @@
                 }
             };
 
-
     2.拖拽上传文件
         oDiv.ondrop = function(ev) {
             var ev = ev || event;
@@ -131,7 +131,6 @@
             }
             }
         };
-
 
     3.拖拽去重
         var jDate = {};

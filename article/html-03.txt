@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">1.概念
+<pre style="text-indent:0;">
+1.概念
     1.定义
         1.HTML5 Geolocation API 用于获得用户的地理位置。
         2.鉴于该特性可能侵犯用户的隐私，除非用户同意，否则用户位置信息是不可用的。

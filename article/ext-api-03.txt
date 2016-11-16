@@ -1,6 +1,5 @@
-<pre style="text-indent:0;">指定文件编码：@chartset "UTF-8";
-
-Sass
+<pre style="text-indent:0;">
+1.Sass
     1.Css预处理器，为Css增加编程的特性，然后编译成正常的Css文件
 
     2.Sass与SCSS是一个东西，只是语法格式不一样
@@ -269,10 +268,10 @@ Sass
             2.只能提供一个单位
 
     2.颜色运算
-    color: #010203 + #040506;               //color: #050709;
-    color: #010203 * 2;                     //color: #020406;
-
+        color: #010203 + #040506;               //color: #050709;
+        color: #010203 * 2;                     //color: #020406;
         1.原理：每两位进行数值运算
+
     3.字符运算
         1.通过+，进行字符串拼接
             cursor: e + -resize;            //cursor: e-resize;

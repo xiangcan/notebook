@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">核心：给元素绑定事件和事件函数
+<pre style="text-indent:0;">
+核心：给元素绑定事件和事件函数
 问题：事件绑定，根据语言环境，只是为当时的元素给予绑定
     后面新增的元素不会有该事件，这就需要进行事件委托
 JQ与JS事件
@@ -14,7 +15,6 @@ JQ与JS事件
     1.event对象:JQ中已做兼容处理
         1.event传参给事件函数对象
             $('div').one('click',function(ev) {});
-
     2.属性
         1.鼠标坐标值
             ev.clientX
@@ -30,7 +30,6 @@ JQ与JS事件
         1.ev.preventDefault():阻止默认事件
         2.ev.stopPropagation():阻止冒泡的操作
         3.return false:阻止默认事件+阻止冒泡的操作
-
 
 2.事件函数绑定
     1.JQ事件绑定
@@ -100,7 +99,6 @@ JQ与JS事件
                         $(this).toggle();
                     });
 
-
 3.事件取消
     1.off():取消事件，所有该事件的函数都不再执行。
         1.指定事件和事件函数：off(evName,[fnName])
@@ -143,7 +141,6 @@ JQ与JS事件
                 });
 
         3.ctrlKey:布尔值,检测ctrl键是否按下
-
 
 6.默认事件行为
     1.ev.preventDefault():阻止默认事件
@@ -198,7 +195,6 @@ JQ与JS事件
         unbind()                    从匹配元素移除一个被添加的事件处理器
         undelegate()                从匹配元素移除一个被添加的事件处理器，现在或将来
         unload()                    触发、或将函数绑定到指定元素的 unload 事件
-
 
 8.on()
     1.定义

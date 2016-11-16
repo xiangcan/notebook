@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">1.ReactDOM.render()：将模板转化为HTML语言，并插入指定的DOM节点
+<pre style="text-indent:0;">
+1.ReactDOM.render()：将模板转化为HTML语言，并插入指定的DOM节点
     ReactDOM.render(
         &lt;h1>Hello, world!&lt;h1>,
         document.getElementById('container');

@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">pipe思想：一个数据流stream
+<pre style="text-indent:0;">
+pipe思想：一个数据流stream
     1.gulp.src()产生数据流，gulp.dest()方法将数据流写入文件
     2.pipe()：流可以继续导入到其他插件中，也可以把流写入到文件中
 
@@ -42,13 +43,6 @@ gulp：代码自动化构建工具，可以自动执行开发中的常见任务�
     5.运行gulp
         1.指定任务：gulp 任务名称
         2.默认任务：gulp+回车
-
-常用插件
-    npm install gulp-uglify --save-dev
-    npm install gulp-minify-css --save-dev
-    npm install gulp-ruby-sass --save-dev
-    npm install gulp-htmlmin --save-dev
-
 
 3.gulp API
     1.gulp.task(name [, deps, fn])：定义任务

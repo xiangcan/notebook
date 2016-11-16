@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">JS与JQ
+<pre style="text-indent:0;">
+JS与JQ
     1.JQ核心$()函数(jQuery())，
     2.向该函数传递DOM对象，返回jquery对象，对象将具有jquery的属性和方法
     3.jquery通过CSS风格的选择器来获取元素
@@ -81,9 +82,9 @@ CDN：
                 $('li')[1].style
                 //JQ没有定义,但是源码符合
 
-    3.定义变量风格
-        var ojs = a;
-        var $jq = b;        //JQ前面加$
+        3.定义变量风格
+            var ojs = a;
+            var $jq = b;        //JQ前面加$
 
 3.$标识符
     1.$在jQuery里是一个内置函数
@@ -102,18 +103,17 @@ CDN：
 
     4.$防冲突(JS库最好最先导入)
         1.JQ中，$ = jQuery，如果其他库或者变量使用了$符或jQuery会造成冲突
-        2.解决方法
-            2.noConflict()：防止冲突
-                1.代替名
-                    var M = $.noConflict();
-                    var $=10;
-                    M(function() {}); //用mi来代替$
+        2.解决方法：noConflict()：防止冲突
+            1.代替名
+                var M = $.noConflict();
+                var $=10;
+                M(function() {}); //用mi来代替$
 
-                2.内部函数传参
-                    jQuery.noConfict();
-                    jQuery(function($) {
-                       $('p').html();
-                    });
+            2.内部函数传参
+                jQuery.noConfict();
+                jQuery(function($) {
+                   $('p').html();
+                });
 
             3.函数传参
                 (function($) {          //形参：$

@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">Web设计采用Css像素
+<pre style="text-indent:0;">
+Web设计采用Css像素
 具体一个Css像素值的大小决定于：
     1.显示器物理尺寸和分辨率设置
         1.不缩放,默认一个Css像素 = 一个设备像素
@@ -108,31 +109,16 @@
     1.屏幕尺寸
         1.screen.width/height
         2.度量单位：设备像素
-        3.固定的
-        desktop_screen.jpg
-
-        4.PC与移动端
-            1.PC端：默认zoon=1，screen.width/height获取的是屏幕的分辨率，设备像素单位
-            2.移动端：
 
     2.窗口尺寸
         1.window.innerWidth/Height
         2.度量单位：CSS像素
-        3.浏览器整个窗口的大小,包括滚动条
-        4.可以理解为在窗口内,你还有多少Css像素可以供布局
-        5.zoon=1时，screen.width = innerWidth(窗口铺满浏览器)
-        6.放大页面时，innerWidht减小
-           缩小页面时，innerWidth增大
 
-        4.兼容性：
+        3.兼容性：
             1.缩放时,innerWidth/height值变小
             2.Opera以设备像素度量,它不会变小
-        5.实例
-            1.页面不缩放
-        ·desktop_inner.jpg
-             2.页面缩放
-        desktop_inner_zoomed.jpg
-    4.滚动距离
+
+    3.滚动距离
         1.window.pageXOffset/pageYOffset
         2.页面的滚动距离,文档水平和垂直方向的滚动距离
         3.度量单位：Css像素
@@ -142,11 +128,6 @@
             但是，浏览器为了想保持web页面的连贯，会在用户缩放的时候保持相同的元素位于可见页面的顶部。
             这个机制并不能一直很完美的执行，但是它意味着在实际情况下window.pageX/YOffset并没有真正的更改，
             被滚动出窗口的CSS像素的数量仍然大概相同,即滚出后,再缩放,它还是隐藏的。
-        5.实例
-            1.滚动后不缩放
-            desktop_page.jpg
-            2.滚动后缩放
-            desktop_page_zoomed.jpg
 
 6.视口(viewpotr)
     1.定义
@@ -157,16 +138,7 @@
 
     2.度量单位：Css像素
     3.获取宽高：document.documentElement.clientWidth/height
-        desktop_client.jpg
-        desktop_client_smallpage.jpg
-
-    4.问题：
-      document.documentElement实际上指的是&lt;html>根元素。viewport要比它更高一层；它是包含&lt;html>元素的元素。
-      如果你给&lt;html>元素设置width属性。    document.documentElement.clientWidth和-Height给出的仍然是viewport的尺寸，
-      而不是&lt;html>元素的。这是一个特殊的规则，只对这个元素的这个属性对产生作用。在任何其他的情况下，使用的是元素的实际宽度。
-      总结：document.documentElement.clientWidth和-Height一直代表的是viewport的尺寸，不管&lt;html>元素的尺寸是多少。
-
-    5.document.documentElement.clientWidth/height与window.innerWidth/height
+    4.document.documentElement.clientWidth/height与window.innerWidth/height
         1.区别：视口尺寸不包括滚动条
 
 7.HTML页面尺寸
@@ -174,19 +146,11 @@
     2.度量单位：Css像素
     3.兼容：IE度量的是viewpoint,而非HTML
 
-         desktop_documentwidth.jpg
-        desktop_offset.jpg
-        desktop_offset_smallpage.jpg
-
 8.事件坐标尺寸
     1.pageX/Y:相对于html,Css像素度量,常用
-        desktop_pageXY.jpg
     2.clientX/Y:相对于viewport,Css像素度量
-        desktop_clientXY.jpg
     3.screenX/Y:相对于屏幕,设备像素度量,几乎不用
-        desktop_screenXY.jpg
     4.兼容：IE不支持pageX/Y
-
 
 9.媒体查询
     1.width/height
@@ -196,7 +160,6 @@
     2.device-width/height
         1.计算屏幕的宽度
         2.使用screen.width/height,屏幕的宽高。在设备像素度量。
-         desktop_screenXY.jpg
     3.media query来探测屏幕尺寸
 
     4.viewport区域适配于设备像素宽度

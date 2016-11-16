@@ -1,160 +1,76 @@
 <pre>
-    var total = 17;
-    var winWidth = $(window).width();
+waterFall();
+// 后台数据，对象数组，数组每个元素都是一个对象
+var dataInt = {'data':[{'src':'images/pbl/10.jpg'},{'src':'images/pbl/11.jpg'},{'src':'images/pbl/12.jpg'},{'src':'images/pbl/13.jpg'}]};
+$(window).on('scroll',function() {
+    if(checkScroll()) {
+        var str = '';
+        // 方括号需要加""
+        // $.each()用于数组遍历，不能用obj.each
+        $.each(dataInt.data,function(key,value) {
+            str += '&lt;div class="box">&lt;img src="'+value.src+'">&lt;/div>';
+        });
+        // 创建内容并插入
+        $('#main').append($(str));
+    }
+    // 内容创建完后重新渲染一次
+    waterFall();
+});
 
-    var render = function() {
-        // 图片之间的间距
-        var padding = 5;
-        // 单张图片宽度，防止超出宽度，Math.floor()
-        var imgWidth = Math.floor((winWidth - padding*3)/4);
+function waterFall() {
+        // 只获取一级子元素>
+        var $boxs = $('.box');
+        // 每一个图片容器宽度相同
+        var w = $boxs.eq(0).outerWidth();
+        // 获取列数
+        var cols = Math.floor($(window).width()/w);
+        // 重新设置容器的总宽度并居中
+        $('#main').width(cols*w).css('margin','0 auto');
 
-        // 定义为空字符，否则第一次累加为undifined
-        var tmpl = '';
-        for(var i= 1;i&lt;=total;i++) {
-            var p = padding;
-            // 每行第一个图片的padding-left：0
-            if( i%4 == 1) {
-                p = 0;
-            }
-            var imgSrc = 'img/'+i+'.jpg';
-            // 设置li的宽高和padding
-            // 不使用img标签而是canvas加载图片，通过id索引
-            // li添加animate.css动画，class=animated bounceIn
-            // data-index：li的索引
-            tmpl += '&lt;li class="animated bounceIn" data-index="'+i+'"style="width:'+imgWidth+'px;height:'+imgWidth+'px;padding-top:'+padding+'px;padding-left:'+p+'px;">&lt;canvas id="cvs_'+i+'">&lt;/canvas>">&lt;/li>';
-
-            // 加载canvas图片
-            var oImg = new Image();
-            oImg.index = i;
-
-            // 只有在图片请求成功后才会触发该事件
-            oImg.onload = function() {
-                // 获取canvas工具
-                var cvs = $('#cvs_'+this.index)[0];
-                // 设置画布的宽高
-                cvs.width = imgWidth;
-                cvs.height = imgWidth;
-
-                var ctx = cvs.getContext('2d');
-                // 设置设置图片的宽高，画布和图片都保持和li容器一致
-                ctx.drawImage(this,0,0,imgWidth,imgWidth);
-            };
-            oImg.src = imgSrc;
-
-        }
-        // 生成Dom结构
-        $('#container').html(tmpl);
-    };
-    render();
-
-    // 记录当前图片的ID，每次点击时获取到该ID
-    var currentID;
-    // 用事件代理给ul的每个li绑定事件
-    // 移动端使用tap事件
-    $('#container').delegate('li','tap',function() {
-        // 获取li的索引
-        var _index = currentID = $(this).attr('data-index');
-        loadImg(_index);
-    });
-
-    var largeImage = $('#largeImage');
-    // 添加图片加载的回调函数
-    function loadImg(index,callback) {
-        $('#largeContainer').css({
-            width: $(window).width(),
-            height: $(window).height()
-        }).show();
-        var imgSrc = 'img/'+index+'.large.jpg';
-
-        var oImg = new Image();
-
-        // 使用image对象的好处：可以动态调整，控制图片加载的过程
-        // 使用onload监控图面加载过程
-        oImg.onload = function() {
-            var w = this.width;
-            var h = this.height;
-            var winWidth = $(window).width();
-            var winHeight = $(window).height();
-
-            // 根据原本图片宽高比，计算设置后的图片宽高
-            var realHeight = h/w*winWidth;
-            var paddingTop = parseInt((winHeight-realHeight)/2)+'px';
-
-            var realWidth = w/h*winHeight;
-            var paddingLeft = parseInt((winWidth - realWidth)/2)+'px';
-            console.log(winWidth);
-            console.log(realWidth);
-
-
-            // 切换时，由于横竖需要设置padding-top而竖图设置padding-left，造成属性没有清楚
-            // 先清除图片元素身上的属性
-            largeImage.css({"width":'auto',"height":'auto',"padding-left":0,"padding-top":0});
-
-            // 计算图片的宽高比
-            // 动态调整图片
-            if(h/w > 1.2) {
-                largeImage.attr('src',imgSrc).css({
-                    'height': winHeight,
-                    'padding-left':paddingLeft
-                });
+        var hArr = [];
+        // 遍历数组和元素集合
+        $boxs.each(function(index,value) {
+            h = $(this).outerHeight();
+            // 获取第一行图片的宽高
+            if( index &lt; cols) {
+                hArr.push(h);
             }else {
-                largeImage.attr('src',imgSrc).css({
-                    'width': winWidth,
-                    'padding-top': paddingTop
+            // 第一行的最小高度列
+                var minH = Math.min.apply(null,hArr);
+            // 获取最小高度列的
+                var minIndex = $.inArray(minH,hArr);
+
+            // 对第一样后面的图片进行定位
+                $(this).css({
+                    'position': 'absolute',
+                // 上面：最矮列的高度
+                    'top': minH+'px',
+                // 左侧：最矮列的左距离
+                    'left': $boxs.eq(minIndex).position().left+'px'
                 });
+
+            // 更新当前列的高度数组
+                hArr[minIndex] = h + minH;
             }
-
-            // 图片加载完成，如果没有传入回调函数则不调用
-            callback&&callback();
-
-        };
-        oImg.src = imgSrc;
-
+        });
     }
 
-    // 关闭大图显示
-    $('#largeContainer').tap(function() {
-        $(this).hide();
-    })
-    .swipeLeft(function() {
-        // 图片ID加一位
-        currentID++;
-        if(currentID > total) {
-            // 重置为tatal，然后不进行操作
-            currentID = total;
-        }else {
-            loadImg(currentID,function() {              //添加t图片加载好的回调函数
-                // addEventListener：满足chrome和火狐，适用移动端
-                largeImage[0].addEventListener('webkitAnimationEnd',function() {
-                    largeImage.removeClass('animated bounceInRight');
-                    largeImage[0].removeEventListener('webkitAnimationEnd',function() {
-                        largeImage.removeClass('animated bounceInRight');
-                    });
-                });
-                // 如果class存在，重复添加时没有效果的
-                largeImage.addClass('animated bounceInRight');
-            },false);
+function checkScroll() {
+    // 最后一个即最高的那一列
+    var lastBox = $('.box').last();                //last()：最后一个元素
+    // 注意取值：像素需要时整数
+    // 最高那一列，以box一般作为临界点
+    var maxH = lastBox.offset().top + Math.floor(lastBox.outerHeight()/2);
 
-        }
-    })
-    .swipeRight(function() {
-        // 图片ID减一位
-        currentID--;
-        if(currentID &lt; 1) {
-            // 重置为0 ，然后不进行操作
-            currentID = 1;
-        }else {
-            loadImg(currentID,function() {              //添加t图片加载好的回调函数
-                // addEventListener：满足chrome和火狐，适用移动端
-                largeImage[0].addEventListener('webkitAnimationEnd',function() {
-                    largeImage.removeClass('animated bounceInRight');
-                    largeImage[0].removeEventListener('webkitAnimationEnd',function() {
-                        largeImage.removeClass('animated bounceInRight');
-                    });
-                });
-                // 如果class存在，重复添加时没有效果的
-                largeImage.addClass('animated bounceInRight');
-            },false);
-        }
-    });
+    // 获取页面的滚动距离
+    //var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;        //JS兼容写法
+    var scrollTop = $(window).scrollTop();
+
+    // 获取可视区高度
+    //var wHeight = document.body.clientHeight || document.documentElement.clientHeight || window.innerHeight;          //JS兼容写法
+    var wHeight = $(window).height();
+
+    // 注意是写返回值
+    return (maxH &lt; scrollTop+wHeight)?true:false;
+}
 </pre>

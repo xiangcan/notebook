@@ -68,7 +68,6 @@
         1.Array.toLocaleString()：转化为字符串
         2.Array.join()：用分隔符将数组连接为字符串
 
-
 2.对象转换为数值
     1.Number(value):将元素整体转换为数值
         1.转换原理：针对整体，字符串整体是数字，可以转换。
@@ -87,9 +86,7 @@
         2.参数
             1.thisobj:这个对象将代替Function里的this指向
             2.arg：函数的传参列表
-
         3.定义：调用当前函数,修改this执行
-
 
     2.apply()
         1.格式：Function.apply(thisobj,args）
@@ -184,7 +181,6 @@
     4.总结：
         1.search()可以传参正则
         2.indexOf()更底层,效率高,一般推荐
-
 
 5.类型判断
     1.typeof：判断大体数据类型

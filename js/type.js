@@ -45,7 +45,7 @@ define(['jquery'],function($) {
                     }
 
                     // 计算scroll
-                    var dis = $text.height() - $textParetn.height();
+                    var dis = $text.height() - $textParetn.height()+30;
                     if(dis>0) $textParetn.scrollTop(dis);
 
                 },50);

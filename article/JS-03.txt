@@ -7,7 +7,6 @@
         1.document是window对象的属性
             window.document.body：body标签
             window.document.documentElement：html标签
-
         2.document.location = window.location
 
 2.window 相关宽高
@@ -31,8 +30,6 @@
                 3.兼容新旧
                     var w = window.innerWidth?window.innerWidth:document.documentElement.clientWidth || document.body.clientWdith;
                     var h = window.innerWidth?window.innerHeight:document.documentElement.clientHeight || document.body.clientHeight;
-
-
     3.浏览器屏幕
         1.屏幕高度
             window.screen.height：屏幕整体实际高度
@@ -45,12 +42,10 @@
             window.screenLeft：窗口距离屏幕左边的距离，等价window.screenX
             window.screenTop：窗口距离屏幕顶部的距离，等价window.screenY
 
-
 3.document 相关宽高
     1.元素内容宽高(行间样式)
         ele.style.width:元素的内容区
         ele.sytle.height:元素的宽度
-
         1.宽高值
             1.值为元素设置的行间样式，设置为百分比，则 width 返回此百分比
             2.offsetWidth则返回对象的具体宽度值而不是百分比值；
@@ -63,8 +58,7 @@
     2.元素定位距离(仅定位元素可用，行间样式)
         ele.style.left:定位元素左外边距距离父级左边界(padding)的偏移
         ele.style.top:定位元素上外边距距离父级上边界(padding)的偏移
-
-        3.具体值
+        1.具体值
             1.值为定位元素设置的行间样式 left/top
             2.返回值:返回值px，可读,可写
             3.百分数赋值,返回的也是一个百分数
@@ -149,17 +143,12 @@
                 1.document.body.scrollTop || document.docuemntElement.scrollTop
                 2.document.body.scrollLeft || document.docuemntElement.scrollLeft
 
-
 4.Event坐标
     1.clientX/Y：相对于浏览器(可视区左上角)的坐标
         1.移动端浏览器一般不能缩小
-
     2.screenX/Y：相对于设备屏幕左上角的坐标
-
     3.pageX/Y：相对于网页页面左上角的坐标(页面会滚动)
-
     4.offsetX/Y：相对于事件源左上角的坐标
-
     5.X/Y：相对于Css动态定位的最内层包容元素
         1.默认等价clientX/Y
         2.IE中，若设置position，则为offsetX/Y
@@ -173,9 +162,7 @@
 
     2.元素内部宽高：padding+width/height (包括滚动条)
         innerWidth/height()
-
         1.一般用于普通元素：可读可写，innerWidth(value),innerWidth(function() {})
-
 
     3.元素整体宽高：
         1.outerHeight()：height + padding + border
@@ -199,10 +186,8 @@
     1.针对window和html/body
         1.浏览器可视区尺寸
             window.width() = window.innerWidth() = window.outerWidth()
-
         2.页面宽高
             document.width() = document.innnerWidth() = document.outerWidth()
-
         3.滚动
             1.滚动距离：$(window).scrollTop/left
             2.滚动尺寸：$('body').scrollWidth/scrollHeight

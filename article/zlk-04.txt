@@ -10,7 +10,6 @@
         3.files：文件列表
             1.size：文件大小
             2.type：文件类型
-
     2.类式ev.dataTransfer对象
 
 2.dataTransfer外部拖拽
@@ -88,7 +87,6 @@
                 contentType: false
             }).done(function(res) {
             }).fail(function(res) {});
-
 
 4.FileReade对象
     1.方法

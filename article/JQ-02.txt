@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">JQ方法
+<pre style="text-indent:0;">
+JQ方法
     1.对象方法：只能JQ对象使用，JS对象需要转化为JQ对象
     2.工具方法：JS对象也可以使用
 

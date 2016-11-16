@@ -15,10 +15,12 @@ require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRea
     $('#codeBox').length>0 && new Autotype('codeBox');
     // 点击阅读图
     $('.btnRead').length>0 && new TabRead('btnRead');
-    // 获取时间
+
+
+    // nav获取时间
     var iTime;
     getTime();
-    setInterval(getTime,30001000);
+    setInterval(getTime,3000000);
     function getTime() {
         var nTime = new Date();
         var iYear = nTime.getFullYear();
@@ -38,5 +40,10 @@ require(['jquery','carouse','type','tabRead'],function($,Carouse,Autotype,TabRea
         iTime = iYear+'年'+iMoth+'月'+iDay+'日 '+week;
         $('#navTime').html(iTime);
     }
+
+    // 响应式三道杠
+    $('#sdg').on('touchstart',function() {
+        $('#navList').toggle();
+    });
 
 });

@@ -6,7 +6,6 @@ define(['jquery'],function($) {
         if($('.'+id)) {
             $btn = $('.'+id);
             this.init();
-
         }
     }
 

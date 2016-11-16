@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- 从桌面 icon 启动 iOS Safari 是否进入全屏状态（App模式） yes | no-->
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <!-- iOS Safari 全屏状态下的状态栏样式  default | balck | black-translucent-->
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <!-- iOS 设备上禁止将数字识别为可点击的 tel link -->
+    <meta content="telephone=no" name="format-detection"/>
     <title>前端资料</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_phsurxe8m5ay8pvi.css">
@@ -15,8 +21,9 @@
     <!-- 头部导航 -->
     <header>
         <div class="container">
+            <span class="sdg" id="sdg"></span>
             <h1 class="logo">Notebook</h1>
-            <ul class="nav-list">
+            <ul class="nav-list" id="navList">
                <li class="item"><a href="index.html">首页</a></li>
                 <li class="item"><a href="qianduan.html">前端笔记</a></li>
                 <li class="item"><a href="jsGo.html">资料库</a></li>
@@ -33,7 +40,7 @@
         <div class="top-bg">
             <hgroup>
                 <h2>学习 & 分享有用的东西</h2>
-                <h3>分享学习经验、最新的开发技术、设计技巧、和项目等。</h3>
+                <h3>分享学习经验、最新的开发技术、和项目等。</h3>
             </hgroup>
         </div>
 <!--         <div class="nav-tab" id="navTab">
@@ -65,7 +72,7 @@
                     <figure>
                         <a href="case/lxs-ydd/index.html" class="case-top" style="background: #EF8224;"><img class="case-img" src="images/response.png"></a>
                         <figcaption>
-                            <a href="case/lxs-ydd/index.html">旅行社移动端兼容布局</a>
+                            <a href="case/lxs-ydd/index.html">旅行社兼容布局</a>
                             <p>常见的旅行社网站，采用移动端布局的方式，兼容PC端...</p>
                         </figcaption>
                         <div class="fig-bottom clearfix">
@@ -80,27 +87,12 @@
                     <figure>
                         <a href="case/qy-bts/index.html" class="case-top" style="background: #5a4083;"><img class="case-img" src="images/bootstrap.png"></a>
                         <figcaption>
-                            <a href="case/qy-bts/index.html">企业站bootstrap布局</a>
+                            <a href="case/qy-bts/index.html">企业bootstrap布局</a>
                             <p>常见的企业网站，采用bootstrap框架，响应式布局...</p>
                         </figcaption>
                         <div class="fig-bottom clearfix">
-                            <a href="" class="bjBtn"  data-img=""><i class="iconfont icon-tips"></i></a>
+                            <a href="" class="bjBtn" data-img=""><i class="iconfont icon-tips"></i></a>
                             <a href="case/qy-bts/index.html">查看效果</a>
-                        </div>
-                    </figure>
-                </div>
-            </div>
-            <div class="case-box">
-                <div class="case-content">
-                    <figure>
-                        <a href="case/lc-ydd/index.html" class="case-top" style="background: #EF8224;"><img class="case-img" src="images/response.png"></a>
-                        <figcaption>
-                            <a href="case/lc-ydd/index.html">理财网响应式布局</a>
-                            <p>常见的理财网站，采用响应式布局，移动端为主...</p>
-                        </figcaption>
-                        <div class="fig-bottom clearfix">
-                            <a href="" class="bjBtn"  data-img="<img class='case-img' src='case/lxs-ydd-01-mark.png'>"><i class="iconfont icon-tips"></i></a>
-                            <a href="case/lc-ydd/index.html">查看效果</a>
                         </div>
                     </figure>
                 </div>
@@ -111,7 +103,7 @@
                         <a href="case/lc-ydd/index.html" class="case-top" style="background: #1296db;"><img class="case-img" src="images/mobile.png"></a>
                         <figcaption>
                             <a href="case/lc-ydd/index.html">移动端布局</a>
-                            <p>常见的理财网站，采用响应式布局，移动端为主...</p>
+                            <p>常见的理财网站，采用响应式布局，通过媒体查询，移动端为主...</p>
                         </figcaption>
                         <div class="fig-bottom clearfix">
                             <a href="" class="bjBtn"  data-img="<img class='case-img' src='case/lxs-ydd-01-mark.png'>"><i class="iconfont icon-tips"></i></a>
@@ -126,7 +118,7 @@
                         <a href="case/web-photo/index.html" class="case-top" style="background: #1296db;"><img class="case-img" src="images/mobile.png"></a>
                         <figcaption>
                             <a href="case/web-photo/index.html">移动端相册</a>
-                            <p>手机端相册，结合zepto.js，适用于移动端...</p>
+                            <p>手机端相册，结合zepto.js插件的使用，适用于移动端...</p>
                         </figcaption>
                         <div class="fig-bottom clearfix">
                             <a href="" class="bjBtn"  data-img="<img class='case-img' src='case/lxs-ydd-01-mark.png'>"><i class="iconfont icon-tips"></i></a>
@@ -140,8 +132,8 @@
                     <figure>
                         <a href="case/dp-ydd/index.html" class="case-top" style="background: #1296db;"><img class="case-img" src="images/mobile.png"></a>
                         <figcaption>
-                            <a href="case/dp-ydd/index.html">移动端相册</a>
-                            <p>网站点评项目，单页面，基于移动端开发...</p>
+                            <a href="case/dp-ydd/index.html">点评网站</a>
+                            <p>网站点评项目，单页面，纯JavaScript开发，基于移动端布局...</p>
                         </figcaption>
                         <div class="fig-bottom clearfix">
                             <a href="" class="bjBtn"  data-img="<img class='case-img' src='case/lxs-ydd-01-mark.png'>"><i class="iconfont icon-tips"></i></a>
@@ -155,7 +147,7 @@
 
 
        <!-- 底部导航 -->
-        <div class="nav-bottom">
+        <div class="nav-bottom" style="margin-top: 80px;">
             <ul class="bottom-list">
                 <li><a href="#">前进</a></li>
                 <li><a href="#" class="active">1</a></li>

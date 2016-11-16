@@ -226,7 +226,4 @@
                 3.获取数据以后销毁这个iframe，释放内存；这也保证了安全（不被其他域frame js访问）。
                         iframe.contentWindow.document.write('');
                         iframe.contentWindow.close();
-                        document.body.removeChild(iframe);
-
-
-</pre>
+                        document.body.removeChild(iframe);</pre>

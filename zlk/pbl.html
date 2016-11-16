@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>瀑布流</title>
+    <!--
+    瀑布流原理：
+        1.img盒子浮动布局，且相对容器绝对定位
+        2.第一列img盒子作为列的基础，后续img盒子根据列中最矮的列绝对定位
+
+    算法关键：
+        1.将第一列的盒子的高度保存为一个数组，后续插入盒子时更新该数组
+        2.每次插入盒子时，计算数组中的最小值，得到高度最低的那一列
+        3.top值为该列的高度，left值为该列的距离值。然后更新该列的高度即可
+
+    滚动加载
+        1.根据最后一个元素来判断滚动加载点
+        2.达到滚动点时，获取数组，生成新的Dom元素，插入页面，重新渲染一次
+
+     -->
+    <style type="text/css">
+        div,body {
+            margin: 0;padding: 0;
+        }
+        img {
+            border:0;vertical-align: middle;
+        }
+        .clearfix:after {
+            display: table;
+            content: '';
+            clear: both;
+        }
+
+        .main {
+            position: relative;
+        }
+        .box {
+            padding: 5px;
+            float: left;
+        }
+        /*img也可以设置padding*/
+        .main img {
+            padding: 4px;
+            border: solid 1px #999;
+            box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="main clearfix" id="main">
+        <div class="box">
+            <img src="images/pbl/0.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/1.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/2.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/3.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/4.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/5.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/6.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/7.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/8.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/9.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/10.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/11.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/12.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/13.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/14.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/15.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/16.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/17.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/18.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/10.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/11.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/12.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/17.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/18.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/10.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/11.jpg">
+        </div>
+        <div class="box">
+            <img src="images/pbl/12.jpg">
+        </div>
+
+    </div>
+
+    <!-- 尽量把JS放在末尾吧，避免不要必要的麻烦 -->
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        /**
+         *
+         * @authors Your Name (you@example.org)
+         * @date    2016-11-06 23:10:59
+         * @version $Id$
+         */
+        waterFall();
+        // 后台数据，对象数组，数组每个元素都是一个对象
+        var dataInt = {'data':[{'src':'images/pbl/10.jpg'},{'src':'images/pbl/11.jpg'},{'src':'images/pbl/12.jpg'},{'src':'images/pbl/13.jpg'}]};
+        $(window).on('scroll',function() {
+            if(checkScroll()) {
+                var str = '';
+
+                // 方括号需要加""
+                // $.each()用于数组遍历，不能用obj.each
+                $.each(dataInt.data,function(key,value) {
+                    str += '<div class="box"><img src="'+value.src+'"></div>';
+                });
+                // 创建内容并插入
+                $('#main').append($(str));
+            }
+            // 内容创建完后重新渲染一次
+            waterFall();
+        });
+
+        function waterFall() {
+                // 只获取一级子元素>
+                var $boxs = $('.box');
+                // 每一个图片容器宽度相同
+                var w = $boxs.eq(0).outerWidth();
+                // 获取列数
+                var cols = Math.floor($(window).width()/w);
+                // 重新设置容器的总宽度并居中
+                $('#main').width(cols*w).css('margin','0 auto');
+
+
+                var hArr = [];
+                // 遍历数组和元素集合
+                $boxs.each(function(index,value) {
+                    h = $(this).outerHeight();
+                    // 获取第一行图片的宽高
+                    if( index < cols) {
+                        hArr.push(h);
+                    }else {
+                    // 第一行的最小高度列
+                        var minH = Math.min.apply(null,hArr);
+                    // 获取最小高度列的
+                        var minIndex = $.inArray(minH,hArr);
+
+                    // 对第一样后面的图片进行定位
+                        $(this).css({
+                            'position': 'absolute',
+                        // 上面：最矮列的高度
+                            'top': minH+'px',
+                        // 左侧：最矮列的左距离
+                            'left': $boxs.eq(minIndex).position().left+'px'
+                        });
+
+                    // 更新当前列的高度数组
+                        hArr[minIndex] = h + minH;
+                    }
+                });
+            }
+
+        function checkScroll() {
+            // 最后一个即最高的那一列
+            var lastBox = $('.box').last();                //last()：最后一个元素
+            // 注意取值：像素需要时整数
+            // 最高那一列，以box一般作为临界点
+            var maxH = lastBox.offset().top + Math.floor(lastBox.outerHeight()/2);
+
+            // 获取页面的滚动距离
+            //var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;        //JS兼容写法
+            var scrollTop = $(window).scrollTop();
+
+            // 获取可视区高度
+            //var wHeight = document.body.clientHeight || document.documentElement.clientHeight || window.innerHeight;          //JS兼容写法
+            var wHeight = $(window).height();
+
+            // 注意是写返回值
+            return (maxH < scrollTop+wHeight)?true:false;
+        }
+    </script>
+</body>
+</html>

@@ -1,63 +1,42 @@
-<pre style="text-indent:0;">ECMA部分，node和js一样，包括数据类型，语法结构，内置对象
-1.JS顶层对象：window，nodeJS顶层对象：Global
-
+<pre style="text-indent:0;">
 Node.JS的模块：
     一个文件就是一个模块，每个文件都有自己的作用域
     使用var声明的变量不是全局的，不是全局的，而是属于当前模块下的。
 
+1.模块加载
+    1.require()：引入模块
+    2.模块加载：
+        1.首先按照加载模块的文件名称进行查找
+        2.如果没有查找，则自动在名称后面加js进行查找。
+        3.如果还没有，则加json的后缀进行查找
+        4.如果还没有，则加.node后缀进行查找
+        5.文件名称->js->json->.node
+            require('./app.js');
 
-global.a = 200;
-console.log(a);
-console.log(global.a);
+2.定义变量
+    1.var变量：作用域是当前模块，外部模块无法直接访问
 
-模块加载
-require()：引入模块
-路径：
-    1.相对路径：
-        (相同文件下)：./，一定要加./，否则加载的是核心模块或者node_modules
-    2.绝对路径：b:/HT/实战/app.js
+    2.跨模块访问变量
+        1.把变量定义为global的属性，尽量减少全局变量
+        2.使用module模块对象进行访问
 
-模块加载：
-    1.首先按照加载模块的文件名称进行查找
-    2.如果没有查找，则自动在名称后面加js进行查找。
-    3.如果还没有，则加json的后缀进行查找
-    4.如果还没有，则加.node后缀进行查找
-    5.文件名称->js->json->.node
-require('./app.js');
+    3.module：模块变量，保存当前模块的相关信息
+        1.module.exports：子对象，通过这个对象把一个模块中的局部变量提供访问接口
+        2.exports：模块作用域中内置的模块对象，与module.exports相等，指定同一个对象。
+            console.log(module.exports === exports);
 
+            1.module.exports
+                var a = 100;
+                module.exports.a = a;
+                require('./2.js');                  //返回值，被加载模块中的module.exports
+                var data = require('./2.js');       //提供2.js的对外访问变量接口
+                console.log(data);
 
-
-var定义的变量
-1.作用域是当前模块，外部模块无法直接访问
-
-跨模块访问变量
-1.把变量定义为global的属性，尽量减少全局变量
-2.使用module模块对象进行访问
-
-module：模块变量，保存当前模块的相关信息
-    1.module.exports：子对象，通过这个对象把一个模块中的局部变量提供访问接口
-    2.exports：模块作用域中内置的模块对象，与module.exports相等，指定同一个对象。
-console.log(module.exports === exports);
-
-1.module.exports
-var a = 100;
-module.exports.a = a;
-require('./2.js');        //返回值，被加载模块中的module.exports
-var data = require('./2.js');       //提供2.js的对外访问变量接口
-console.log(data);
-2.exports
-var b = 100;
-exports.b = b;
-
-
-global对象
-
-1._filename：返回当前模块文件解析后的绝对路径，模块作用域下，不是全局的。
-console.log(_filename);
-2._dirname：返回当前文件夹解析后的绝对路径，不是全局的。
+            2.exports
+                var b = 100;
+                exports.b = b;
 
 3.process：全局对象，返回当前程序运行的信息。
-    //属性方法
     1.argv：一个包含命令行参数的数组，第一个元素是node，第二个是.js文件的名称，接下来的是命令行传入的参数
     2.execPath：开启当前进程的绝对路径
     3.env：用户的环境信息
@@ -73,13 +52,12 @@ console.log(_filename);
     13.exit(code)：退出
     14.kill(pid)：向进程发送信息
 
-    1.stain/stdout：标准输入输出流(IO)
-        1.stain；标准输入流，用于监听用户输入数据的事件
-        默认情况下输入流关闭，使用resume()开启
-process.stdin.resume();
-process.stdin.on('data',function(chunk) {        //data事件:用户输入数据切回车时触发
-    console.log(chunk.toString());          //chunk是一个buffer对象
-    console.log('game'+chunk);              //与字符串连接时，chunk会自动调用功能toString()方法
-});
-        //2.stdout：标准输出流
-process.stdout.write('hello');</pre>
+4.stain/stdout：标准输入输出流(IO)
+    1.stain；标准输入流，用于监听用户输入数据的事件，默认情况下输入流关闭，使用resume()开启
+        process.stdin.resume();
+        process.stdin.on('data',function(chunk) {           //data事件:用户输入数据切回车时触发
+            console.log(chunk.toString());                  //chunk是一个buffer对象
+            console.log('game'+chunk);                      //与字符串连接时，chunk会自动调用功能toString()方法
+        });
+    2.stdout：标准输出流
+        process.stdout.write('hello');</pre>

@@ -1,4 +1,5 @@
-<pre style="text-indent:0;">1.结构标签
+<pre style="text-indent:0;">
+1.结构标签
     1.&lt;header>：页眉,页面或板块的头部
     2.&lt;nav>：导航列表,相对于ul,内嵌的标签规则更加简单,nav默认样式更少。
     3.&lt;hgroup>：页面上的标题组合

@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- 从桌面 icon 启动 iOS Safari 是否进入全屏状态（App模式） yes | no-->
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <!-- iOS Safari 全屏状态下的状态栏样式  default | balck | black-translucent-->
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <!-- iOS 设备上禁止将数字识别为可点击的 tel link -->
+    <meta content="telephone=no" name="format-detection"/>
     <title>前端资料</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
@@ -16,8 +22,9 @@
     <!-- 头部导航 -->
     <header>
         <div class="container">
+            <span class="sdg" id="sdg"></span>
             <h1 class="logo">Notebook</h1>
-            <ul class="nav-list">
+            <ul class="nav-list" id="navList">
                <li class="item"><a href="index.html">首页</a></li>
                 <li class="item"><a href="qianduan.html" class="active">前端笔记</a></li>
                 <li class="item"><a href="jsGo.html">资料库</a></li>
@@ -34,7 +41,7 @@
         <div class="top-bg">
             <hgroup>
                 <h2>学习 & 分享有用的东西</h2>
-                <h3>分享学习经验、最新的开发技术、设计技巧、和项目等。</h3>
+                <h3>分享学习经验、最新的开发技术、和项目等。</h3>
             </hgroup>
         </div>
         <div class="nav-tab" id="navTab">
