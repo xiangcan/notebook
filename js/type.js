@@ -48,7 +48,7 @@ define(['jquery'],function($) {
                     var dis = $text.height() - $textParetn.height()+30;
                     if(dis>0) $textParetn.scrollTop(dis);
 
-                },50);
+                },500);
             });
             }
     });
